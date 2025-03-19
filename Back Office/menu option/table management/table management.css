@@ -1,0 +1,770 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Arial, Helvetica, sans-serif;
+  user-select: none;
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  grid-template-areas:
+    "nav header"
+    "nav main"
+    "nav bufferSpace"
+    "nav footerTop"
+    "nav footer";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 50px auto 20px 40px 50px;
+  overflow: hidden;
+}
+
+/*-----------------loading screen-------------------*/
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  z-index: 999;
+}
+
+#loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  border: 10px solid lightgray;
+  border-top: 10px solid #00aeef;
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
+}
+
+#loading-txt {
+  position: fixed;
+  font-weight: bold;
+  color: gray;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/*-----------------header-------------------*/
+header {
+  grid-area: header;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.switchingOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.switchingOptions button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.logOut {
+  height: 100%;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid lightgray;
+}
+
+.logOut button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  color: red;
+}
+
+/*-----------------navbar-------------------*/
+
+nav {
+  grid-area: nav;
+  background-color: black;
+  width: 200px;
+  display: grid;
+  grid-template-rows: 50px 45px auto 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.nav-header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 200px;
+  background: none;
+  border: none;
+}
+
+.nav-header img {
+  height: 100%;
+  width: 100%;
+}
+
+.navbar-options {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.navbar-options button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: lightgray;
+}
+
+.navbar-options button:hover {
+  background-color: #00aeef;
+  color: white;
+}
+
+/*----------------nav master option--------------------*/
+
+.active {
+  background-color: ;
+}
+
+.nav-master-options {
+  display: none;
+  overflow: hidden;
+  overflow-y: auto;
+  height: auto;
+  padding-top: 5px;
+}
+
+.nav-master-options::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-master-options li {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.nav-master-options a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9em;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-master-options span {
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+.nav-master-options a:hover {
+  color: #00aeef;
+}
+
+/*----------------nav menu option--------------------*/
+.nav-menu-options {
+  display: flex;
+  overflow: hidden;
+  overflow-y: auto;
+  height: auto;
+  padding-top: 5px;
+}
+
+.nav-menu-options::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-menu-options li {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.nav-menu-options a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9em;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-menu-options span {
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+.nav-menu-options a:hover {
+  color: #00aeef;
+}
+
+/*----------------nav settings option--------------------*/
+.nav-setting-options {
+  display: none;
+  overflow: hidden;
+  overflow-y: auto;
+  height: auto;
+  padding-top: 5px;
+}
+
+.nav-setting-options::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-setting-options li {
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+}
+
+.nav-setting-options a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9em;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-setting-options span {
+  margin-right: 30px;
+  margin-left: 5px;
+}
+
+.nav-setting-options a:hover {
+  color: #00aeef;
+}
+
+#active-page {
+  color: #00aeef;
+}
+
+/*----------------nav bar footer--------------------*/
+
+.nav-footer {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid lightgray;
+  font-size: 0.7em;
+  overflow: none;
+}
+
+/*----------------main--------------------*/
+main {
+  grid-area: main;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50px 60px auto;
+  overflow: hidden;
+}
+/*----------------main heading--------------------*/
+.main-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.main-heading h2 {
+  margin-left: 10px;
+  font-size: 1.3em;
+  font-weight: 500;
+  color: rgb(44, 42, 42);
+}
+
+.main-heading button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  background-color: #00aeef;
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.main-heading button:hover {
+  background-color: #0280ae;
+}
+
+.search-and-more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+}
+
+#search-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 13%;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 350px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.searchBar input {
+  width: 100%;
+  height: 90%;
+  border: none;
+  background: none;
+  outline: none;
+  padding-left: 5px;
+  font-size: 0.9em;
+}
+
+.searchBar span {
+  padding-left: 5px;
+}
+
+.search-and-more-right {
+  display: flex;
+  align-items: center;
+}
+
+.options-button {
+  height: 40px;
+  width: 40px;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  background-color: #00aeef;
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.options-button:hover {
+  background-color: #0280ae;
+}
+
+.delete-records-button {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  background-color: #b4e6f8;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  color: gray;
+  margin-right: 10px;
+}
+
+.delete-records-button:hover {
+  background-color: #00aeef;
+  color: white;
+}
+
+/*---------------- import export menu --------------------*/
+
+.import-export-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.import-export-options {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  right: 1px;
+  top: 40px;
+  height: 150px;
+  width: 180px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid lightgray;
+  z-index: 1;
+}
+
+.import-export-options-hide {
+  display: flex;
+}
+
+.import-export-options button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-left: 5px;
+  font-size: 0.9em;
+  color: gray;
+}
+
+.import-export-options span {
+  margin-right: 10px;
+}
+
+.import-export-options button:hover {
+  color: white;
+  background-color: #00aeef;
+}
+
+/* Main container styles */
+.main-container {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  margin: 0px 10px;
+}
+
+/* Hide scrollbar */
+.main-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Table styles */
+.main-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Sticky table headers */
+.main-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.main-container table thead {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+/* Table row styles */
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Ensure table rows have no blue background */
+td, tr {
+  background-color: white !important;
+}
+
+/* Row hover effect */
+tr:hover {
+  background-color: #f0f0f0 !important;
+}
+
+/* Table row height and border */
+.main-container table tr {
+  height: 40px;
+  border-bottom: 1px solid lightgray;
+  scroll-snap-align: start;
+}
+
+/* Table cell alignment */
+.main-container td {
+  text-align: left;
+  padding-left: 5px;
+}
+
+/* Paragraph styles inside the table */
+.main-container p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 35px;
+  width: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+/* Page transition effect */
+.page {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.active {
+  display: block;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/*----------------buffer space--------------------*/
+
+.bufferSpace {
+  grid-area: bufferSpace;
+  border-top: 1px solid lightgray;
+}
+
+/*----------------show the total pages--------------------*/
+.footerTop {
+  grid-area: footerTop;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #00aeef;
+}
+
+.footerTop p {
+  margin-right: 10px;
+}
+
+/*----------------footer--------------------*/
+footer {
+  grid-area: footer;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.footer-left {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+}
+
+#live-support {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.download-packages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-right img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+
+.plus-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.plus-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Popup Styling */
+.popup {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+/* Popup Styling */
+.popup-2 {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  z-index: 1000;
+  width: 300px;
+}
+
+/* Popup Content */
+.popup-content-2 {
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Input Field */
+#tableName-2 {
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Save Button */
+#save {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#save:hover {
+  background: darkblue;
+}
+
+/* Plus Button */
+.plus-btn {
+  background: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.plus-btn:hover {
+  background: darkblue;
+}

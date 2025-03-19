@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block List Popup</title>
+    <link rel="stylesheet" href="Blocked Devices.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+</head>
+<body>
+
+    <!-- Open Popup Button -->
+    <button id="openPopup">Open Block List</button>
+
+    <!-- Popup Container -->
+    <div id="popupContainer" class="popup-container">
+        <div class="popup">
+            <span class="close-btn" id="closePopup">&times;</span>
+            <h2>Block List</h2>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <span class="material-icons-outlined"> search </span>
+                <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchDevices()">
+            </div>
+            
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Device Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="deviceTable">
+                    <!-- Sample data (can be replaced dynamically) -->
+                    <!-- If empty, 'No record found' message will be displayed -->
+                </tbody>
+            </table>
+
+            <!-- No Record Message -->
+            <p id="noRecordMessage">No record found!</p>
+        </div>
+    </div>
+
+    <script src="Blocked Devices.js"></script>
+</body>
+</html>

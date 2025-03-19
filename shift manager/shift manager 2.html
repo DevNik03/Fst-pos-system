@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shift Manager</title>
+    <link rel="stylesheet" href="shift manager 2.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+    />
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <button id="navbar-enable-button" class="header-buttons">
+          <span class="material-symbols-outlined"> widgets </span>
+        </button>
+        <div class="page-heading">
+          <p>Shift Manager</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-buttons" title="Online Ordering Status">
+          <span class="material-symbols-outlined"> phone_android </span>
+        </button>
+        <button class="header-buttons" title="Latest Updates">
+          <span class="material-symbols-outlined"> campaign </span>
+        </button>
+        <button class="header-buttons" onclick="openSelectionPopup('outlet')">
+          <span class="material-symbols-outlined"> store </span>
+          <p>Outlet Name</p>
+        </button>
+        <button id="popover-enable" class="header-buttons">
+          <span class="material-symbols-outlined"> person </span>
+          <p>username</p>
+        </button>
+
+        <!-- popover -->
+        <div id="popover-overlay" class="navbar-overlay"></div>
+        <div class="popover">
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> lock_open_right </span>
+            <p>Change Password</p>
+          </button>
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> undo </span>
+            <p>Switch To Back</p>
+          </button>
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> business_center </span>
+            <p>Know Your Plan</p>
+          </button>
+          <button id="logout-button" class="popover-buttons">
+            <span class="material-symbols-outlined"> power_settings_new </span>
+            <p>Logout</p>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="navbar-overlay" class="navbar-overlay"></div>
+    <nav>
+      <div class="nav-searchbar">
+        <button class="search-button">
+          <span class="material-icons-outlined"> search </span>
+        </button>
+        <input
+          id="navbar-search"
+          class="search-input"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+      <div class="navbar-main">
+        <div id="navbar-ordering" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Ordering</p>
+          </div>
+          <div class="navbar-container">
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> restaurant </span>
+              <p>Dine In</p>
+            </button>
+            <button id="take-away-button" class="navbar-buttons">
+              <span class="material-symbols-outlined"> takeout_dining </span>
+              <p>Take Away</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined">
+                delivery_truck_speed
+              </span>
+              <p>Delivery Manager</p>
+            </button>
+            <button id="no-charge-button" class="navbar-buttons">
+              <span class="material-symbols-outlined"> money_off </span>
+              <p>No Charge</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> receipt_long </span>
+              <p>Order Summary</p>
+            </button>
+          </div>
+        </div>
+
+        <div id="navbar-manager" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Manager</p>
+          </div>
+          <div class="navbar-container">
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> dashboard </span>
+              <p>Dashboard</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> query_stats </span>
+              <p>Reports</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> assignment_ind </span>
+              <p>Account Lookup</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> receipt_long_off </span>
+              <p>Transaction Lock</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> app_blocking </span>
+              <p>Blocked Devices</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> manage_accounts </span>
+              <p>Shift Manager</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> calendar_month </span>
+              <p>Day Close</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> point_of_sale </span>
+              <p>No Sale</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> arrow_circle_up </span>
+              <p>Expense Voucher</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> arrow_circle_down </span>
+              <p>Income Voucher</p>
+            </button>
+          </div>
+        </div>
+
+        <div id="navbar-other" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Other</p>
+          </div>
+          <div class="navbar-container">
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> manage_search </span>
+              <p>Item Lookup</p>
+            </button>
+            <button class="navbar-buttons">
+              <span class="material-symbols-outlined"> groups </span>
+              <p>Guest Database</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="main-filterbar">
+        <div class="main-searchbar">
+          <button class="search-button">
+            <span class="material-icons-outlined"> search </span>
+          </button>
+          <input
+            id="main-search"
+            class="search-input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div class="button-container">
+          <button id="btn-image-1" class="record-status-button">
+              <img src="/images/shift management.png">
+          </button>
+          <button id="btn-image-2" class="record-status-button">
+              <img src="/images/shift management.png">
+          </button>
+        </div>
+      </div>
+      
+      <div class="main-container">
+        <div id="no-data" class="table-warning">
+          <h2>No Data Available!</h2>
+        </div>
+        <div id="no-records" class="table-warning">
+          <h2>No Records Available!</h2>
+        </div>
+        <table id="guest-table" class="main-table">
+          <thead>
+            <tr>
+              <th id="tbl-guest-user">User</th>
+              <th id="tbl-guest-city">Status</th>
+              <th id="tbl-guest-mobile ">Started time</th>
+              <th id="tbl-guest-phone">Shift No.</th>
+              <th id="tbl-guest-email">Opening Balance</th>
+              <th id="tbl-guest-email">Expected Balance</th>
+              <th id="tbl-action">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>Logged Out</td>
+              <td>27-feb-2024 6:16:25 PM</td>
+              <td>225</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>
+                <button><img src="/images/logout.png"></button>
+                <button><img src="/images/reprint reciept.png"></button>
+                <button><img src="/images/reprint kot.png"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>Jane Smith</td>
+              <td>Logged Out</td>
+              <td>27-feb-2024 6:16:25 PM</td>
+              <td>225</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>
+                <button><img src="/images/logout.png"></button>
+                <button><img src="/images/reprint reciept.png"></button>
+                <button><img src="/images/reprint kot.png"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>Michael Johnson</td>
+              <td>Logged Out</td>
+              <td>27-feb-2024 6:16:25 PM</td>
+              <td>225</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>
+                <button><img src="/images/logout.png"></button>
+                <button><img src="/images/reprint reciept.png"></button>
+                <button><img src="/images/reprint kot.png"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>Emily Davis</td>
+              <td>Logged Out</td>
+              <td>27-feb-2024 6:16:25 PM</td>
+              <td>225</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>
+                <button><img src="/images/logout.png"></button>
+                <button><img src="/images/reprint reciept.png"></button>
+                <button><img src="/images/reprint kot.png"></button>
+              </td>
+            </tr>
+            <tr>
+              <td>David Wilson</td>
+              <td>Logged Out</td>
+              <td>27-feb-2024 6:16:25 PM</td>
+              <td>225</td>
+              <td>0.00</td>
+              <td>0.00</td>
+              <td>
+                <button><img src="/images/logout.png"></button>
+                <button><img src="/images/reprint reciept.png"></button>
+                <button><img src="/images/reprint kot.png"></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="total-records-display">
+        <div class="total-records-container">
+          X of
+          <p id="total-records" class="record-count">0</p>
+          records
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-left">
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> calendar_month </span>
+          <p>18-02-2025</p>
+        </button>
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> person_pin_circle </span>
+          <p>username</p>
+        </button>
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> desktop_windows </span>
+          <p>Terminal Name</p>
+        </button>
+      </div>
+      <div class="footer-right">
+        <button class="footer-buttons" title="Market Place">
+          <span class="material-symbols-outlined"> settings </span>
+          <p>Market Place</p>
+        </button>
+        <button class="footer-buttons" title="Help Center">
+          <span class="material-symbols-outlined"> help </span>
+          <p>Help Center</p>
+        </button>
+      </div>
+    </footer>
+
+    <!------------------- POPUPS -------------------------->
+    <div id="selection-popup-overlay" class="overlay"></div>
+
+    <div id="selection-popup" class="popup">
+      <div class="popup-header">
+        <h4 class="selection-popup-heading"></h4>
+        <button id="selection-popup-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+
+      <form
+        id="selection-popup-form"
+        class="popup-main-container selection-popup-scroll"
+      >
+        <div class="popup-search">
+          <button class="search-button">
+            <span class="material-icons-outlined"> search </span>
+          </button>
+          <input
+            id="selection-popup-search"
+            class="search-input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div class="popup-container">
+          <ul class="main-ul"></ul>
+        </div>
+      </form>
+    </div>
+
+    <!-----------------logout popup---------------------------------->
+    <div id="warning-popup-overlay" class="overlay"></div>
+    <div id="warning-popup" class="popup">
+      <div id="warning-header" class="popup-header">
+        <div class="warning">
+          <span id="warning-icon" class="material-symbols-outlined">
+            warning
+          </span>
+          <p id="warning-heading"></p>
+        </div>
+        <button id="warning-popup-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <div id="warning-main" class="popup-main">
+        <p id="warning-message"></p>
+      </div>
+      <div id="warning-footer" class="popup-footer"></div>
+    </div>
+    <!---------------------------- important popups --------------------->
+    <!---------------------------- take away popup ---------------------->
+    <div id="order-information-overlay" class="overlay"></div>
+    <div id="order-information-popup" class="popup">
+      <div class="popup-header">
+        <h4 class="selection-popup-heading">Order Information</h4>
+        <button id="order-information-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <form
+        id="order-information-form"
+        class="popup-main order-info-scroll"
+      ></form>
+      <div id="order-info-footer" class="popup-footer"></div>
+    </div>
+
+    <script src="shift manager 2.js"></script>
+  </body>
+</html>

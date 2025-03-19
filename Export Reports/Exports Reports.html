@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Report</title>
+    <link rel="stylesheet" href="Exports Reports.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+</head>
+<body>
+
+    <!-- Open Popup Button -->
+    <button id="openPopup">Open Export Report</button>
+
+    <!-- Popup Container -->
+    <div id="popupContainer" class="popup-container">
+        <div class="popup">
+            <span class="close-btn" id="closePopup">&times;</span>
+            <h2>Export Report</h2>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Report Name</th>
+                        <th>Report</th>
+                        <th>Request Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="footer">
+            <button class="refresh-btn" onclick="refreshPage()">Refresh</button>
+            <button class="cancel-btn" onclick="cancelAction()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="Exports Reports.js"></script>
+</body>
+</html>

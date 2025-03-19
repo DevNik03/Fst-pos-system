@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>printing template</title>
+    <link rel="stylesheet" href="printing.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+    />
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- loading page -->
+    <div class="loading-screen">
+      <div id="loader"></div>
+      <span id="loading-txt">Loading...</span>
+    </div>
+    <header>
+      <div class="switchingOptions">
+        <button><span>User Name</span></button>
+      </div>
+      <div class="logOut">
+        <button>
+          <i id="logoutButton" class="material-icons-outlined"
+            >power_settings_new
+          </i>
+        </button>
+      </div>
+    </header>
+
+    <!-- right navigation bar -->
+    <nav>
+      <div class="nav-header">
+        <button><img src="/images/fst white no bg.png" /></button>
+      </div>
+      <div class="navbar-options">
+        <button
+          title="Master"
+          class="master-btn navbar-active-option"
+          id="masterButton"
+        >
+          <span class="material-icons-outlined"> person </span>
+        </button>
+        <button title="Menu" class="menu-btn">
+          <span class="material-icons-outlined"> menu </span>
+        </button>
+        <button title="Settings" class="settings-btn">
+          <span class="material-icons-outlined"> settings </span>
+        </button>
+      </div>
+      <!-- master menu -->
+      <div class="nav-master-options">
+        <ul>
+          <li>
+            <a href="/Back Office/master option/Outlet/outlet.html"
+              ><span class="material-icons-outlined"> person </span>
+              <p>Outlet</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/Address/address.html"
+              ><span class="material-icons-outlined"> location_on </span>
+              <p>Address Lookup</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/payment/payment.html"
+              ><span class="material-icons-outlined"> credit_card </span>
+              <p>Payment</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/Currency/currency.html"
+              ><span class="material-icons-outlined"> attach_money </span>
+              <p>Currency</p>
+            </a>
+          </li>
+          <li>
+            <a id="active-page" href="/Back Office/master option/tax/tax.html">
+              <span class="material-icons-outlined"> menu </span>
+              <p>Tax</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/tax group/tax group.html">
+              <span class="material-icons-outlined"> sort </span>
+              <p>Tax Groups</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/extra charge/extra charge.html">
+              <span class="material-icons-outlined"> add_circle </span>
+              <p>Extra Charge</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/discount/discount.html">
+              <span class="material-icons-outlined"> redeem </span>
+              <p>Discount</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/reasons/reason.html">
+              <span class="material-icons-outlined"> help </span>
+              <p>Reason</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/account/account.html">
+              <span class="material-icons-outlined"> person_2 </span>
+              <p>Account</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/no charge account/no charge account.html"
+            >
+              <span class="material-icons-outlined"> person_2 </span>
+              <p>No Charge Account</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/business source/business.html">
+              <span class="material-icons-outlined"> groups </span>
+              <p>Business Source</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/comission plan/comission plan.html"
+            >
+              <span class="material-icons-outlined"> payments </span>
+              <p>Comission Plan</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/guest database/guest database.html"
+            >
+              <span class="material-icons-outlined"> table_rows </span>
+              <p>Guest Database</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- menu option -->
+      <div class="nav-menu-options">
+        <ul>
+          <li>
+            <a href="/Back Office/menu option/category/category.html">
+              <span class="material-icons-outlined"> toc </span>
+              <p>Category</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/subcategory/subcategory.html">
+              <span class="material-icons-outlined"> subject </span>
+              <p>Subcategory</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/menu group/menu group.html">
+              <span class="material-icons-outlined"> menu </span>
+              <p>Menu Group</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/menu subgroup/menu subgroup.html">
+              <span class="material-icons-outlined"> drag_handle </span>
+              <p>Menu Subgroup</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/item group/item group.html">
+              <span class="material-icons-outlined"> inventory_2 </span>
+              <p>Item Group</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/item/item.html">
+              <span class="material-icons-outlined"> inventory_2 </span>
+              <p>Item</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/modifier group/modifier group.html"
+            >
+              <span class="material-icons-outlined"> edit_note </span>
+              <p>Modifier Group</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/menu management/menu management.html"
+            >
+              <span class="material-icons-outlined"> menu </span>
+              <p>Menu Management</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/rate config/rate config.html">
+              <span class="material-icons-outlined"> payments </span>
+              <p>Rate Configuration</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/rate/rate.html">
+              <span class="material-icons-outlined"> payments </span>
+              <p>Rate</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/table management/table management.html"
+            >
+              <span class="material-icons-outlined"> grid_view </span>
+              <p>Table Management</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/table notification/table notification.html"
+            >
+              <span class="material-icons-outlined"> notifications </span>
+              <p>Table Notification</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/course/course.html">
+              <span class="material-icons-outlined">
+                collections_bookmark
+              </span>
+              <p>Course</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/waiter/waiter.html">
+              <span class="material-icons-outlined"> perm_identity </span>
+              <p>Waiter</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/session/session.html">
+              <span class="material-icons-outlined"> timer </span>
+              <p>Session</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- navigation setting options -->
+      <div class="nav-setting-options">
+        <ul>
+          <li>
+            <a href="/Back Office/setting option/terminal/terminal.html">
+              <span class="material-icons-outlined"> terminal </span>
+              <p>Terminal</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/setting option/virtual devices/virtual devices.html"
+            >
+              <span class="material-icons-outlined"> devices </span>
+              <p>Virtual Device</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/app devices/app devices.html">
+              <span class="material-icons-outlined"> phone_android </span>
+              <p>App Device</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/user role/user role.html">
+              <span class="material-icons-outlined"> portrait </span>
+              <p>User Role</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/user/user.html">
+              <span class="material-icons-outlined"> account_circle </span>
+              <p>User</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/setting option/template category/template category.html"
+            >
+              <span class="material-icons-outlined"> print </span>
+              <p>Template Category</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/setting option/email&sms providers/email sms providers.html"
+            >
+              <span class="material-icons-outlined"> email </span>
+              <p>Email/SMS Providers</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/email template/email.html">
+              <span class="material-icons-outlined"> summarize </span>
+              <p>Email/SMS Template</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/printing template/printing.html">
+              <span class="material-icons-outlined"> text_snippet </span>
+              <p>Printing Template</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/setting/setting.html">
+              <span class="material-icons-outlined"> tune </span>
+              <p>Settings</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/notification/notification.html">
+              <span class="material-icons-outlined">
+                notifications_active
+              </span>
+              <p>Notification Setting</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/qr code generator/qr code generator.html">
+              <span class="material-icons-outlined"> qr_code_scanner </span>
+              <p>QR Code Generator</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/online ordering logs/online ordering logs.html">
+              <span class="material-icons-outlined">
+                format_list_bulleted
+              </span>
+              <p>Online Ordering Logs</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- nav bar footer -->
+      <div class="nav-footer">
+        <span> Powered By: FST Technology </span>
+      </div>
+    </nav>
+    <!-- main content -->
+    <main>
+      <!-- main heading -->
+      <div class="main-heading">
+        <h2>printing template</h2>
+        <!--  button to enable popup -->
+        <button class="popup-enable-button" title="Add">
+          <span class="material-icons-outlined"> add </span>
+        </button>
+      </div>
+      <!-- search bar -->
+      <div class="search-and-more">
+        <div class="searchBar">
+          <span class="material-icons-outlined"> search </span>
+          <input id="tax-search" type="search" placeholder="Search" />
+        </div>
+        <div class="search-and-more-right">
+          <button class="delete-records-button">Delete Selected</button>
+          <!-- import export button -->
+          <div class="import-export-overlay"></div>
+          <div class="import-export-menu">
+            <button title="More" class="options-button">
+              <span class="material-icons-outlined"> more_horiz </span>
+            </button>
+            <div class="import-export-options">
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> arrow_upward </span>
+                <p>Import</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> arrow_downward </span>
+                <p>Export</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> print </span>
+                <p>Report</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> visibility </span>
+                <p>Include Inactive</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container">
+        <div id="no-data" class="table-warning">
+          <h2>No Data Available!</h2>
+        </div>
+        <div id="no-records" class="table-warning">
+          <h2>No Records Available!</h2>
+        </div>
+        <table id="tax-table" class="main-table">
+          <thead>
+            <tr>
+              <th id="delete-records-checkbox">
+                <input id="delete-record-checkbox" type="checkbox" />
+              </th>
+              <th id="Name">
+                <p class="sort-data">
+                  Tax Name
+                  <span class="material-icons-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+
+              <th id="actions">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <input class="table-checkbox" type="checkbox" />
+              </td>
+              <td>VAT</td>
+              <td>
+                <button class="action-buttons edit-btn" title="Edit">
+                  <span class="material-symbols-outlined"> edit </span>
+                </button>
+                <button class="action-buttons delete-btn" title="Delete">
+                  <span class="material-symbols-outlined"> delete </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="table-checkbox" type="checkbox" />
+              </td>
+              <td>GST</td>
+              <td>
+                <button class="action-buttons edit-btn" title="Edit">
+                  <span class="material-symbols-outlined"> edit </span>
+                </button>
+                <button class="action-buttons delete-btn" title="Delete">
+                  <span class="material-symbols-outlined"> delete </span>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input class="table-checkbox" type="checkbox" />
+              </td>
+              <td>Sales Tax</td>
+              <td>
+                <button class="action-buttons edit-btn" title="Edit">
+                  <span class="material-symbols-outlined"> edit </span>
+                </button>
+                <button class="action-buttons delete-btn" title="Delete">
+                  <span class="material-symbols-outlined"> delete </span>
+                </button>
+              </td>
+            </tr>
+
+            <!-- Add more rows here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <div class="bufferSpace"></div>
+    <div class="footerTop"><p>Showing Pages</p></div>
+    <footer>
+      <div class="footer-left">
+        <p>Property Name</p>
+      </div>
+      <div class="footer-right">
+        <button id="live-support">
+          <span class="material-icons-outlined"> forum </span>
+          <p>Live Support</p>
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+      </div>
+    </footer>
+    <div class="popup-overlay"></div>
+    <form id="tax-form">
+      <div class="tax-option-popup">
+        <div class="popup-header">
+          <h4>Add Tax</h4>
+          <button class="close-popup-btn">
+            <span class="material-icons-outlined"> close </span>
+          </button>
+        </div>
+        <div class="popup-main">
+          <div class="popup-main-divs">
+            <label for="tax-name"> Tax<span class="mandatory">*</span> </label>
+            <input
+              id="tax-name"
+              class="text-input"
+              type="text"
+              placeholder="Tax Name"
+              required
+            />
+          </div>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-save-btn">Save</button>
+        </div>
+      </div>
+    </form>
+    <script src="printing.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="qr code generator.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+    />
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- loading page -->
+    <div class="loading-screen">
+      <div id="loader"></div>
+      <span id="loading-txt">Loading...</span>
+    </div>
+    <!-- page header -->
+    <header>
+      <div class="switchingOptions">
+        <button><span>User Name</span></button>
+      </div>
+      <div class="logOut">
+        <button>
+          <i id="logoutButton" class="material-icons-outlined"
+            >power_settings_new</i
+          >
+        </button>
+      </div>
+    </header>
+
+    <!-- right navigation bar -->
+    <nav>
+      <div class="nav-header">
+        <button><img src="/images/fst white no bg.png" /></button>
+      </div>
+      <div class="navbar-options">
+        <button title="Master" class="master-btn" id="masterButton">
+          <span class="material-icons-outlined"> person </span>
+        </button>
+        <button title="Menu" class="menu-btn">
+          <span class="material-icons-outlined"> menu </span>
+        </button>
+        <button title="Settings" class="settings-btn navbar-active-option">
+          <span class="material-icons-outlined"> settings </span>
+        </button>
+      </div>
+      <!-- master menu -->
+      <div class="nav-master-options">
+        <ul>
+          <li>
+            <a href="/Back Office/master option/Outlet/outlet.html"
+              ><span class="material-icons-outlined"> person </span>
+              <p>Outlet</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/Address/address.html"
+              ><span class="material-icons-outlined"> location_on </span>
+              <p>Address Lookup</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/payment/payment.html"
+              ><span class="material-icons-outlined"> credit_card </span>
+              <p>Payment</p></a
+            >
+          </li>
+          <li>
+            <a href="/Back Office/master option/Currency/currency.html"
+              ><span class="material-icons-outlined"> attach_money </span>
+              <p>Currency</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/tax/tax.html">
+              <span class="material-icons-outlined"> menu </span>
+              <p>Tax</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/tax group/tax group.html">
+              <span class="material-icons-outlined"> sort </span>
+              <p>Tax Groups</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/extra charge/extra charge.html">
+              <span class="material-icons-outlined"> add_circle </span>
+              <p>Extra Charge</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/discount/discount.html">
+              <span class="material-icons-outlined"> redeem </span>
+              <p>Discount</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/reasons/reason.html">
+              <span class="material-icons-outlined"> help </span>
+              <p>Reason</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/account/account.html">
+              <span class="material-icons-outlined"> person_2 </span>
+              <p>Account</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/no charge account/no charge account.html"
+            >
+              <span class="material-icons-outlined"> person_2 </span>
+              <p>No Charge Account</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/master option/business source/business.html">
+              <span class="material-icons-outlined"> groups </span>
+              <p>Business Source</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/comission plan/comission plan.html"
+            >
+              <span class="material-icons-outlined"> payments </span>
+              <p>Comission Plan</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/master option/guest database/guest database.html"
+            >
+              <span class="material-icons-outlined"> table_rows </span>
+              <p>Guest Database</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- menu option -->
+      <div class="nav-menu-options">
+        <ul>
+          <li>
+            <a href="/Back Office/menu option/category/category.html">
+              <span class="material-icons-outlined"> toc </span>
+              <p>Category</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/subcategory/subcategory.html">
+              <span class="material-icons-outlined"> subject </span>
+              <p>Subcategory</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/menu group/menu group.html">
+              <span class="material-icons-outlined"> menu </span>
+              <p>Menu Group</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/menu subgroup/menu subgroup.html">
+              <span class="material-icons-outlined"> drag_handle </span>
+              <p>Menu Subgroup</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/item group/item group.html">
+              <span class="material-icons-outlined"> inventory_2 </span>
+              <p>Item Group</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/item/item.html">
+              <span class="material-icons-outlined"> inventory_2 </span>
+              <p>Item</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/modifier group/modifier group.html"
+            >
+              <span class="material-icons-outlined"> edit_note </span>
+              <p>Modifier Group</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/menu management/menu management.html"
+            >
+              <span class="material-icons-outlined"> menu </span>
+              <p>Menu Management</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/rate config/rate config.html">
+              <span class="material-icons-outlined"> payments </span>
+              <p>Rate Configuration</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/rate/rate.html">
+              <span class="material-icons-outlined"> payments </span>
+              <p>Rate</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/table management/table management.html"
+            >
+              <span class="material-icons-outlined"> grid_view </span>
+              <p>Table Management</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/menu option/table notification/table notification.html"
+            >
+              <span class="material-icons-outlined"> notifications </span>
+              <p>Table Notification</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/course/course.html">
+              <span class="material-icons-outlined">
+                collections_bookmark
+              </span>
+              <p>Course</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/waiter/waiter.html">
+              <span class="material-icons-outlined"> perm_identity </span>
+              <p>Waiter</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/menu option/session/session.html">
+              <span class="material-icons-outlined"> timer </span>
+              <p>Session</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- navigation setting options -->
+      <div class="nav-setting-options">
+        <ul>
+          <li>
+            <a href="/Back Office/setting option/terminal/terminal.html">
+              <span class="material-icons-outlined"> terminal </span>
+              <p>Terminal</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/setting option/virtual devices/virtual devices.html"
+            >
+              <span class="material-icons-outlined"> devices </span>
+              <p>Virtual Device</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/app devices/app devices.html">
+              <span class="material-icons-outlined"> phone_android </span>
+              <p>App Device</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/user role/user role.html">
+              <span class="material-icons-outlined"> portrait </span>
+              <p>User Role</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/user/user.html">
+              <span class="material-icons-outlined"> account_circle </span>
+              <p>User</p>
+            </a>
+          </li>
+          <li>
+            <a
+              id="active-page"
+              href="/Back Office/setting option/template category/template category.html"
+            >
+              <span class="material-icons-outlined"> print </span>
+              <p>Template Category</p>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/Back Office/setting option/email&sms providers/email sms providers.html"
+            >
+              <span class="material-icons-outlined"> email </span>
+              <p>Email/SMS Providers</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/email template/email.html">
+              <span class="material-icons-outlined"> summarize </span>
+              <p>Email/SMS Template</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/printing template/printing.html">
+              <span class="material-icons-outlined"> text_snippet </span>
+              <p>Printing Template</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/setting/setting.html">
+              <span class="material-icons-outlined"> tune </span>
+              <p>Settings</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/notification/notification.html">
+              <span class="material-icons-outlined">
+                notifications_active
+              </span>
+              <p>Notification Setting</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/qr code generator/qr code generator.html">
+              <span class="material-icons-outlined"> qr_code_scanner </span>
+              <p>QR Code Generator</p>
+            </a>
+          </li>
+          <li>
+            <a href="/Back Office/setting option/online ordering logs/online ordering logs.html">
+              <span class="material-icons-outlined">
+                format_list_bulleted
+              </span>
+              <p>Online Ordering Logs</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- nav bar footer -->
+      <div class="nav-footer">
+        <span> Powered By: FST Technology </span>
+      </div>
+    </nav>
+    <!-- main content -->
+    <main>
+      <!-- main heading -->
+      <div class="main-heading">
+        <h2>QR CODE GENERATOR</h2>
+        <!--  button to enable popup -->
+        <div class="popup-buttons">
+          <button
+            id="settings-button"
+            class="popup-enable-button"
+            title="Add Logo"
+          >
+            <span class="material-icons-outlined"> settings </span>
+          </button>
+
+          <button id="qr-popup-button" class="popup-enable-button" title="Add">
+            <span class="material-icons-outlined"> add </span>
+          </button>
+        </div>
+      </div>
+      <!-- search bar -->
+      <div class="search-and-more">
+        <div class="search-and-more-left">
+          <div class="select-outlet">
+            <select id="outlet-select" class="main-select">
+              <option value="default">--Select Outlet--</option>
+            </select>
+          </div>
+          <div class="searchBar">
+            <button id="search-button">
+              <span class="material-icons-outlined"> search </span>
+            </button>
+            <input id="qr-code-search" type="search" placeholder="Search" />
+          </div>
+        </div>
+
+        <div class="search-and-more-right">
+          <!-- import export button -->
+          <div class="import-export-overlay"></div>
+          <div class="import-export-menu">
+            <button title="More" class="options-button">
+              <span class="material-icons-outlined"> more_horiz </span>
+            </button>
+            <div class="import-export-options">
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> arrow_upward </span>
+                <p>Import</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> arrow_downward </span>
+                <p>Export</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> print </span>
+                <p>Report</p>
+              </button>
+              <button class="import-export-menu-button">
+                <span class="material-icons-outlined"> visibility </span>
+                <p>Include Inactive</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-container">
+        <div id="no-data" class="table-warning">
+          <h2>No Data Available!</h2>
+        </div>
+        <div id="no-records" class="table-warning">
+          <h2>No Records Available!</h2>
+        </div>
+
+        <table id="qr-code-generator-table" class="main-table">
+          <thead>
+            <tr>
+              <th id="qr-code-for">
+                <p class="sort-data" role="button" aria-sort="none">
+                  QR Code For
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down</span
+                  >
+                </p>
+              </th>
+              <th id="outlet">
+                <p class="sort-data" role="button" aria-sort="none">
+                  Outlet
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down</span
+                  >
+                </p>
+              </th>
+              <th id="actions">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Dine In</td>
+              <td>Coffee Shop2</td>
+              <td><button>Delete</button><button>Edit</button></td>
+            </tr>
+            <tr>
+              <td>Take Away</td>
+              <td>Burger Joint</td>
+              <td><button>Delete</button><button>Edit</button></td>
+            </tr>
+            <tr>
+              <td>Delivery</td>
+              <td>Pizza Place</td>
+              <td><button>Delete</button><button>Edit</button></td>
+            </tr>
+            <tr>
+              <td>Dine In</td>
+              <td>Pasta House</td>
+              <td><button>Delete</button><button>Edit</button></td>
+            </tr>
+            <tr>
+              <td>Take Away</td>
+              <td>Grill Master</td>
+              <td><button>Delete</button><button>Edit</button></td>
+            </tr>
+            <!-- Add more rows here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <!-- buffer space -->
+    <div class="bufferSpace"></div>
+    <!-- place to show how many pages are there -->
+    <div class="footerTop">
+      <button class="update-button">Update</button>
+      <p>Showing Pages</p>
+    </div>
+    <!-- <footer -->
+    <footer>
+      <div class="footer-left">
+        <p>Property Name</p>
+      </div>
+      <div class="footer-right">
+        <button id="live-support">
+          <span class="material-icons-outlined"> forum </span>
+          <p>Live Support</p>
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+        <button class="download-packages">
+          <img src="/images/payment website logo.jpg" />
+        </button>
+      </div>
+    </footer>
+
+    <!-- overlay -->
+    <div id="add-qr-overlay" class="popup-overlay"></div>
+    <form id="add-qr-form">
+      <div id="add-qr-popup" class="popup">
+        <div class="popup-header">
+          <h4>Add QR Code</h4>
+          <button id="close-qr-popup" class="close-popup-btn">
+            <span class="material-icons-outlined"> close </span>
+          </button>
+        </div>
+        <div class="popup-main">
+          <div class="heading">
+            <h4>General Details</h4>
+          </div>
+          <div class="popup-main-divs">
+            <label for="qr-code">
+              QR Code For<span class="mandatory">*</span>
+            </label>
+            <select id="qr-code" class="main-select">
+              <option value="default">--Select--</option>
+              <option value="dinein">Dine In</option>
+              <option value="room sevice">Room Service</option>
+              <option value="menu link">Menu Link</option>
+            </select>
+          </div>
+          <div id="dinein">
+            <div class="popup-main-divs dineIn roomService">
+              <label for="languages">
+                Language<span class="mandatory">*</span>
+              </label>
+              <select id="qr-code" class="main-select">
+                <option value="english">English</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="add-qr-outlet">
+                Outlet<span class="mandatory">*</span>
+              </label>
+              <select id="add-qr-outlet" class="main-select">
+                <option value="default">--Select--</option>
+              </select>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="add-qr-menu"
+                >Menu<span class="mandatory">*</span>
+              </label>
+              <input id="add-qr-menu" class="text-input" type="text" />
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="add-qr-rate"> Rate</label>
+              <select id="add-qr-rate" class="main-select rate-select">
+                <option value="default">--Select--</option>
+              </select>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="add-qr-floor"
+                >Floor<span class="mandatory">*</span>
+              </label>
+              <select id="add-qr-floor" class="main-select">
+                <option value="default">--Select--</option>
+              </select>
+            </div>
+            <div class="popup-main-divs-big dineIn">
+              <label for="available-tables">
+                Available table<span class="mandatory">*</span>
+              </label>
+              <div id="add-qr-table" class="table-wrapper">
+                <table id="select-table" class="available-table table-main">
+                  <thead></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="heading dineIn">
+              <h4>Payment Gateway</h4>
+            </div>
+            <div class="popup-main-divs-big dineIn">
+              <label for="payment-method"> Payment Method </label>
+              <div class="table-wrapper">
+                <table
+                  id="payment-method-table"
+                  class="table-main payment-select-table"
+                >
+                  <thead>
+                    <tr>
+                      <th>
+                        <input
+                          id="sel-all-payment"
+                          class="checkbox-input"
+                          type="checkbox"
+                        />
+                      </th>
+                      <th><label for="sel-all-payment">Select All</label></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="popup-main-divs-big dineIn">
+              <label for="business-source"> Business Source </label>
+              <div class="table-wrapper">
+                <table
+                  id="business-source-table"
+                  class="table-main business-source-select-table"
+                >
+                  <thead>
+                    <tr>
+                      <th>
+                        <input
+                          id="sel-all-business-src"
+                          class="checkbox-input"
+                          type="checkbox"
+                        />
+                      </th>
+                      <th>
+                        <label for="sel-all-business-src">Select All</label>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="pay-later">Allow Pay Later</label>
+              <input id="pay-later" class="checkbox-input" type="checkbox" />
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="ask-comment">Ask Comment</label>
+              <input id="ask-comment" class="checkbox-input" type="checkbox" />
+            </div>
+            <div class="popup-main-divs dineIn">
+              <label for="minimum-order-amount">Minimum Order Amount</label>
+              <input
+                id="minimum-order-amount"
+                class="text-input"
+                type="text"
+                placeholder="Minimum Amount"
+              />
+            </div>
+            <div class="popup-main-divs-big dineIn">
+              <label for="outlet-slogan">Outlet Slogan</label>
+              <textarea
+                id="outlet-slogan"
+                class="text-area-input"
+                placeholder="Add Outlet Slogan"
+              ></textarea>
+            </div>
+
+            <div class="heading dineIn">
+              <h4>Visibility Settings</h4>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="monday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="monday">Monday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="tuesday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="tuesday">Tuesday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="wednesday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="wednesday">Wednesday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="thursday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="thursday">Thursday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="friday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="friday">Friday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="saturday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="saturday">Saturday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="popup-main-divs dineIn">
+              <div class="day">
+                <input
+                  id="sunday"
+                  class="checkbox-input day-input"
+                  type="checkbox"
+                  checked
+                />
+                <label for="sunday">Sunday</label>
+              </div>
+              <div class="day-select">
+                <button type="button" class="day-select-buttons">
+                  <p>00:00 - 23:59</p>
+                  <span class="material-icons-outlined rotate-icon"
+                    >arrow_drop_down
+                  </span>
+                </button>
+                <div class="day-select-container">
+                  <div class="start-time">
+                    <p>Start :</p>
+                    <div class="start-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="start-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="end-time">
+                    <p>End :</p>
+                    <div class="end-hour">
+                      <select class="select-option select-hour"></select>
+                    </div>
+                    <b>:</b>
+                    <div class="end-minute">
+                      <select class="select-option select-minute"></select>
+                    </div>
+                  </div>
+                  <div class="time-buttons">
+                    <button>Apply</button>
+                    <button>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="room-service">
+            <div class="popup-main-divs">
+              <label for="Language">
+                Language<span class="mandatory">*</span>
+              </label>
+              <select id="Language" class="main-select">
+                <option value="english">English</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="popup-main-divs">
+              <label for="posting-method">
+                Posting Method<span class="mandatory">*</span>
+              </label>
+              <select id="posting-method" class="main-select">
+                <option value="default">--select--</option>
+              </select>
+            </div>
+            <div class="heading">
+              <h4>Menu Configuration</h4>
+              <button id="menu-config-button" class="menu-popup" type="button">
+                <span class="material-icons-outlined"> add </span>
+              </button>
+            </div>
+            <div class="heading">
+              <h4>List Of All Menu Configurations</h4>
+            </div>
+            <div class="popup-main-divs-big">
+              <table class="table-main">
+                <thead>
+                  <tr>
+                    <th>Outlet</th>
+                    <th>Menu</th>
+                    <th>Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>coffee shop</td>
+                    <td>coffee shop</td>
+                    <td>coffee shop</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="menu-link">
+            <div class="popup-main-divs">
+              <label for="Language">
+                Language<span class="mandatory">*</span>
+              </label>
+              <select id="Language" class="main-select">
+                <option value="english">English</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="heading">
+              <h4>Menu Configuration</h4>
+              <button class="menu-popup" type="button">
+                <span class="material-icons-outlined"> add </span>
+              </button>
+            </div>
+            <div class="heading">
+              <h4>List Of All Menu Configurations</h4>
+            </div>
+            <div class="popup-main-divs-big">
+              <table class="table-main">
+                <thead>
+                  <tr>
+                    <th>Outlet</th>
+                    <th>Menu</th>
+                    <th>Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>coffee shop</td>
+                    <td>coffee shop</td>
+                    <td>coffee shop</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="popup-footer">
+          <button id="qr-submit-button" class="popup-save-btn" type="button">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div id="add-menu-config-overlay" class="popup-overlay"></div>
+    <form id="add-menu-config-form">
+      <div id="add-menu-config-popup" class="popup">
+        <div class="popup-header">
+          <h4>Add Menu Configuration</h4>
+          <button id="menu-config-close" class="close-popup-btn">
+            <span class="material-icons-outlined"> close </span>
+          </button>
+        </div>
+        <div class="popup-main">
+          <div class="heading dineIn">
+            <h4>General Details</h4>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="outlets">Outlet<span class="mandatory">*</span> </label>
+            <select id="outlets" class="main-select">
+              <option value="default">--Select--</option>
+            </select>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="menu">Menu<span class="mandatory">*</span> </label>
+            <select id="menu" class="main-select">
+              <option value="default">--Select--</option>
+            </select>
+          </div>
+          <div class="popup-main-divs">
+            <label for="allow-order-type"> Allow Order type </label>
+            <div class="order-type-container">
+              <input id="take-away" class="checkbox-input" type="checkbox" />
+              <label for="take-away">Take Away</label>
+
+              <input id="delivery" class="checkbox-input" type="checkbox" />
+              <label for="delivery">Delivery</label>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="rate"> Rate</label>
+            <select id="rate" class="main-select rate-select">
+              <option value="default">--Select--</option>
+            </select>
+          </div>
+          <div class="heading dineIn">
+            <h4>Payment Gateway</h4>
+          </div>
+          <div class="popup-main-divs-big dineIn">
+            <label for="payment-method"> Payment Method </label>
+            <div class="table-wrapper">
+              <table
+                id="payment-method-table"
+                class="table-main payment-select-table"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      <input
+                        id="sel-all-payment"
+                        class="checkbox-input"
+                        type="checkbox"
+                      />
+                    </th>
+                    <th><label for="sel-all-payment">Select All</label></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="popup-main-divs-big dineIn">
+            <label for="business-source"> Business Source </label>
+            <div class="table-wrapper">
+              <table
+                id="business-source-table"
+                class="table-main business-source-select-table"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      <input
+                        id="sel-all-business-src"
+                        class="checkbox-input"
+                        type="checkbox"
+                      />
+                    </th>
+                    <th>
+                      <label for="sel-all-business-src">Select All</label>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="pay-later">Allow Pay Later</label>
+            <input id="pay-later" class="checkbox-input" type="checkbox" />
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="ask-comment">Ask Comment</label>
+            <input id="ask-comment" class="checkbox-input" type="checkbox" />
+          </div>
+          <div class="popup-main-divs dineIn">
+            <label for="minimum-order-amount">Minimum Order Amount</label>
+            <input
+              id="minimum-order-amount"
+              class="text-input"
+              type="text"
+              placeholder="Minimum Amount"
+            />
+          </div>
+          <div class="popup-main-divs-big dineIn">
+            <label for="outlet-slogan">Outlet Slogan</label>
+            <textarea
+              id="outlet-slogan"
+              class="text-area-input"
+              placeholder="Add Outlet Slogan"
+            ></textarea>
+          </div>
+          <div class="heading dineIn">
+            <h4>Visibility Settings</h4>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="monday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="monday">Monday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="tuesday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="tuesday">Tuesday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="wednesday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="wednesday">Wednesday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="thursday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="thursday">Thursday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="friday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="friday">Friday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="saturday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="saturday">Saturday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-main-divs dineIn">
+            <div class="day">
+              <input
+                id="sunday"
+                class="checkbox-input day-input"
+                type="checkbox"
+                checked
+              />
+              <label for="sunday">Sunday</label>
+            </div>
+            <div class="day-select">
+              <button type="button" class="day-select-buttons">
+                <p>00:00 - 23:59</p>
+                <span class="material-icons-outlined rotate-icon"
+                  >arrow_drop_down
+                </span>
+              </button>
+              <div class="day-select-container">
+                <div class="start-time">
+                  <p>Start :</p>
+                  <div class="start-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="start-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="end-time">
+                  <p>End :</p>
+                  <div class="end-hour">
+                    <select class="select-option select-hour"></select>
+                  </div>
+                  <b>:</b>
+                  <div class="end-minute">
+                    <select class="select-option select-minute"></select>
+                  </div>
+                </div>
+                <div class="time-buttons">
+                  <button>Apply</button>
+                  <button>Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-save-btn">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="add-logo-overlay" class="popup-overlay"></div>
+    <div id="add-logo-popup" class="popup">
+      <div class="popup-header">
+        <h4>Add Menu Configuration</h4>
+        <button id="add-logo-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <div class="popup-main">
+        <div class="popup-main-divs">
+          <label for="company-logo">
+            Company Logo<span class="mandatory">*</span>
+          </label>
+          <input type="file" accept="images" />
+        </div>
+      </div>
+      <div class="popup-footer">
+        <button class="popup-save-btn">Save</button>
+      </div>
+    </div>
+
+    <script src="qr code generator.js"></script>
+  </body>
+</html>
