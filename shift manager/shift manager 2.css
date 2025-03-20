@@ -405,7 +405,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .main-table tbody td button img{
@@ -416,7 +416,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  flex-direction: column;
+  flex-direction: row;
 } 
 
 #tbl-guest-user {
