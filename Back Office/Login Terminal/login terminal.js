@@ -7,7 +7,7 @@ terminalForm.addEventListener("submit", (event) => {
   const terminal = document.getElementById("terminal-select").value;
 
   if (outlet && terminal) {
-    window.location.href = "../../Back Office/master option/Outlet/outlet.html";
+    window.location.href = "../../Order summary/order summary.html";
   } else {
     alert("Please select both an outlet and a terminal.");
   }
