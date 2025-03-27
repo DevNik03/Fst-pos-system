@@ -206,6 +206,15 @@ function warningCall(warning) {
         Logout
       </button>
     `;
+
+    // Add event listener after button is created
+    setTimeout(() => {
+      document
+        .getElementById("logout-confirm-button")
+        .addEventListener("click", () => {
+          window.location.href = "/index.html";
+        });
+    }, 100);
   } else if (warning === "action") {
     warningHeading.innerText = "Select An Order";
     warningMessage.innerText = "Please Select An Order To Continue!";
