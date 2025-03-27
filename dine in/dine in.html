@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>guest database</title>
-    <link rel="stylesheet" href="guest database.css" />
+    <title>Dine In</title>
+    <link rel="stylesheet" href="dine in.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
@@ -40,10 +40,23 @@
           <span class="material-symbols-outlined"> widgets </span>
         </button>
         <div class="page-heading">
-          <p>Guest Database</p>
+          <p>Dine In</p>
+        </div>
+        <div class="dinein-floors">
+          <button class="header-buttons">Floor 1</button>
+          <button class="header-buttons">Floor 2</button>
         </div>
       </div>
       <div class="header-right">
+        <button class="header-buttons" title="Assign Waiter">
+          <span class="material-symbols-outlined"> concierge </span>
+        </button>
+        <button class="header-buttons" title="Dine In Orders">
+          <span class="material-symbols-outlined"> restaurant </span>
+        </button>
+        <button class="header-buttons" title="Take Away Orders">
+          <span class="material-symbols-outlined"> takeout_dining </span>
+        </button>
         <button class="header-buttons" title="Online Ordering Status">
           <span class="material-symbols-outlined"> phone_android </span>
         </button>
@@ -105,7 +118,11 @@
               <span class="material-symbols-outlined"> restaurant </span>
               <p>Dine In</p>
             </button>
-            <button id="take-away-button" class="navbar-buttons">
+            <button
+              id="take-away-button"
+              class="navbar-buttons"
+              onclick="openOrderPopup('takeAway')"
+            >
               <span class="material-symbols-outlined"> takeout_dining </span>
               <p>Take Away</p>
             </button>
@@ -119,7 +136,7 @@
               <span class="material-symbols-outlined"> money_off </span>
               <p>No Charge</p>
             </button>
-            <button class="navbar-buttons">
+            <button class="navbar-buttons nav-active-option">
               <span class="material-symbols-outlined"> receipt_long </span>
               <p>Order Summary</p>
             </button>
@@ -193,103 +210,52 @@
     </nav>
 
     <main>
-      <div class="main-filterbar">
-        <div class="main-searchbar">
-          <button class="search-button">
-            <span class="material-icons-outlined"> search </span>
+      <div class="dinein-table">
+        <div class="table-info active-order">
+          <div class="table-active-time">Time</div>
+          <div class="table-number active-table">Table No</div>
+          <div class="waiter-name">Waiter Name</div>
+          <div class="guest-count">
+            <span class="material-symbols-outlined"> person </span>Guest Count
+          </div>
+        </div>
+        <div class="table-status">
+          <div class="running-orders">1 Running</div>
+          <button class="start-new-order" title="Start New Order">
+            <span class="material-symbols-outlined"> add </span>
           </button>
-          <input
-            id="main-search"
-            class="search-input"
-            type="search"
-            placeholder="Search"
-          />
         </div>
-        <button class="record-status-button">
-          <span class="material-symbols-outlined"> filter_list </span>
-          <span id="record-status">Active</span>
-          <span id="running-badge" class="badge">
-            <p class="record-count">0</p>
-          </span>
-        </button>
-
-        <div class="select-status">
-          <button id="active-records" class="Status-buttons active-status">
-            Active
-          </button>
-          <button id="all-records" class="Status-buttons">All</button>
-        </div>
-      </div>
-      <div class="main-container">
-        <div id="no-data" class="table-warning">
-          <h2>No Data Available!</h2>
-        </div>
-        <div id="no-records" class="table-warning">
-          <h2>No Records Available!</h2>
-        </div>
-        <table id="guest-table" class="main-table">
-          <thead>
-            <tr>
-              <th id="tbl-guest-name">Name</th>
-              <th id="tbl-guest-city">City</th>
-              <th id="tbl-guest-mobile ">Mobile No.</th>
-              <th id="tbl-guest-phone">Phone</th>
-              <th id="tbl-guest-email">Email</th>
-              <th id="tbl-action">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>New York</td>
-              <td>1234567890</td>
-              <td>9876543210</td>
-              <td>john@example.com</td>
-              <td>Edit | Delete</td>
-            </tr>
-            <tr>
-              <td>Jane Smith</td>
-              <td>Los Angeles</td>
-              <td>2233445566</td>
-              <td>1122334455</td>
-              <td>jane@example.com</td>
-              <td>Edit | Delete</td>
-            </tr>
-            <tr>
-              <td>Michael Johnson</td>
-              <td>Chicago</td>
-              <td>3344556677</td>
-              <td>5566778899</td>
-              <td>michael@example.com</td>
-              <td>Edit | Delete</td>
-            </tr>
-            <tr>
-              <td>Emily Davis</td>
-              <td>Houston</td>
-              <td>4455667788</td>
-              <td>6677889900</td>
-              <td>emily@example.com</td>
-              <td>Edit | Delete</td>
-            </tr>
-            <tr>
-              <td>David Wilson</td>
-              <td>San Francisco</td>
-              <td>5566778899</td>
-              <td>7788990011</td>
-              <td>david@example.com</td>
-              <td>Edit | Delete</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
-      <div class="total-records-display">
-        <div class="total-records-container">
-          X of
-          <p id="total-records" class="record-count">0</p>
-          records
+      <div class="dinein-table">
+        <div class="table-info">
+          <div class="table-number">Table No</div>
+          <div class="waiter-name">Waiter Name</div>
+        </div>
+        <div class="table-status">
+          <button class="start-new-order" title="Start New Order">
+            <span class="material-symbols-outlined"> add </span>
+          </button>
         </div>
       </div>
+
+      <div class="dinein-tables-statusbar">
+        <div id="status-occupied" class="table-status-info">
+          <div id="occupied-box" class="table-box"></div>
+          Occupied
+          <p id="occupied-tables">(count)</p>
+        </div>
+        <div id="status-vacant" class="table-status-info">
+          <div id="vacant-box" class="table-box"></div>
+          Vacant
+          <p id="vacant-tables">(count)</p>
+        </div>
+      </div>
+
+      <button class="add-table-button" title="Add Table">
+        <p>Add Table</p>
+        <span class="material-symbols-outlined"> add </span>
+      </button>
     </main>
 
     <footer>
@@ -346,7 +312,12 @@
           />
         </div>
         <div class="popup-container">
-          <ul class="main-ul"></ul>
+          <ul class="main-ul">
+            <li class="popup-list">
+              <input id="coffeeshop2" type="radio" name="select-outlet" />
+              <label for="coffeeshop2">Coffee Shop 2</label>
+            </li>
+          </ul>
         </div>
       </form>
     </div>
@@ -355,14 +326,12 @@
     <div id="warning-popup-overlay" class="overlay"></div>
     <div id="warning-popup" class="popup">
       <div id="warning-header" class="popup-header">
-        <div class="warning">
-          <span id="warning-icon" class="material-symbols-outlined">
-            warning
-          </span>
-          <p id="warning-heading"></p>
-        </div>
-        <button id="warning-popup-close" class="close-popup-btn">
-          <span class="material-icons-outlined"> close </span>
+        <span id="warning-icon" class="material-symbols-outlined">
+          warning
+        </span>
+        <p id="warning-heading"></p>
+        <button id="warning-popup-close" class="close-button">
+          <span class="material-symbols-outlined"> close </span>
         </button>
       </div>
       <div id="warning-main" class="popup-main">
@@ -370,8 +339,57 @@
       </div>
       <div id="warning-footer" class="popup-footer"></div>
     </div>
-    <!---------------------------- important popups --------------------->
-    <!---------------------------- take away popup ---------------------->
+    <!---------------------------- add table popup --------------------->
+
+    <div id="add-table-overlay" class="overlay"></div>
+    <div id="add-table-popup" class="popup">
+      <div class="popup-header">
+        <h4 class="selection-popup-heading">Add Table</h4>
+        <button id="add-table-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <form id="add-table-form" class="popup-main">
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="text"
+            id="table-name"
+            placeholder=" "
+          />
+          <label for="table-name">
+            Table Name<span class="mandatory">*</span>
+          </label>
+        </div>
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="text"
+            id="table-short-code"
+            placeholder=" "
+          />
+          <label for="table-short-code">
+            Table Short Code<span class="mandatory">*</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="text"
+            id="table-waiter"
+            placeholder=" "
+          />
+          <label for="table-waiter">
+            Waiter Name<span class="mandatory">*</span>
+          </label>
+        </div>
+      </form>
+      <div class="popup-footer">
+        <button id="add-table-submit" class="popup-save-btn">Save</button>
+      </div>
+    </div>
+
     <div id="order-information-overlay" class="overlay"></div>
     <div id="order-information-popup" class="popup">
       <div class="popup-header">
@@ -380,13 +398,124 @@
           <span class="material-icons-outlined"> close </span>
         </button>
       </div>
-      <form
-        id="order-information-form"
-        class="popup-main order-info-scroll"
-      ></form>
-      <div id="order-info-footer" class="popup-footer"></div>
+      <form id="order-information-form" class="popup-main">
+        <div class="heading">
+          <p>Waiter Details</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <select id="ord-info-waiter" class="main-select">
+              <option value="default">Select Waiter</option>
+            </select>
+            <span class="main-select-label">Waiter</span>
+          </div>
+
+          <div class="form-group">
+            <input
+              class="text-input"
+              type="text"
+              id="waiter-code"
+              placeholder=" "
+            />
+            <label for="waiter-code">Waiter Code</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="text"
+            id="guest-quantity"
+            placeholder=" "
+          />
+          <label for="guest-quantity">No. of Guests</label>
+        </div>
+
+        <div class="heading">
+          <p>Guest Details</p>
+        </div>
+
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="search"
+            id="guest-search"
+            placeholder=" "
+          />
+          <label for="guest-search"
+            >Enter Guest Name, Mobile, Phone, or Email</label
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <input
+              class="text-input"
+              type="text"
+              id="guest-name"
+              placeholder=" "
+            />
+            <label for="guest-name">Guest Name</label>
+          </div>
+
+          <div class="form-group">
+            <input
+              class="text-input"
+              type="text"
+              id="guest-email"
+              placeholder=" "
+            />
+            <label for="guest-email">Email</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <input
+              class="text-input"
+              type="text"
+              id="guest-phone"
+              placeholder=" "
+            />
+            <label for="guest-phone">Phone No.</label>
+          </div>
+
+          <div class="form-group">
+            <input
+              class="text-input"
+              type="text"
+              id="guest-registration#"
+              placeholder=" "
+            />
+            <label for="guest-registration#">Guest Registration#</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            class="text-input"
+            type="text"
+            id="guest-remark"
+            placeholder=" "
+          />
+          <label for="guest-remark">Remark</label>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <select class="main-select">
+              <option value="default">Select Business Source</option>
+            </select>
+            <span class="main-select-label">Business Source</span>
+          </div>
+
+          <div class="form-group"></div>
+        </div>
+      </form>
+      <div id="order-info-footer" class="popup-footer">
+        <button id="order-info-submit" class="popup-save-btn">Save</button>
+      </div>
     </div>
 
-    <script src="guest database.js"></script>
+    <script src="dine in.js"></script>
   </body>
 </html>
