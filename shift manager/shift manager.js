@@ -46,6 +46,59 @@ searchInput.addEventListener("input", () => {
   });
 });
 
+// NavBar buttons functions
+document.getElementById('dine-in-btn').addEventListener('click', function () {
+  window.location.href = '../dine in/dine in.html'; 
+});
+document.getElementById('take-away-btn').addEventListener('click', function () {
+  window.location.href = '../take away/take away.html'; 
+});
+document.getElementById('delivery-manager-btn').addEventListener('click', function () {
+  window.location.href = '../delivery manager/delivery manager.html'; 
+});
+document.getElementById('no-charge-btn').addEventListener('click', function () {
+  window.location.href = '../no charge/no charge.html'; 
+});
+document.getElementById('order-summary-btn').addEventListener('click', function () {
+  window.location.href = '../order summary/order summary.html'; 
+});
+document.getElementById('dashboard-btn').addEventListener('click', function () {
+  window.location.href = '../dashboard/dashboard.html'; 
+});
+document.getElementById('reports-btn').addEventListener('click', function () {
+  window.location.href = '../reports/reports.html'; 
+});
+document.getElementById('account-lookup-btn').addEventListener('click', function () {
+  window.location.href = '../account lookup/account lookup.html'; 
+});
+document.getElementById('transaction-lock-btn').addEventListener('click', function () {
+  window.location.href = '../transaction lock/transaction lock.html'; 
+});
+document.getElementById('blocked-devices-btn').addEventListener('click', function () {
+  window.location.href = '../blocked devices/blocked devices.html'; 
+});
+document.getElementById('shift-manager-btn').addEventListener('click', function () {
+  window.location.href = '../shift manager/shift manager.html'; 
+});
+document.getElementById('day-close-btn').addEventListener('click', function () {
+  window.location.href = '../day close/day close.html'; 
+});
+document.getElementById('no-sale-btn').addEventListener('click', function () {
+  window.location.href = '../no sale/no sale.html'; 
+});
+document.getElementById('expense-voucher-btn').addEventListener('click', function () {
+  window.location.href = '../expense voucher/expense voucher.html'; 
+});
+document.getElementById('income-voucher-btn').addEventListener('click', function () {
+  window.location.href = '../income voucher/income voucher.html'; 
+});
+document.getElementById('item-lookup-btn').addEventListener('click', function () {
+  window.location.href = '../item lookup/item lookup.html'; 
+});
+document.getElementById('guest-database-btn').addEventListener('click', function () {
+  window.location.href = '../guest database/guest database.html'; 
+});
+
 //-------------------------------header-------------------------------
 
 // Select all filter buttons
