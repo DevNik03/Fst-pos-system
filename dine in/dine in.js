@@ -96,7 +96,9 @@ document.getElementById('item-lookup-btn').addEventListener('click', function ()
 document.getElementById('guest-database-btn').addEventListener('click', function () {
   window.location.href = '../guest database/guest database.html'; 
 });
-
+document.getElementbyId('switch-to-back-btn').addEventListener('click', function () {
+  window.location.href = '../Back Office/master option/Outlet/outlet.html';
+});
 //-------------------------------header-------------------------------
 
 // Select Outlet Popup Elements
