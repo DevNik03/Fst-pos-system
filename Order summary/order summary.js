@@ -69,12 +69,12 @@ document.getElementById('reports-btn').addEventListener('click', function () {
 document.getElementById('account-lookup-btn').addEventListener('click', function () {
   window.location.href = '../account lookup/account lookup.html'; 
 });
-// document.getElementById('transaction-lock-btn').addEventListener('click', function () {
-//   window.location.href = '../transaction lock/transaction lock.html'; 
-// });
-// document.getElementById('blocked-devices-btn').addEventListener('click', function () {
-//   window.location.href = '../blocked devices/blocked devices.html'; 
-// });
+document.getElementById('transaction-lock-btn').addEventListener('click', function () {
+  window.location.href = '../transaction lock/transaction lock.html'; 
+});
+document.getElementById('blocked-device-btn').addEventListener('click', function () {
+  window.location.href = '../blocked devices/blocked devices.html'; 
+});
 document.getElementById('shift-manager-btn').addEventListener('click', function () {
   window.location.href = '../shift manager/shift manager.html'; 
 }); 
