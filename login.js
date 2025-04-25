@@ -52,7 +52,7 @@ loginButton.addEventListener("click", () => {
   const restaurantCode = document.getElementById("restaurant-code").value;
 
   if (username === "fstqatar" && password === "trisha123" && restaurantCode === "682") {
-    window.location.href = "../Back Office/Login Terminal/login terminal.html"; // Redirect to the terminal page
+    window.location.href = "/Login Terminal/login terminal.html"; // Redirect to the terminal page
   } else {
     alert("Invalid login details.");
   }
@@ -61,7 +61,7 @@ loginButton.addEventListener("click", () => {
 // Pin Login
 keypadLoginButton.addEventListener("click", () => {
   if (pin === "4321") {
-    window.location.href = "../Back Office/Login Terminal/login terminal.html"; // Redirect to the terminal page
+    window.location.href = "/Login Terminal/login terminal.html"; // Redirect to the terminal page
   } else {
     alert("Invalid PIN.");
   }

@@ -1,17 +1,83 @@
-//loader
+//----------------------------- header-----------------------------------
+//-----------------------------user option-----------------------------
 
-const loadingScreen = document.querySelector(".loading-screen");
-window.addEventListener("load", () => {
-  const loadingScreen = document.querySelector(".loading-screen");
-  if (loadingScreen) {
-    loadingScreen.remove(); // This removes it from the DOM completely
-  }
+const userbutton = document.querySelector(".username-button");
+const userOptions = document.querySelector(".user-options");
+const userOptionsOverlay = document.querySelector("#user-option-overlay");
+
+userbutton.addEventListener("click", () => {
+  userOptions.style.opacity = 1;
+  userOptions.style.visibility = "visible";
+  userOptionsOverlay.style.visibility = "visible";
 });
 
-// Select buttons
-const masterButton = document.querySelector(".master-btn");
-const menuButton = document.querySelector(".menu-btn");
-const settingButton = document.querySelector(".settings-btn");
+userOptionsOverlay.addEventListener("click", () => {
+  userOptions.style.opacity = 0;
+  userOptions.style.visibility = "hidden";
+  userOptionsOverlay.style.visibility = "hidden";
+});
+
+//----------------------------- Select warning popup elements-----------------------------
+const warningPopup = document.querySelector(".warning-popup");
+const warningOverlay = document.querySelector("#warning-overlay");
+const warningMessage = document.querySelector("#warning-message");
+const warningFooter = document.querySelector(".warning-popup-foot");
+
+// Function to show the warning popup
+function warningPopupEnable(actionType) {
+  warningPopup.style.opacity = 1;
+  warningPopup.style.visibility = "visible";
+  warningOverlay.style.opacity = 1;
+  warningOverlay.style.visibility = "visible";
+
+  // Set message based on action type
+  if (actionType === "logout") {
+    warningMessage.textContent = "Are you sure you want to logout?";
+    warningFooter.innerHTML = `
+      <button id="logout-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="logout-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  } else if (actionType === "delete") {
+    warningMessage.textContent = "Are you sure you want to delete?";
+    warningFooter.innerHTML = `
+      <button id="delete-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="delete-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  }
+}
+
+// Logout button event listener
+document.querySelector(".main-logout-button").addEventListener("click", () => {
+  warningPopupEnable("logout");
+});
+
+function closeWarning() {
+  warningPopup.style.opacity = 0;
+  warningPopup.style.visibility = "hidden";
+  warningOverlay.style.opacity = 0;
+  warningOverlay.style.visibility = "hidden";
+}
+
+// Use event delegation to close popup when clicking "No"
+document
+  .querySelector(".warning-popup-foot")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("warning-denied")) {
+      closeWarning();
+    }
+  });
+
+// Close popup when clicking outside of it
+warningOverlay.addEventListener("click", () => {
+  closeWarning();
+});
+
+//-----------------------------navbar-----------------------------
+
+//----------------------------- Select buttons-----------------------------
+const masterButton = document.querySelector("#master-button");
+const menuButton = document.querySelector("#menu-button");
+const settingButton = document.querySelector("#setting-button");
 
 // Add event listeners for buttons
 masterButton.addEventListener("click", () => {
@@ -41,164 +107,250 @@ settingButton.addEventListener("click", () => {
   menuButton.classList.remove("navbar-active-option");
 });
 
-// add popup close button
+// -----------------------------main-----------------------------
 
-const popupEnableButton = document.querySelector(".popup-enable-button");
-const popupCloseButton = document.querySelector(".close-popup-btn");
-const popupSaveButton = document.querySelector(".popup-save-btn");
-const popup = document.querySelector(".popup");
-const overlay = document.querySelector(".popup-overlay");
-const form = document.querySelector("#currency-form");
-const scrollableArea = document.querySelector(".popup-main");
+//----------------------------- titlebar-----------------------------
+// opening main popup
 
-function openPopup() {
-  popup.style.display = "grid";
-  overlay.style.display = "flex";
-  scrollableArea.scrollTop = 0;
+const currencyOverlay = document.querySelector("#currency-overlay");
+const currencyPopup = document.querySelector("#currency-popup");
+const currencyForm = document.querySelector("#currency-form");
+const currencyPopupAdd = document.querySelector("#currency-open");
+const currencyPopupClose = document.querySelector("#currency-close");
+
+function mainPopupEnable() {
+  currencyPopup.style.visibility = "visible";
+  currencyPopup.style.opacity = 1;
+
+  currencyOverlay.style.visibility = "visible";
+  currencyOverlay.style.opacity = 1;
+
+  currencyForm.scrollTop = 0;
 }
 
-function closePopup() {
-  popup.style.display = "none";
-  overlay.style.display = "none";
-  form.reset();
+function mainPopupDisable() {
+  currencyPopup.style.visibility = "hidden";
+  currencyPopup.style.opacity = 0;
+
+  currencyOverlay.style.visibility = "hidden";
+  currencyOverlay.style.opacity = 0;
+
+  currencyForm.reset();
+
+  // symbol container is on the left initially
+  symbolHolders.forEach((holder) => {
+    holder.classList.add("left");
+    holder.classList.remove("right");
+  });
 }
 
-popupEnableButton.addEventListener("click", () => {
-  openPopup();
+currencyPopupAdd.addEventListener("click", () => {
+  mainPopupEnable();
 });
 
-popupCloseButton.addEventListener("click", () => {
-  closePopup();
+currencyPopupClose.addEventListener("click", () => {
+  mainPopupDisable();
 });
 
-// Country data
-const currencyData = {
-  Afghanistan: { code: "AFN", symbol: "؋", name: "Afghani", subunit: "Pul" },
-  Albania: { code: "ALL", symbol: "L", name: "Lek", subunit: "Qindarkë" },
-  Algeria: {
-    code: "DZD",
-    symbol: "د.ج",
-    name: "Algerian Dinar",
-    subunit: "Santeem",
-  },
-  Andorra: { code: "EUR", symbol: "€", name: "Euro", subunit: "Cent" },
-  Angola: { code: "AOA", symbol: "Kz", name: "Kwanza", subunit: "Cêntimo" },
-  Argentina: {
-    code: "ARS",
-    symbol: "$",
-    name: "Argentine Peso",
-    subunit: "Centavo",
-  },
-  Australia: {
-    code: "AUD",
-    symbol: "$",
-    name: "Australian Dollar",
-    subunit: "Cent",
-  },
-  Bangladesh: { code: "BDT", symbol: "৳", name: "Taka", subunit: "Paisa" },
-  Brazil: {
-    code: "BRL",
-    symbol: "R$",
-    name: "Brazilian Real",
-    subunit: "Centavo",
-  },
-  Canada: {
-    code: "CAD",
-    symbol: "$",
-    name: "Canadian Dollar",
-    subunit: "Cent",
-  },
-  China: { code: "CNY", symbol: "¥", name: "Yuan", subunit: "Fen" },
-  "United States": {
-    code: "USD",
-    symbol: "$",
-    name: "United States Dollar",
-    subunit: "Cents",
-  },
-  India: { code: "INR", symbol: "₹", name: "Indian Rupee", subunit: "Paisa" },
-  Japan: { code: "JPY", symbol: "¥", name: "Japanese Yen", subunit: "Sen" },
-  Mexico: {
-    code: "MXN",
-    symbol: "$",
-    name: "Mexican Peso",
-    subunit: "Centavo",
-  },
-  Nigeria: { code: "NGN", symbol: "₦", name: "Naira", subunit: "Kobo" },
-  Pakistan: {
-    code: "PKR",
-    symbol: "₨",
-    name: "Pakistani Rupee",
-    subunit: "Paisa",
-  },
-  "United Kingdom": {
-    code: "GBP",
-    symbol: "£",
-    name: "Pound Sterling",
-    subunit: "Pence",
-  },
-};
+currencyOverlay.addEventListener("click", () => {
+  mainPopupDisable();
+});
 
-// Populate the country dropdown
-const countrySelect = document.querySelector("#country");
-Object.keys(currencyData).forEach((country) => {
+// sign placement
+
+const placementSelect = document.querySelector("#sign-placement");
+const symbolHolders = document.querySelectorAll(".currency-symbol");
+
+placementSelect.addEventListener("change", () => {
+  const selectedValue = placementSelect.value.trim();
+
+  if (selectedValue === "After Amount") {
+    symbolHolders.forEach((holder) => {
+      holder.classList.add("right");
+      holder.classList.remove("left");
+    });
+  } else {
+    symbolHolders.forEach((holder) => {
+      holder.classList.add("left");
+      holder.classList.remove("right");
+    });
+  }
+});
+
+//populating the country select
+const countries = [
+  {
+    name: "India",
+    currencyCode: "INR",
+    currencySymbol: "₹",
+    currencyName: "Rupee",
+    subCurrencyName: "Paise",
+  },
+  {
+    name: "Pakistan",
+    currencyCode: "PKR",
+    currencySymbol: "₨",
+    currencyName: "Rupee",
+    subCurrencyName: "Paisa",
+  },
+  {
+    name: "United States",
+    currencyCode: "USD",
+    currencySymbol: "$",
+    currencyName: "Dollar",
+    subCurrencyName: "Cent",
+  },
+  {
+    name: "United Kingdom",
+    currencyCode: "GBP",
+    currencySymbol: "£",
+    currencyName: "Pound Sterling",
+    subCurrencyName: "Penny",
+  },
+  {
+    name: "Japan",
+    currencyCode: "JPY",
+    currencySymbol: "¥",
+    currencyName: "Yen",
+    subCurrencyName: "Sen",
+  },
+  {
+    name: "China",
+    currencyCode: "CNY",
+    currencySymbol: "¥",
+    currencyName: "Yuan",
+    subCurrencyName: "Fen",
+  },
+  {
+    name: "European Union",
+    currencyCode: "EUR",
+    currencySymbol: "€",
+    currencyName: "Euro",
+    subCurrencyName: "Cent",
+  },
+  {
+    name: "Australia",
+    currencyCode: "AUD",
+    currencySymbol: "A$",
+    currencyName: "Australian Dollar",
+    subCurrencyName: "Cent",
+  },
+  {
+    name: "Canada",
+    currencyCode: "CAD",
+    currencySymbol: "C$",
+    currencyName: "Canadian Dollar",
+    subCurrencyName: "Cent",
+  },
+  {
+    name: "Russia",
+    currencyCode: "RUB",
+    currencySymbol: "₽",
+    currencyName: "Ruble",
+    subCurrencyName: "Kopek",
+  },
+];
+
+const countrySelect = document.querySelector("#country-name");
+const currencyShortCode = document.querySelector("#currency-short-code");
+const currencySymbol = document.querySelector("#currency-sign");
+const currencyName = document.querySelector("#currency-name");
+const subCurrencyName = document.querySelector("#subcurrency-name");
+const conversionSymbol = document.querySelector("#country-symbol");
+
+countries.forEach((country) => {
   const option = document.createElement("option");
-  option.value = country;
-  option.textContent = country;
+  option.value = country.name;
+  option.textContent = country.name;
+
   countrySelect.appendChild(option);
 });
 
-// Selecting input fields
-const cnameInput = document.querySelector("#currency-name");
-const signInput = document.querySelector("#sign");
-const currencyName = document.querySelector("#main-currency-name");
-const subCurrencyInput = document.querySelector("#subcurrency-name");
-const currencySymbol = document.querySelector("#country-symbol");
+//when u select a country all the respective fields should be automatically be filled
 
-// Event listener for country selection
-countrySelect.addEventListener("change", function () {
-  const selectedCountry = this.value; // Use `this.value` instead of `this`
+countrySelect.addEventListener("change", () => {
+  const selectedValue = countrySelect.value.trim();
+  const countryData = countries.find(
+    (country) => country.name === selectedValue
+  );
 
-  if (currencyData[selectedCountry]) {
-    cnameInput.value = currencyData[selectedCountry].name;
-    signInput.value = currencyData[selectedCountry].symbol;
-    currencyName.value = currencyData[selectedCountry].name;
-    subCurrencyInput.value = currencyData[selectedCountry].subunit;
-    currencySymbol.textContent = currencyData[selectedCountry].symbol; // Update currency symbol in UI
-
-    document.querySelector("#conversion-rate").value = 1;
-    document.querySelector("#conversion-rate-fixed").value = 1;
-  }
-
-  if (countrySelect.value === "" || countrySelect.value === "default") {
-    form.reset();
+  if (countryData) {
+    currencyShortCode.value = countryData.currencyCode;
+    currencySymbol.value = countryData.currencySymbol;
+    currencyName.value = countryData.currencyName;
+    subCurrencyName.value = countryData.subCurrencyName;
+    conversionSymbol.textContent = countryData.currencySymbol;
+  } else {
+    currencyShortCode.value = "";
+    currencySymbol.value = "";
+    currencyName.value = "";
+    subCurrencyName.value = "";
+    conversionSymbol.textContent = "";
   }
 });
 
-// for import export menu
+//----------------------------- filterbar-----------------------------
 
-const importExportMenuButton = document.querySelector(".options-button");
-const importExportMenu = document.querySelector(".import-export-options");
-const importExportMenuOverlay = document.querySelector(
-  ".import-export-overlay"
-);
+const mainSearchBar = document.querySelector("#currency-search");
+const noRecordsMessage = document.querySelector("#no-records");
 
-importExportMenuButton.addEventListener("click", () => {
-  importExportMenu.style.display = "flex";
-  importExportMenuOverlay.style.display = "flex";
+mainSearchBar.addEventListener("input", () => {
+  mainSearch();
 });
 
-importExportMenuOverlay.addEventListener("click", () => {
-  importExportMenu.style.display = "none";
-  importExportMenuOverlay.style.display = "none";
+function mainSearch() {
+  const searchValue = mainSearchBar.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll("#currency-table tbody tr");
+
+  let matchFound = false;
+
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
+  }
+}
+//----------------------------- import export menu-----------------------------
+
+const importExportOverlay = document.querySelector("#import-export-overlay");
+const importExportMenu = document.querySelector(".import-export-menu");
+const importExportButton = document.querySelector("#import-export-add");
+
+importExportButton.addEventListener("click", () => {
+  importExportMenu.style.right = "0px";
+  importExportOverlay.style.visibility = "visible";
 });
 
-// rotate 180
+importExportOverlay.addEventListener("click", () => {
+  importExportMenu.style.right = "-300px";
+  importExportOverlay.style.visibility = "hidden";
+});
 
-const sortDataElements = document.querySelectorAll(".sort-data"); // Select all sort-data elements
+//-----------------------------main container-----------------------------
+//----------------------------- rotate icon-----------------------------
+const sortDataElements = document.querySelectorAll(".sort-icon"); // Select all sort-data elements
 
 sortDataElements.forEach((sortData) => {
   sortData.addEventListener("click", () => {
-    // Toggle the rotate-180 class on the icon inside the clicked sortData
     const icon = sortData.querySelector(".rotate-icon");
     if (icon) {
       icon.classList.toggle("rotate-180");
@@ -206,174 +358,248 @@ sortDataElements.forEach((sortData) => {
   });
 });
 
-$(document).ready(function () {
-  $("#currency-table").DataTable({
-    paging: false, // Disable pagination (entries per page)
-    searching: false, // Disable search bar
-    info: false, // Disable "Showing 1 to X of Y entries" info text
-    ordering: true, // Enable sorting
-    order: [], // Prevent default sorting on page load
-    language: {
-      emptyTable: "", // Hide 'No data available in table'
-      zeroRecords: "", // Hide 'No matching records found'
-      infoEmpty: "", // Hide 'Showing 0 to 0 of 0 entries'
-      infoFiltered: "", // Hide 'filtered from X total entries'
-    },
+// -----------------------------table sorting-----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.querySelector("#currency-table");
+  const headers = table.querySelectorAll("th");
+
+  headers.forEach((header, columnIndex) => {
+    header.addEventListener("click", () => {
+      sortTable(table, columnIndex);
+    });
   });
+
+  function sortTable(table, columnIndex) {
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const isAscending = table.dataset.sortOrder === "asc";
+
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.children[columnIndex].textContent.trim().toLowerCase();
+      const cellB = rowB.children[columnIndex].textContent.trim().toLowerCase();
+
+      return isAscending
+        ? cellA.localeCompare(cellB, undefined, { numeric: true })
+        : cellB.localeCompare(cellA, undefined, { numeric: true });
+    });
+
+    table.dataset.sortOrder = isAscending ? "desc" : "asc"; // Toggle sort order
+
+    tbody.innerHTML = "";
+    rows.forEach((row) => tbody.appendChild(row)); // Append sorted rows back to the table
+  }
 });
 
-// delete record button
+//-----------------------------delete all checkbox-----------------------------
 
-const checkbox = document.querySelectorAll("#delete-record-checkbox");
-const deleteRecordBtn = document.querySelector(".delete-records-button");
+const selectAllCheckbox = document.querySelector("#select-all-checkbox");
 
-checkbox.forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      deleteRecordBtn.style.display = "flex";
-    } else {
-      deleteRecordBtn.style.display = "none";
+selectAllCheckbox.addEventListener("change", () => {
+  const tableRows = document.querySelectorAll("#currency-table tbody tr");
+
+  tableRows.forEach((row) => {
+    const checkbox = row.querySelector("input[type='checkbox']");
+    if (checkbox) {
+      checkbox.checked = selectAllCheckbox.checked;
     }
   });
+  deleteAllEnable();
+  noDataDisplay();
 });
 
-// Select the "Delete All" checkbox
-const deleteAllCheckbox = document.querySelector("#delete-record-checkbox");
+//----------------------------- delete all button display-----------------------------
 
-// Add event listener to toggle all checkboxes
-deleteAllCheckbox.addEventListener("change", function () {
+function deleteAllEnable() {
+  const deleteAllButton = document.querySelector(".delete-all-button");
   const allCheckboxes = document.querySelectorAll(
-    "#currency-table tbody input[type='checkbox']"
+    "#currency-table tr input[type='checkbox']"
   );
 
   allCheckboxes.forEach((checkbox) => {
-    checkbox.checked = deleteAllCheckbox.checked;
-  });
-});
-
-const deletebutton = document.querySelector(".delete-records-button");
-deletebutton.addEventListener("click", () => {
-  tbody = document.querySelector("#currency-table tbody");
-  tbody.innerHTML = "";
-  checkEmptyTable();
-});
-
-// checking if the table is empty
-
-function checkEmptyTable() {
-  const tableRows = document.querySelectorAll("#currency-table tbody tr");
-  const noDataMessage = document.querySelector("#no-data");
-
-  if (tableRows.length === 0) {
-    noDataMessage.style.display = "block"; // Show message if no rows
-  } else {
-    noDataMessage.style.display = "none"; // Hide message if rows are present
-  }
-}
-document.addEventListener("DOMContentLoaded", function () {
-  checkEmptyTable();
-});
-
-// searchbar
-
-const searchBar = document.querySelector("#currency-search");
-searchBar.addEventListener("input", () => {
-  const searchValue = searchBar.value.trim().toLowerCase();
-  const tableRows = document.querySelectorAll("#currency-table tbody tr");
-  let hasVisibleRows = false;
-
-  tableRows.forEach((row) => {
-    let isMatch = false;
-    row.querySelectorAll("td").forEach((data) => {
-      if (data.textContent.trim().toLowerCase().includes(searchValue)) {
-        isMatch = true;
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        deleteAllButton.style.visibility = "visible";
+        deleteAllButton.style.opacity = 1;
+      } else {
+        deleteAllButton.style.visibility = "hidden";
+        deleteAllButton.style.opacity = 0;
       }
     });
-
-    if (isMatch) {
-      row.style.display = "";
-      hasVisibleRows = true;
-    } else {
-      row.style.display = "none";
-    }
   });
+}
 
-  // Handle "No data" message correctly
-  const noDataMessage = document.querySelector("#no-records");
-  noDataMessage.style.display = hasVisibleRows ? "none" : "flex";
+deleteAllEnable();
+//-----------------------------clicking of confirm delete button-----------------------------
+const deleteAllButton = document.querySelector(".delete-all-button");
+deleteAllButton.addEventListener("click", () => {
+  warningPopupEnable("delete");
+  document.querySelector("#delete-confirm").addEventListener("click", () => {
+    deleteRecords();
+    closeWarning();
+  });
 });
 
-// Account Submit Button
+//-----------------------------delete records-----------------------------
+function deleteRecords() {
+  const checkedBoxes = document.querySelectorAll(
+    "#currency-table tbody input[type='checkbox']:checked"
+  );
 
-const submitButton = document.querySelector("#currency-submit");
+  checkedBoxes.forEach((checkbox) => {
+    const row = checkbox.closest("tr"); // Get the closest <tr>
+    if (row) {
+      row.remove();
+      deleteAllButton.style.visibility = "hidden";
+      deleteAllButton.style.opacity = 0;
 
-submitButton.addEventListener("click", (event) => {
-  event.preventDefault();
+      selectAllCheckbox.checked = false;
+    }
+  });
+  noDataDisplay();
+  recordCount();
+}
 
-  const countryName = document.querySelector("#country").value.trim();
+function noDataDisplay() {
+  const rows = document.querySelectorAll("#currency-table tbody tr");
+
+  if (rows.length === 0) {
+    document.querySelector("#no-data").style.display = "flex"; // Show "No Data" message
+  } else {
+    document.querySelector("#no-data").style.display = "none"; // Hide "No Data" message
+  }
+}
+
+noDataDisplay();
+
+//----------------------------- adding records to table-----------------------------
+
+const currencySubmit = document.querySelector("#currency-submit-button");
+
+currencySubmit.addEventListener("click", () => {
+  // Taking inputs
+  const countryName = document.querySelector("#country-name").value.trim();
+
+  const currencyShortCode = document
+    .querySelector("#currency-short-code")
+    .value.trim();
+
+  const currencySymbol = document.querySelector("#currency-sign").value.trim();
+
+  const signPlacement = document.querySelector("#sign-placement").value.trim();
+
   const currencyName = document.querySelector("#currency-name").value.trim();
-  const symbol = document.querySelector("#sign").value.trim();
-  const exchangeRate = document.querySelector("#conversion-rate").value.trim(); // Get the value
 
-  // Validation Checks
+  const subCurrencyName = document
+    .querySelector("#subcurrency-name")
+    .value.trim();
+
+  const fromCurrency = document.querySelector("#from-currency").value.trim();
+
+  const toCurrency = document.querySelector("#to-currency").value.trim();
+
+  const decimalDigits = document
+    .querySelector("#digits-after-decimal")
+    .value.trim();
+
+  // Validation
   if (countryName === "" || countryName === "default") {
     alert("Please Select a Country");
     return;
   }
+
+  if (currencyShortCode === "") {
+    alert("Please Enter Currency Short Code");
+    return;
+  }
+
+  if (currencySymbol === "") {
+    alert("Please Enter a Currency Sign");
+    return;
+  }
+
   if (currencyName === "") {
     alert("Please Enter Currency Name");
     return;
   }
-  if (symbol === "") {
-    alert("Please Enter Currency Symbol");
-    return;
-  }
-  if (exchangeRate === "" || isNaN(exchangeRate)) {
-    alert("Please Enter a Valid Exchange Rate");
+
+  if (subCurrencyName === "") {
+    alert("Please Enter Subcurrency Name");
     return;
   }
 
-  // Get Current Date
+  //adding zeros
+
+  // Convert input values to numbers before formatting
+  let formattedFromCurrency = parseFloat(fromCurrency).toFixed(decimalDigits);
+  let formattedToCurrency = parseFloat(toCurrency).toFixed(decimalDigits);
+
+  //getting the date
+
   const now = new Date();
-  const formattedDate = now.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+  const currentDate = now.toISOString().split("T")[0]; // Extract YYYY-MM-DD
 
-  // Create the table row to append to the table
+  // Populating the data
   const tableBody = document.querySelector("#currency-table tbody");
   const row = document.createElement("tr");
   row.innerHTML = `
-    <td><input type="checkbox" class="record-checkbox" /></td>
+    <td><input type="checkbox"/></td>
     <td>${countryName}</td>
-    <td>${currencyName}</td>
-    <td>${formattedDate}</td>
-    <td>${symbol}</td>
-    <td>1.00 ${symbol} = ${exchangeRate} ₹</td>
+    <td>${currencyShortCode}</td>
+     <td>${currentDate}</td>
+      <td>${currencySymbol}</td>
     <td>
-      <button class="action-buttons edit-btn" title="Edit">
-        <span class="material-symbols-outlined"> edit </span>
+    ${
+      signPlacement === "Before Amount"
+        ? `${currencySymbol} ${formattedFromCurrency} = ₹ ${formattedToCurrency}`
+        : `${formattedFromCurrency} ${currencySymbol}  = ${formattedToCurrency} ₹ `
+    }
+      </td>
+    <td>
+      <button class="active-button action-buttons" title="Status">
+        <span class="material-symbols-outlined">radio_button_checked</span>
       </button>
-      <button class="action-buttons delete-btn" title="Delete">
-        <span class="material-symbols-outlined"> delete </span>
+      <button class="edit-btn action-buttons" title="Edit">
+        <span class="material-symbols-outlined medium-icon">edit</span>
       </button>
-    </td>`;
-
-  // Append row to the table
+      <button class="delete-btn action-buttons" title="Delete">
+        <span class="material-symbols-outlined medium-icon">delete</span>
+      </button>
+    </td>
+  `;
   tableBody.appendChild(row);
 
-  // Close popup (assuming you have a function named closePopup)
-  closePopup();
+  mainPopupDisable();
+  deleteAllEnable();
+  recordCount();
+  noDataDisplay();
 });
 
-// Event listener for "Edit" and "Delete" buttons (Event Delegation)
+//-----------------------------delete function for all delete buttons-----------------------------
+
 document
   .querySelector("#currency-table tbody")
-  .addEventListener("click", function (event) {
-    let target = event.target.closest("button");
-    if (!target) return; // Ignore clicks outside buttons
+  .addEventListener("click", (event) => {
+    if (event.target.closest(".delete-btn")) {
+      const checkedBoxes = document.querySelectorAll(
+        "#currency-table tbody input[type='checkbox']:checked"
+      ).length;
 
-    let row = target.closest("tr");
-
-    if (target.classList.contains("delete-btn")) {
-      // Delete Row
-      row.remove();
+      if (checkedBoxes === 0) {
+        alert("Select the record you want to delete");
+      } else {
+        deleteRecords();
+      }
+      mainSearch();
     }
   });
+
+//-----------------------------buffer-----------------------------
+
+function recordCount() {
+  const rowLength = document.querySelectorAll(
+    "#currency-table tbody tr"
+  ).length;
+  document.querySelector("#record-count").textContent = rowLength;
+}
+
+recordCount();

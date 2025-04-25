@@ -1,17 +1,83 @@
-//loader
+//----------------------------- header-----------------------------------
+//-----------------------------user option-----------------------------
 
-const loadingScreen = document.querySelector(".loading-screen");
-window.addEventListener("load", () => {
-  const loadingScreen = document.querySelector(".loading-screen");
-  if (loadingScreen) {
-    loadingScreen.remove(); // This removes it from the DOM completely
-  }
+const userbutton = document.querySelector(".username-button");
+const userOptions = document.querySelector(".user-options");
+const userOptionsOverlay = document.querySelector("#user-option-overlay");
+
+userbutton.addEventListener("click", () => {
+  userOptions.style.opacity = 1;
+  userOptions.style.visibility = "visible";
+  userOptionsOverlay.style.visibility = "visible";
 });
 
-// Select buttons
-const masterButton = document.querySelector(".master-btn");
-const menuButton = document.querySelector(".menu-btn");
-const settingButton = document.querySelector(".settings-btn");
+userOptionsOverlay.addEventListener("click", () => {
+  userOptions.style.opacity = 0;
+  userOptions.style.visibility = "hidden";
+  userOptionsOverlay.style.visibility = "hidden";
+});
+
+//----------------------------- Select warning popup elements-----------------------------
+const warningPopup = document.querySelector(".warning-popup");
+const warningOverlay = document.querySelector("#warning-overlay");
+const warningMessage = document.querySelector("#warning-message");
+const warningFooter = document.querySelector(".warning-popup-foot");
+
+// Function to show the warning popup
+function warningPopupEnable(actionType) {
+  warningPopup.style.opacity = 1;
+  warningPopup.style.visibility = "visible";
+  warningOverlay.style.opacity = 1;
+  warningOverlay.style.visibility = "visible";
+
+  // Set message based on action type
+  if (actionType === "logout") {
+    warningMessage.textContent = "Are you sure you want to logout?";
+    warningFooter.innerHTML = `
+      <button id="logout-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="logout-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  } else if (actionType === "delete") {
+    warningMessage.textContent = "Are you sure you want to delete?";
+    warningFooter.innerHTML = `
+      <button id="delete-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="delete-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  }
+}
+
+// Logout button event listener
+document.querySelector(".main-logout-button").addEventListener("click", () => {
+  warningPopupEnable("logout");
+});
+
+function closeWarning() {
+  warningPopup.style.opacity = 0;
+  warningPopup.style.visibility = "hidden";
+  warningOverlay.style.opacity = 0;
+  warningOverlay.style.visibility = "hidden";
+}
+
+// Use event delegation to close popup when clicking "No"
+document
+  .querySelector(".warning-popup-foot")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("warning-denied")) {
+      closeWarning();
+    }
+  });
+
+// Close popup when clicking outside of it
+warningOverlay.addEventListener("click", () => {
+  closeWarning();
+});
+
+//-----------------------------navbar-----------------------------
+
+//----------------------------- Select buttons-----------------------------
+const masterButton = document.querySelector("#master-button");
+const menuButton = document.querySelector("#menu-button");
+const settingButton = document.querySelector("#setting-button");
 
 // Add event listeners for buttons
 masterButton.addEventListener("click", () => {
@@ -41,30 +107,111 @@ settingButton.addEventListener("click", () => {
   menuButton.classList.remove("navbar-active-option");
 });
 
-// for import export menu
+// -----------------------------main-----------------------------
 
-const importExportMenuButton = document.querySelector(".options-button");
-const importExportMenu = document.querySelector(".import-export-options");
-const importExportMenuOverlay = document.querySelector(
-  ".import-export-overlay"
-);
+//----------------------------- titlebar-----------------------------
+// // opening main popup
 
-importExportMenuButton.addEventListener("click", () => {
-  importExportMenu.style.display = "flex";
-  importExportMenuOverlay.style.display = "flex";
+// const VDOverlay = document.querySelector("#VD-overlay");
+// const VDPopup = document.querySelector("#VD-popup");
+// const VDForm = document.querySelector("#VD-form");
+// const VDPopupAdd = document.querySelector("#VD-open");
+// const VDPopupClose = document.querySelector("#VD-close");
+
+// function mainPopupEnable() {
+//   VDPopup.style.visibility = "visible";
+//   VDPopup.style.opacity = 1;
+
+//   VDOverlay.style.visibility = "visible";
+//   VDOverlay.style.opacity = 1;
+
+//   VDForm.scrollTop = 0;
+// }
+
+// function mainPopupDisable() {
+//   VDPopup.style.visibility = "hidden";
+//   VDPopup.style.opacity = 0;
+
+//   VDOverlay.style.visibility = "hidden";
+//   VDOverlay.style.opacity = 0;
+
+//   VDForm.reset();
+// }
+
+// VDPopupAdd.addEventListener("click", () => {
+//   mainPopupEnable();
+// });
+
+// VDPopupClose.addEventListener("click", () => {
+//   mainPopupDisable();
+// });
+
+// VDOverlay.addEventListener("click", () => {
+//   mainPopupDisable();
+// });
+
+//----------------------------- filterbar-----------------------------
+
+const mainSearchBar = document.querySelector("#AVD-search");
+const noRecordsMessage = document.querySelector("#no-records");
+
+mainSearchBar.addEventListener("input", () => {
+  mainSearch();
 });
 
-importExportMenuOverlay.addEventListener("click", () => {
-  importExportMenu.style.display = "none";
-  importExportMenuOverlay.style.display = "none";
-});
-// rotate 180
+function mainSearch() {
+  const searchValue = mainSearchBar.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll("#AVD-table tbody tr");
 
-const sortDataElements = document.querySelectorAll(".sort-data"); // Select all sort-data elements
+  let matchFound = false;
+
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
+  }
+}
+//----------------------------- import export menu-----------------------------
+
+const importExportOverlay = document.querySelector("#import-export-overlay");
+const importExportMenu = document.querySelector(".import-export-menu");
+const importExportButton = document.querySelector("#import-export-add");
+
+importExportButton.addEventListener("click", () => {
+  importExportMenu.style.right = "0px";
+  importExportOverlay.style.visibility = "visible";
+});
+
+importExportOverlay.addEventListener("click", () => {
+  importExportMenu.style.right = "-300px";
+  importExportOverlay.style.visibility = "hidden";
+});
+
+//-----------------------------main container-----------------------------
+//----------------------------- rotate icon-----------------------------
+const sortDataElements = document.querySelectorAll(".sort-icon"); // Select all sort-data elements
 
 sortDataElements.forEach((sortData) => {
   sortData.addEventListener("click", () => {
-    // Toggle the rotate-180 class on the icon inside the clicked sortData
     const icon = sortData.querySelector(".rotate-icon");
     if (icon) {
       icon.classList.toggle("rotate-180");
@@ -72,67 +219,207 @@ sortDataElements.forEach((sortData) => {
   });
 });
 
-$(document).ready(function () {
-  $("#virtual-devices-table").DataTable({
-    paging: false, // Disable pagination (entries per page)
-    searching: false, // Disable search bar
-    info: false, // Disable "Showing 1 to X of Y entries" info text
-    ordering: true, // Enable sorting
-    order: [], // Prevent default sorting on page load
-    language: {
-      emptyTable: "", // Hide 'No data available in table'
-      zeroRecords: "", // Hide 'No matching records found'
-      infoEmpty: "", // Hide 'Showing 0 to 0 of 0 entries'
-      infoFiltered: "", // Hide 'filtered from X total entries'
-    },
+// -----------------------------table sorting-----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.querySelector("#AVD-table");
+  const headers = table.querySelectorAll("th");
+
+  headers.forEach((header, columnIndex) => {
+    header.addEventListener("click", () => {
+      sortTable(table, columnIndex);
+    });
+  });
+
+  function sortTable(table, columnIndex) {
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const isAscending = table.dataset.sortOrder === "asc";
+
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.children[columnIndex].textContent.trim().toLowerCase();
+      const cellB = rowB.children[columnIndex].textContent.trim().toLowerCase();
+
+      return isAscending
+        ? cellA.localeCompare(cellB, undefined, { numeric: true })
+        : cellB.localeCompare(cellA, undefined, { numeric: true });
+    });
+
+    table.dataset.sortOrder = isAscending ? "desc" : "asc"; // Toggle sort order
+
+    tbody.innerHTML = "";
+    rows.forEach((row) => tbody.appendChild(row)); // Append sorted rows back to the table
+  }
+});
+
+//-----------------------------delete all checkbox-----------------------------
+
+const selectAllCheckbox = document.querySelector("#select-all-checkbox");
+
+selectAllCheckbox.addEventListener("change", () => {
+  const tableRows = document.querySelectorAll("#AVD-table tbody tr");
+
+  tableRows.forEach((row) => {
+    const checkbox = row.querySelector("input[type='checkbox']");
+    if (checkbox) {
+      checkbox.checked = selectAllCheckbox.checked;
+    }
+  });
+  deleteAllEnable();
+  noDataDisplay();
+});
+
+//----------------------------- delete all button display-----------------------------
+
+function deleteAllEnable() {
+  const deleteAllButton = document.querySelector(".delete-all-button");
+  const allCheckboxes = document.querySelectorAll(
+    "#AVD-table tr input[type='checkbox']"
+  );
+
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        deleteAllButton.style.visibility = "visible";
+        deleteAllButton.style.opacity = 1;
+      } else {
+        deleteAllButton.style.visibility = "hidden";
+        deleteAllButton.style.opacity = 0;
+      }
+    });
+  });
+}
+
+deleteAllEnable();
+//-----------------------------clicking of confirm delete button-----------------------------
+const deleteAllButton = document.querySelector(".delete-all-button");
+deleteAllButton.addEventListener("click", () => {
+  warningPopupEnable("delete");
+  document.querySelector("#delete-confirm").addEventListener("click", () => {
+    deleteRecords();
+    closeWarning();
   });
 });
 
-// checking if the table is empty
-
-function checkEmptyTable() {
-  const tableRows = document.querySelectorAll(
-    "#virtual-devices-table tbody tr"
+//-----------------------------delete records-----------------------------
+function deleteRecords() {
+  const checkedBoxes = document.querySelectorAll(
+    "#AVD-table tbody input[type='checkbox']:checked"
   );
-  const noDataMessage = document.querySelector("#no-data");
 
-  if (tableRows.length === 0) {
-    noDataMessage.style.display = "block"; // Show message if no rows
+  checkedBoxes.forEach((checkbox) => {
+    const row = checkbox.closest("tr"); // Get the closest <tr>
+    if (row) {
+      row.remove();
+      deleteAllButton.style.visibility = "hidden";
+      deleteAllButton.style.opacity = 0;
+
+      selectAllCheckbox.checked = false;
+    }
+  });
+  noDataDisplay();
+  recordCount();
+}
+
+function noDataDisplay() {
+  const rows = document.querySelectorAll("#AVD-table tbody tr");
+
+  if (rows.length === 0) {
+    document.querySelector("#no-data").style.display = "flex"; // Show "No Data" message
   } else {
-    noDataMessage.style.display = "none"; // Hide message if rows are present
+    document.querySelector("#no-data").style.display = "none"; // Hide "No Data" message
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  checkEmptyTable();
-});
 
-// searchbar
+noDataDisplay();
 
-const searchBar = document.querySelector("#virtual-devices-search");
-searchBar.addEventListener("input", () => {
-  const searchValue = searchBar.value.trim().toLowerCase();
-  const tableRows = document.querySelectorAll(
-    "#virtual-devices-table tbody tr"
-  );
-  let hasVisibleRows = false;
+//----------------------------- adding records to table-----------------------------
 
-  tableRows.forEach((row) => {
-    let isMatch = false;
-    row.querySelectorAll("td").forEach((data) => {
-      if (data.textContent.trim().toLowerCase().includes(searchValue)) {
-        isMatch = true;
+// const VDSubmit = document.querySelector("#VD-submit-button");
+
+// VDSubmit.addEventListener("click", () => {
+//   // Taking inputs
+//   const deviceName = document.querySelector("#device-name").value.trim();
+
+//   const deviceType = document.querySelector("#device-type").value.trim();
+
+//   // Validation
+
+//   if (deviceName === "") {
+//     alert("Please Enter a Device Name");
+//     return;
+//   }
+
+//   if (deviceType === "" || deviceType === "default") {
+//     alert("Please Select a Device Type");
+//     return;
+//   }
+
+//   // Check for duplicates
+//   const existingValues = document.querySelectorAll(
+//     "#VD-table tbody tr td:nth-child(2)"
+//   );
+
+//   let isDuplicate = Array.from(existingValues).some(
+//     (cell) => cell.textContent.trim().toLowerCase() === deviceName.toLowerCase()
+//   );
+
+//   if (isDuplicate) {
+//     alert("Outlet Device exists!");
+//     return;
+//   }
+
+//   // Populating the data
+//   const tableBody = document.querySelector("#VD-table tbody");
+//   const row = document.createElement("tr");
+//   row.innerHTML = `
+//     <td><input type="checkbox"/></td>
+//     <td>${deviceName}</td>
+//     <td>${deviceType}</td>
+
+//     <td>
+//       <button class="active-button action-buttons" title="Status">
+//         <span class="material-symbols-outlined">radio_button_checked</span>
+//       </button>
+//       <button class="edit-btn action-buttons" title="Edit">
+//         <span class="material-symbols-outlined medium-icon">edit</span>
+//       </button>
+//       <button class="delete-btn action-buttons" title="Delete">
+//         <span class="material-symbols-outlined medium-icon">delete</span>
+//       </button>
+//     </td>
+//   `;
+//   tableBody.appendChild(row);
+
+//   mainPopupDisable();
+//   deleteAllEnable();
+//   recordCount();
+//   noDataDisplay();
+// });
+
+//-----------------------------delete function for all delete buttons-----------------------------
+
+document
+  .querySelector("#AVD-table tbody")
+  .addEventListener("click", (event) => {
+    if (event.target.closest(".delete-btn")) {
+      const checkedBoxes = document.querySelectorAll(
+        "#AVD-table tbody input[type='checkbox']:checked"
+      ).length;
+
+      if (checkedBoxes === 0) {
+        alert("Select the record you want to delete");
+      } else {
+        deleteRecords();
       }
-    });
-
-    if (isMatch) {
-      row.style.display = "";
-      hasVisibleRows = true;
-    } else {
-      row.style.display = "none";
+      mainSearch();
     }
   });
 
-  // Handle "No data" message correctly
-  const noDataMessage = document.querySelector("#no-records");
-  noDataMessage.style.display = hasVisibleRows ? "none" : "flex";
-});
+//-----------------------------buffer-----------------------------
+
+function recordCount() {
+  const rowLength = document.querySelectorAll("#AVD-table tbody tr").length;
+  document.querySelector("#record-count").textContent = rowLength;
+}
+
+recordCount();

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <!--head-->
+      <div class="login-container-head">
+        <div class="login-heading">
+          <span>Login</span>
+        </div>
+        <div class="toggle-buttons">
+          <button id="text-login-btn" class="toggle-button active-button">
+            <span class="material-symbols-outlined large-icon"> lock </span>
+          </button>
+          <button id="keypad-login-btn" class="toggle-button">
+            <span class="material-symbols-outlined large-icon"> dialpad </span>
+          </button>
+        </div>
+      </div>
+      <!--body-->
+      <form id="text-login-container" class="login-container-body">
+        <div class="form-group">
+          <input
+            id="username"
+            class="login-inputs"
+            type="text"
+            placeholder=""
+          />
+          <label for="username">Username</label>
+        </div>
+        <div class="form-group">
+          <input
+            id="password"
+            class="login-inputs"
+            type="text"
+            placeholder=""
+          />
+          <label for="password">Password</label>
+        </div>
+        <div class="form-group">
+          <input
+            id="restaurant-code"
+            class="login-inputs"
+            type="text"
+            placeholder=""
+          />
+          <label for="restaurant-code">Restaurant Code</label>
+        </div>
+        <button class="login-button" type="button">Sign In</button>
+        <a href="#" class="login-link">Forgot Password?</a>
+      </form>
+
+      <!--keypad login-->
+      <form id="keypad-login-container" class="login-container-body hide">
+        <div class="pin-dot-container">
+          <span class="material-symbols-outlined medium-icon">
+            radio_button_checked
+          </span>
+          <span class="material-symbols-outlined medium-icon">
+            radio_button_checked
+          </span>
+          <span class="material-symbols-outlined medium-icon">
+            radio_button_checked
+          </span>
+          <span class="material-symbols-outlined medium-icon">
+            radio_button_checked
+          </span>
+        </div>
+        <div class="keypad-container">
+          <button class="keypad-button no-left-border" type="button">7</button>
+          <button class="keypad-button" type="button">8</button>
+          <button class="keypad-button" type="button">9</button>
+          <button class="keypad-button no-left-border" type="button">4</button>
+          <button class="keypad-button" type="button">5</button>
+          <button class="keypad-button" type="button">6</button>
+          <button class="keypad-button no-left-border" type="button">1</button>
+          <button class="keypad-button" type="button">2</button>
+          <button class="keypad-button" type="button">3</button>
+          <button class="keypad-button no-left-border" type="button">C</button>
+          <button class="keypad-button" type="button">0</button>
+          <button class="keypad-button" type="button">
+            <span class="material-symbols-outlined medium-icon back-btn">
+              backspace
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="missing-fields-alert">
+      <div class="missing-fields-message">Hellos</div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>

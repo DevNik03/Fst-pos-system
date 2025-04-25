@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sidebar Navigation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: #2c3e50;
+        min-height: 100vh;
+        color: white;
+      }
+
+      .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-item > a {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-item > a:hover {
+        background-color: #34495e;
+      }
+
+      .sub-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: 0; /* Hidden by default */
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        background-color: #34495e;
+      }
+
+      .sub-nav li a {
+        display: block;
+        padding: 10px 40px;
+        text-decoration: none;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sub-nav li a:hover {
+        background-color: #3d566e;
+      }
+
+      /* Expanded state */
+      .nav-item.active .sub-nav {
+        max-height: 500px; /* A large enough value to show all content */
+        transition: max-height 0.5s ease-in;
+      }
+
+      /* Optional: content area */
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" class="toggle" aria-expanded="false">Master</a>
+          <ul class="sub-nav">
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Roles</a></li>
+            <li><a href="#">Outlets</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="toggle" aria-expanded="false">Menu</a>
+          <ul class="sub-nav">
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Items</a></li>
+            <li><a href="#">Modifiers</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="toggle" aria-expanded="false">Settings</a>
+          <ul class="sub-nav">
+            <li><a href="#">General</a></li>
+            <li><a href="#">Payments</a></li>
+            <li><a href="#">Taxes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <h1>Welcome!</h1>
+      <p>Select a sidebar option to begin.</p>
+    </div>
+
+    <script>
+      // Toggle submenu visibility
+      document.querySelectorAll(".toggle").forEach((toggle) => {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          const parentItem = this.parentElement;
+          const expanded = this.getAttribute("aria-expanded") === "true";
+
+          // Close all other items (optional, if you want only one open at a time)
+          document.querySelectorAll(".nav-item").forEach((item) => {
+            item.classList.remove("active");
+            item
+              .querySelector(".toggle")
+              .setAttribute("aria-expanded", "false");
+          });
+
+          // Toggle the current one
+          if (!expanded) {
+            parentItem.classList.add("active");
+            this.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

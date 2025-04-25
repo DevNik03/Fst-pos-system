@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Discount</title>
     <link rel="stylesheet" href="discount.css" />
 
     <link
@@ -15,409 +15,489 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet"
     />
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- DataTables CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
-    />
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <link
-      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <!-- loading page -->
-    <div class="loading-screen">
-      <div id="loader"></div>
-      <span id="loading-txt">Loading...</span>
-    </div>
-    <!-- page header -->
+    <!------------------------- header --------------------------------->
     <header>
-      <div class="switchingOptions">
-        <button><span>User Name</span></button>
-      </div>
-      <div class="logOut">
-        <button>
-          <i id="logoutButton" class="material-icons-outlined"
-            >power_settings_new</i
-          >
+      <div id="user-option-overlay" class="invisible-overlay"></div>
+      <div class="user-options">
+        <button class="user-option-button">Change Password</button>
+        <button class="user-option-button">
+          <a href="/Front Office/ordering/order summary/order summary.html">
+            To Front
+          </a>
         </button>
       </div>
+
+      <!------------------------- username option --------------------------------->
+      <button class="username-button" title="Username">
+        <span id="user-icon" class="material-symbols-outlined medium-icon">
+          account_circle
+        </span>
+        Username
+        <span class="material-symbols-outlined medium-icon">
+          arrow_drop_down
+        </span>
+      </button>
+      <button class="main-logout-button" type="button" title="Logout">
+        <span class="material-symbols-outlined medium-icon">
+          power_settings_new
+        </span>
+      </button>
     </header>
 
-    <!-- right navigation bar -->
+    <!---------------------- navbar -------------------->
     <nav>
-      <div class="nav-header">
-        <button><img src="/images/fst white no bg.png" /></button>
-      </div>
-      <div class="navbar-options">
+      <button class="company-logo">
+        <img
+          id="company-icon"
+          src="/images/fst white no bg.png"
+          alt="Logo Not Found"
+        />
+      </button>
+
+      <!------------------------- navigation-options --------------------------------->
+      <div class="navigation-options">
         <button
+          id="master-button"
+          class="navigation-buttons navbar-active-option"
           title="Master"
-          class="master-btn navbar-active-option"
-          id="masterButton"
         >
-          <span class="material-icons-outlined"> person </span>
+          <span class="material-symbols-outlined medium-icon"> person </span>
         </button>
-        <button title="Menu" class="menu-btn">
-          <span class="material-icons-outlined"> menu </span>
+        <button id="menu-button" class="navigation-buttons" title="Menu">
+          <span class="material-symbols-outlined medium-icon"> menu </span>
         </button>
-        <button title="Settings" class="settings-btn">
-          <span class="material-icons-outlined"> settings </span>
+        <button id="setting-button" class="navigation-buttons" title="Settings">
+          <span class="material-symbols-outlined medium-icon"> settings </span>
         </button>
       </div>
-            <!-- master menu -->
-      <div class="nav-master-options">
-        <ul>
-          <li>
-            <a href="/Back Office/master option/Outlet/outlet.html"
-              ><span class="material-icons-outlined"> person </span>
-              <p>Outlet</p></a
-            >
-          </li>
-          <li>
-            <a href="/Back Office/master option/Address/address.html"
-              ><span class="material-icons-outlined"> location_on </span>
-              <p>Address Lookup</p></a
-            >
-          </li>
-          <li>
-            <a href="/Back Office/master option/payment/payment.html"
-              ><span class="material-icons-outlined"> credit_card </span>
-              <p>Payment</p></a
-            >
-          </li>
-          <li>
-            <a href="/Back Office/master option/Currency/currency.html"
-              ><span class="material-icons-outlined"> attach_money </span>
-              <p>Currency</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/tax/tax.html">
-              <span class="material-icons-outlined"> menu </span>
-              <p>Tax</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/tax group/tax group.html">
-              <span class="material-icons-outlined"> sort </span>
-              <p>Tax Groups</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/extra charge/extra charge.html">
-              <span class="material-icons-outlined"> add_circle </span>
-              <p>Extra Charge</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/discount/discount.html">
-              <span class="material-icons-outlined"> redeem </span>
-              <p>Discount</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/reasons/reason.html">
-              <span class="material-icons-outlined"> help </span>
-              <p>Reason</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/account/account.html">
-              <span class="material-icons-outlined"> person_2 </span>
-              <p>Account</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/master option/no charge account/no charge account.html"
-            >
-              <span class="material-icons-outlined"> person_2 </span>
-              <p>No Charge Account</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/master option/business source/business.html">
-              <span class="material-icons-outlined"> groups </span>
-              <p>Business Source</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/master option/comission plan/comission plan.html"
-            >
-              <span class="material-icons-outlined"> payments </span>
-              <p>Comission Plan</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/master option/guest database/guest database.html"
-            >
-              <span class="material-icons-outlined"> table_rows </span>
-              <p>Guest Database</p>
-            </a>
-          </li>
-        </ul>
+      <div class="nav-container">
+        <!------------------------- master-options --------------------------------->
+        <div class="nav-master-options">
+          <ul>
+            <li>
+              <a href="/Back Office/master option/Outlet/outlet.html">
+                <span class="material-icons-outlined"> person </span>
+                <span class="divider"></span>
+                <p>Outlet</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/Address/address.html">
+                <span class="material-icons-outlined"> location_on </span>
+                <span class="divider"></span>
+                <p>Address Lookup</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/payment/payment.html">
+                <span class="material-icons-outlined"> credit_card </span>
+                <span class="divider"></span>
+                <p>Payment</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/Currency/currency.html">
+                <span class="material-icons-outlined"> attach_money </span>
+                <span class="divider"></span>
+                <p>Currency</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/tax/tax.html">
+                <span class="material-icons-outlined"> menu </span>
+                <span class="divider"></span>
+                <p>Tax</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/tax group/tax group.html">
+                <span class="material-icons-outlined"> sort </span>
+                <span class="divider"></span>
+                <p>Tax Groups</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/master option/extra charge/extra charge.html"
+              >
+                <span class="material-icons-outlined"> add_circle </span>
+                <span class="divider"></span>
+                <p>Extra Charge</p>
+              </a>
+            </li>
+            <li>
+              <a
+                id="active-option"
+                href="/Back Office/master option/discount/discount.html"
+              >
+                <span class="material-icons-outlined"> redeem </span>
+                <span class="divider"></span>
+                <p>Discount</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/reasons/reason.html">
+                <span class="material-icons-outlined"> help </span>
+                <span class="divider"></span>
+                <p>Reason</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/master option/account/account.html">
+                <span class="material-icons-outlined"> person_2 </span>
+                <span class="divider"></span>
+                <p>Account</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/master option/no charge account/no charge account.html"
+              >
+                <span class="material-icons-outlined"> person_2 </span>
+                <span class="divider"></span>
+                <p>No Charge Account</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/master option/business source/business.html"
+              >
+                <span class="material-icons-outlined"> groups </span>
+                <span class="divider"></span>
+                <p>Business Source</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/master option/comission plan/comission plan.html"
+              >
+                <span class="material-icons-outlined"> payments </span>
+                <span class="divider"></span>
+                <p>Comission Plan</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/master option/guest database/guest database.html"
+              >
+                <span class="material-icons-outlined"> table_rows </span>
+                <span class="divider"></span>
+                <p>Guest Database</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!------------------------- menu-options --------------------------------->
+
+        <div class="nav-menu-options">
+          <ul>
+            <li>
+              <a href="/Back Office/menu option/category/category.html">
+                <span class="material-icons-outlined"> toc </span>
+                <span class="divider"></span>
+                <p>Category</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/subcategory/subcategory.html">
+                <span class="material-icons-outlined"> subject </span>
+                <span class="divider"></span>
+                <p>Subcategory</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/menu group/menu group.html">
+                <span class="material-icons-outlined"> menu </span>
+                <span class="divider"></span>
+                <p>Menu Group</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/menu option/menu subgroup/menu subgroup.html"
+              >
+                <span class="material-icons-outlined"> drag_handle </span>
+                <span class="divider"></span>
+                <p>Menu Subgroup</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/item group/item group.html">
+                <span class="material-icons-outlined"> inventory_2 </span>
+                <span class="divider"></span>
+                <p>Item Group</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/item/item.html">
+                <span class="material-icons-outlined"> inventory_2 </span>
+                <span class="divider"></span>
+                <p>Item</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/menu option/modifier group/modifier group.html"
+              >
+                <span class="material-icons-outlined"> edit_note </span>
+                <span class="divider"></span>
+                <p>Modifier Group</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/menu option/menu management/menu management.html"
+              >
+                <span class="material-icons-outlined"> menu </span>
+                <span class="divider"></span>
+                <p>Menu Management</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/rate config/rate config.html">
+                <span class="material-icons-outlined"> payments </span>
+                <span class="divider"></span>
+                <p>Rate Configuration</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/rate/rate.html">
+                <span class="material-icons-outlined"> payments </span>
+                <span class="divider"></span>
+                <p>Rate</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/menu option/table management/table management.html"
+              >
+                <span class="material-icons-outlined"> grid_view </span>
+                <span class="divider"></span>
+                <p>Table Management</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/menu option/table notification/table notification.html"
+              >
+                <span class="material-icons-outlined"> notifications </span>
+                <span class="divider"></span>
+                <p>Table Notification</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/course/course.html">
+                <span class="material-icons-outlined">
+                  collections_bookmark
+                </span>
+                <span class="divider"></span>
+                <p>Course</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/waiter/waiter.html">
+                <span class="material-icons-outlined"> perm_identity </span>
+                <span class="divider"></span>
+                <p>Waiter</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/menu option/session/session.html">
+                <span class="material-icons-outlined"> timer </span>
+                <span class="divider"></span>
+                <p>Session</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!------------------------- settings-options --------------------------------->
+
+        <div class="nav-setting-options">
+          <ul>
+            <li>
+              <a href="/Back Office/setting option/terminal/terminal.html">
+                <span class="material-icons-outlined"> terminal </span>
+                <span class="divider"></span>
+                <p>Terminal</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/virtual devices/virtual devices.html"
+              >
+                <span class="material-icons-outlined"> devices </span>
+                <span class="divider"></span>
+                <p>Virtual Device</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/app devices/app devices.html"
+              >
+                <span class="material-icons-outlined"> phone_android </span>
+                <span class="divider"></span>
+                <p>App Device</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/setting option/user role/user role.html">
+                <span class="material-icons-outlined"> portrait </span>
+                <span class="divider"></span>
+                <p>User Role</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/setting option/user/user.html">
+                <span class="material-icons-outlined"> account_circle </span>
+                <span class="divider"></span>
+                <p>User</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/template category/template category.html"
+              >
+                <span class="material-icons-outlined"> print </span>
+                <span class="divider"></span>
+                <p>Template Category</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/sms providers/sms providers.html"
+              >
+                <span class="material-icons-outlined"> sms </span>
+                <span class="divider"></span>
+                <p>SMS Providers</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/email providers/email providers.html"
+              >
+                <span class="material-icons-outlined"> email </span>
+                <span class="divider"></span>
+                <p>Email Providers</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/setting option/email template/email.html">
+                <span class="material-icons-outlined"> summarize </span>
+                <span class="divider"></span>
+                <p>Email/SMS Template</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/printing template/printing.html"
+              >
+                <span class="material-icons-outlined"> text_snippet </span>
+                <span class="divider"></span>
+                <p>Printing Template</p>
+              </a>
+            </li>
+            <li>
+              <a href="/Back Office/setting option/setting/setting.html">
+                <span class="material-icons-outlined"> tune </span>
+                <span class="divider"></span>
+                <p>Settings</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/notification/notification.html"
+              >
+                <span class="material-icons-outlined">
+                  notifications_active
+                </span>
+                <span class="divider"></span>
+                <p>Notification Setting</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/qr code generator/qr code generator.html"
+              >
+                <span class="material-icons-outlined"> qr_code_scanner </span>
+                <span class="divider"></span>
+                <p>QR Code Generator</p>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/Back Office/setting option/online ordering logs/online ordering logs.html"
+              >
+                <span class="material-icons-outlined">
+                  format_list_bulleted
+                </span>
+                <span class="divider"></span>
+                <p>Online Ordering Logs</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <!-- menu option -->
-      <div class="nav-menu-options">
-        <ul>
-          <li>
-            <a href="/Back Office/menu option/category/category.html">
-              <span class="material-icons-outlined"> toc </span>
-              <p>Category</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/subcategory/subcategory.html">
-              <span class="material-icons-outlined"> subject </span>
-              <p>Subcategory</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/menu group/menu group.html">
-              <span class="material-icons-outlined"> menu </span>
-              <p>Menu Group</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/menu subgroup/menu subgroup.html">
-              <span class="material-icons-outlined"> drag_handle </span>
-              <p>Menu Subgroup</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/item group/item group.html">
-              <span class="material-icons-outlined"> inventory_2 </span>
-              <p>Item Group</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/item/item.html">
-              <span class="material-icons-outlined"> inventory_2 </span>
-              <p>Item</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/menu option/modifier group/modifier group.html"
-            >
-              <span class="material-icons-outlined"> edit_note </span>
-              <p>Modifier Group</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/menu option/menu management/menu management.html"
-            >
-              <span class="material-icons-outlined"> menu </span>
-              <p>Menu Management</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/rate config/rate config.html">
-              <span class="material-icons-outlined"> payments </span>
-              <p>Rate Configuration</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/rate/rate.html">
-              <span class="material-icons-outlined"> payments </span>
-              <p>Rate</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/menu option/table management/table management.html"
-            >
-              <span class="material-icons-outlined"> grid_view </span>
-              <p>Table Management</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/menu option/table notification/table notification.html"
-            >
-              <span class="material-icons-outlined"> notifications </span>
-              <p>Table Notification</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/course/course.html">
-              <span class="material-icons-outlined">
-                collections_bookmark
-              </span>
-              <p>Course</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/waiter/waiter.html">
-              <span class="material-icons-outlined"> perm_identity </span>
-              <p>Waiter</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/menu option/session/session.html">
-              <span class="material-icons-outlined"> timer </span>
-              <p>Session</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- navigation setting options -->
-      <div class="nav-setting-options">
-        <ul>
-          <li>
-            <a href="/Back Office/setting option/terminal/terminal.html">
-              <span class="material-icons-outlined"> terminal </span>
-              <p>Terminal</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/setting option/virtual devices/virtual devices.html"
-            >
-              <span class="material-icons-outlined"> devices </span>
-              <p>Virtual Device</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/app devices/app devices.html">
-              <span class="material-icons-outlined"> phone_android </span>
-              <p>App Device</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/user role/user role.html">
-              <span class="material-icons-outlined"> portrait </span>
-              <p>User Role</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/user/user.html">
-              <span class="material-icons-outlined"> account_circle </span>
-              <p>User</p>
-            </a>
-          </li>
-          <li>
-            <a
-              id="active-page"
-              href="/Back Office/setting option/template category/template category.html"
-            >
-              <span class="material-icons-outlined"> print </span>
-              <p>Template Category</p>
-            </a>
-          </li>
-          <li>
-            <a
-              href="/Back Office/setting option/email&sms providers/email sms providers.html"
-            >
-              <span class="material-icons-outlined"> email </span>
-              <p>Email/SMS Providers</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/email template/email.html">
-              <span class="material-icons-outlined"> summarize </span>
-              <p>Email/SMS Template</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/printing template/printing.html">
-              <span class="material-icons-outlined"> text_snippet </span>
-              <p>Printing Template</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/setting/setting.html">
-              <span class="material-icons-outlined"> tune </span>
-              <p>Settings</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/notification/notification.html">
-              <span class="material-icons-outlined">
-                notifications_active
-              </span>
-              <p>Notification Setting</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/qr code generator/qr code generator.html">
-              <span class="material-icons-outlined"> qr_code_scanner </span>
-              <p>QR Code Generator</p>
-            </a>
-          </li>
-          <li>
-            <a href="/Back Office/setting option/online ordering logs/online ordering logs.html">
-              <span class="material-icons-outlined">
-                format_list_bulleted
-              </span>
-              <p>Online Ordering Logs</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <!-- nav bar footer -->
+      <!------------------------- navbar footer --------------------------------->
       <div class="nav-footer">
-        <span> Powered By: FST Technology </span>
+        <p>Powered By : FST</p>
       </div>
     </nav>
-    <!-- main content -->
+
+    <!------------------------- main --------------------------------->
     <main>
-      <!-- main heading -->
-      <div class="main-heading">
-        <h2>Discount</h2>
-        <!--  button to enable popup -->
-        <button class="popup-enable-button" title="Add">
-          <span class="material-icons-outlined"> add </span>
+      <!------------------------- titlebar --------------------------------->
+      <div class="main-titlebar">
+        <div class="page-title">
+          <p>DISCOUNT</p>
+        </div>
+        <button id="discount-open" class="add-popup-button">
+          <span class="material-symbols-outlined medium-icon"> add </span>
         </button>
       </div>
-      <!-- search bar -->
-      <div class="search-and-more">
-        <div class="searchBar">
-          <span class="material-icons-outlined"> search </span>
+
+      <!------------------------- main-filterbar --------------------------------->
+      <div class="main-filterbar">
+        <div class="main-searchbar">
+          <button class="search-button">
+            <span class="material-symbols-outlined"> search </span>
+          </button>
           <input id="discount-search" type="search" placeholder="Search" />
         </div>
-        <div class="search-and-more-right">
-          <button class="delete-records-button">Delete Selected</button>
-          <!-- import export button -->
-          <div class="import-export-overlay"></div>
+        <div class="main-filterbar-right">
+          <button class="delete-all-button">Delete All Records</button>
+
+          <!------------------------- import export menu --------------------------------->
+
+          <button id="import-export-add" class="import-export-button">
+            <span class="material-symbols-outlined medium-icon"> atr </span>
+          </button>
+
+          <div id="import-export-overlay" class="invisible-overlay"></div>
           <div class="import-export-menu">
-            <button title="More" class="options-button">
-              <span class="material-icons-outlined"> more_horiz </span>
+            <button class="import-export-buttons" title="Import">
+              <span class="material-symbols-outlined">
+                vertical_align_top
+              </span>
+              Import
             </button>
-            <div class="import-export-options">
-              <button class="import-export-menu-button">
-                <span class="material-icons-outlined"> arrow_upward </span>
-                <p>Import</p>
-              </button>
-              <button class="import-export-menu-button">
-                <span class="material-icons-outlined"> arrow_downward </span>
-                <p>Export</p>
-              </button>
-              <button class="import-export-menu-button">
-                <span class="material-icons-outlined"> print </span>
-                <p>Report</p>
-              </button>
-              <button class="import-export-menu-button">
-                <span class="material-icons-outlined"> visibility </span>
-                <p>Include Inactive</p>
-              </button>
-            </div>
+            <button class="import-export-buttons" title="Export">
+              <span class="material-symbols-outlined">
+                vertical_align_bottom
+              </span>
+              Export
+            </button>
+            <button class="import-export-buttons" title="Include Inactive">
+              <span class="material-symbols-outlined"> visibility </span>
+              Include Inactive
+            </button>
           </div>
         </div>
       </div>
+      <!------------------------- main-container --------------------------------->
       <div class="main-container">
         <div id="no-data" class="table-warning">
           <h2>No Data Available!</h2>
@@ -425,563 +505,412 @@
         <div id="no-records" class="table-warning">
           <h2>No Records Available!</h2>
         </div>
+        <!------------------------- main-table --------------------------------->
         <table id="discount-table" class="main-table">
           <thead>
             <tr>
-              <th id="delete-records-checkbox">
-                <input id="delete-record-checkbox" type="checkbox" />
+              <th id="checkbox">
+                <input id="select-all-checkbox" type="checkbox" />
               </th>
-              <th id="name">
-                <p class="sort-data">
-                  Name
-                  <span class="material-icons-outlined rotate-icon"
-                    >arrow_drop_down</span
+              <th id="discount">
+                <p class="sort-icon">
+                  Discount Name
+                  <span
+                    class="material-symbols-outlined medium-icon rotate-icon"
                   >
+                    arrow_drop_down
+                  </span>
                 </p>
               </th>
               <th id="apply-on">
-                <p class="sort-data">
+                <p class="sort-icon">
                   Apply On
-                  <span class="material-icons-outlined rotate-icon"
-                    >arrow_drop_down</span
+                  <span
+                    class="material-symbols-outlined medium-icon rotate-icon"
                   >
+                    arrow_drop_down
+                  </span>
                 </p>
               </th>
               <th id="type">
-                <p class="sort-data">
-                  Type
-                  <span class="material-icons-outlined rotate-icon"
-                    >arrow_drop_down</span
+                <p class="sort-icon">
+                  Discount Type
+                  <span
+                    class="material-symbols-outlined medium-icon rotate-icon"
                   >
+                    arrow_drop_down
+                  </span>
                 </p>
               </th>
               <th id="value">
-                <p class="sort-data">
+                <p class="sort-icon">
                   Value
-                  <span class="material-icons-outlined rotate-icon"
-                    >arrow_drop_down</span
+                  <span
+                    class="material-symbols-outlined medium-icon rotate-icon"
                   >
+                    arrow_drop_down
+                  </span>
                 </p>
               </th>
-              <th id="actions">Actions</th>
+
+              <th>Action</th>
             </tr>
           </thead>
-
           <tbody>
             <tr>
-              <td>
-                <input type="checkbox" class="record-checkbox" />
-              </td>
-              <td>Discount 1</td>
+              <td><input type="checkbox" class="row-checkbox" /></td>
+              <td>10% Discount</td>
               <td>Order</td>
               <td>Percentage</td>
               <td>10%</td>
-              <!-- Percentage -->
+
               <td>
-                <button class="action-buttons edit-btn" title="Edit">
-                  <span class="material-symbols-outlined"> edit </span>
+                <button class="active-button action-buttons" title="Status">
+                  <span class="material-symbols-outlined">
+                    radio_button_checked
+                  </span>
                 </button>
-                <button class="action-buttons delete-btn" title="Delete">
-                  <span class="material-symbols-outlined"> delete </span>
+                <button class="edit-btn action-buttons" title="Edit">
+                  <span class="material-symbols-outlined medium-icon">
+                    edit
+                  </span>
+                </button>
+                <button class="delete-btn action-buttons" title="Delete">
+                  <span class="material-symbols-outlined medium-icon">
+                    delete
+                  </span>
                 </button>
               </td>
             </tr>
             <tr>
+              <td><input type="checkbox" class="row-checkbox" /></td>
+              <td>Discount 25%</td>
+              <td>Order</td>
+              <td>Percentage</td>
+              <td>25%</td>
+
               <td>
-                <input type="checkbox" class="record-checkbox" />
+                <button class="active-button action-buttons" title="Status">
+                  <span class="material-symbols-outlined">
+                    radio_button_checked
+                  </span>
+                </button>
+                <button class="edit-btn action-buttons" title="Edit">
+                  <span class="material-symbols-outlined medium-icon">
+                    edit
+                  </span>
+                </button>
+                <button class="delete-btn action-buttons" title="Delete">
+                  <span class="material-symbols-outlined medium-icon">
+                    delete
+                  </span>
+                </button>
               </td>
-              <td>Discount 2</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" class="row-checkbox" /></td>
+              <td>100 Off</td>
               <td>Item</td>
               <td>Amount</td>
-              <td>$5</td>
-              <!-- Amount -->
-              <td>
-                <button class="action-buttons edit-btn" title="Edit">
-                  <span class="material-symbols-outlined"> edit </span>
-                </button>
-                <button class="action-buttons delete-btn" title="Delete">
-                  <span class="material-symbols-outlined"> delete </span>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="record-checkbox" />
-              </td>
-              <td>Discount 3</td>
-              <td>Bulk Item</td>
-              <td>Percentage</td>
-              <td>15%</td>
-              <!-- Percentage -->
-              <td>
-                <button class="action-buttons edit-btn" title="Edit">
-                  <span class="material-symbols-outlined"> edit </span>
-                </button>
-                <button class="action-buttons delete-btn" title="Delete">
-                  <span class="material-symbols-outlined"> delete </span>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="record-checkbox" />
-              </td>
-              <td>Discount 4</td>
-              <td>Bulk Item</td>
-              <td>Amount</td>
-              <td>$25</td>
-              <!-- Amount -->
-              <td>
-                <button class="action-buttons edit-btn" title="Edit">
-                  <span class="material-symbols-outlined"> edit </span>
-                </button>
-                <button class="action-buttons delete-btn" title="Delete">
-                  <span class="material-symbols-outlined"> delete </span>
-                </button>
-              </td>
-            </tr>
+              <td>100</td>
 
-            <!-- Add more rows as needed -->
-
-            <!-- Add more rows here -->
+              <td>
+                <button class="active-button action-buttons" title="Status">
+                  <span class="material-symbols-outlined">
+                    radio_button_checked
+                  </span>
+                </button>
+                <button class="edit-btn action-buttons" title="Edit">
+                  <span class="material-symbols-outlined medium-icon">
+                    edit
+                  </span>
+                </button>
+                <button class="delete-btn action-buttons" title="Delete">
+                  <span class="material-symbols-outlined medium-icon">
+                    delete
+                  </span>
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </main>
-    <!-- buffer space -->
-    <div class="bufferSpace"></div>
-    <!-- place to show how many pages are there -->
-    <div class="footerTop"><p>Showing Pages</p></div>
-    <!-- <footer -->
-    <footer>
-      <div class="footer-left">
-        <p>Property Name</p>
-      </div>
-      <div class="footer-right">
-        <button id="live-support">
-          <span class="material-icons-outlined"> forum </span>
-          <p>Live Support</p>
-        </button>
-        <button class="download-packages">
-          <img src="/images/payment website logo.jpg" />
-        </button>
-        <button class="download-packages">
-          <img src="/images/payment website logo.jpg" />
-        </button>
-        <button class="download-packages">
-          <img src="/images/payment website logo.jpg" />
-        </button>
-      </div>
-    </footer>
-    <!-- overlay -->
-    <div class="popup-overlay"></div>
-    <form id="discount-form">
-      <div class="discount-popup">
-        <div class="popup-header">
-          <h4>Add Discount</h4>
-          <button class="close-popup-btn">
-            <span class="material-icons-outlined"> close </span>
-          </button>
-        </div>
-        <div class="popup-main">
-          <div class="heading">
-            <h4>General Details</h4>
-          </div>
-          <div class="popup-main-divs">
-            <label for="discount-name">
-              Name<span class="mandatory">*</span>
-            </label>
-            <input
-              id="discount-name"
-              class="text-input"
-              type="text"
-              placeholder="Name"
-              required
-            />
-          </div>
-          <div class="popup-main-divs">
-            <label for="apply-disc-on">
-              Apply On<span class="mandatory">*</span>
-            </label>
-            <select id="apply-disc-on" class="main-select" required>
-              <option value="default">--Select--</option>
-              <option value="Order">Order</option>
-              <option value="Item">Item</option>
-              <option value="Bulk Item">Bulk Item</option>
-            </select>
-          </div>
-          <div class="popup-main-divs">
-            <label for="discount-type">
-              Type<span class="mandatory">*</span>
-            </label>
-            <select id="discount-type" class="main-select" required>
-              <option value="default">--Select--</option>
-              <option value="Percentage">Percentage</option>
-              <option value="Amount">Amount</option>
-            </select>
-          </div>
-          <div class="popup-main-divs item">
-            <label for="promo-discount">Promo Discount</label>
-            <input id="promo-discount" class="checkbox-input" type="checkbox" />
-          </div>
-          <div class="heading">
-            <h4>Discount Value</h4>
-          </div>
-          <div class="popup-main-divs">
-            <label for="open-discount">Open Discount</label>
-            <input id="open-discount" class="checkbox-input" type="checkbox" />
-          </div>
-          <div class="popup-main-divs percentage">
-            <label for="discount-percentage">
-              Discount Percentage<span class="mandatory">*</span>
-            </label>
-            <input
-              id="discount-percentage"
-              class="text-input"
-              type="text"
-              placeholder="Discount Percentage"
-              required
-            />
-          </div>
-          <div class="popup-main-divs amount">
-            <label for="discount-amount">
-              Discount Amount<span class="mandatory">*</span>
-            </label>
-            <input
-              id="discount-amount"
-              class="text-input"
-              type="text"
-              placeholder="Discount Amount"
-              required
-            />
-          </div>
-          <div class="popup-main-divs amount">
-            <label for="distriubuted-amount"
-              >Distributed Amount (Prorate)</label
-            >
-            <input
-              id="distriubuted-amount"
-              class="checkbox-input"
-              type="checkbox"
-            />
-          </div>
-          <div id="tax-exempted-container" class="popup-main-divs">
-            <label for="tax-exempted">Tax Exempted</label>
-            <input id="tax-exempted" class="checkbox-input" type="checkbox" />
-          </div>
 
-          <div class="popup-main-divs order">
-            <label for="discount-on">Apply Discount On</label>
-            <div id="discount-on" class="apply-discount-on">
-              <input type="radio" id="Base" name="apply-discount-on" />
-              <label for="Base">Base </label>
-              <input type="radio" id="Final" name="apply-discount-on" />
-              <label for="Final">Final </label>
-            </div>
-          </div>
-          <div class="heading">
-            <h4>visibility Setting</h4>
-          </div>
-          <div class="popup-main-divs">
-            <p>Inactive For Order Type</p>
-            <div class="inactive-order-type">
-              <label for="dinein">
-                <input id="dinein" class="checkbox-input" type="checkbox" />
-                Dine In
-              </label>
-              <label for="takeaway">
-                <input id="takeaway" class="checkbox-input" type="checkbox" />
-                Take Away
-              </label>
-              <label for="roomservice">
-                <input
-                  id="roomservice"
-                  class="checkbox-input"
-                  type="checkbox"
-                />
-                Room Service
-              </label>
-              <label for="delivery">
-                <input id="delivery" class="checkbox-input" type="checkbox" />
-                Delivery
-              </label>
-            </div>
-          </div>
-          <div class="popup-main-divs">
-            <p>Inactive On Following Days</p>
-            <div class="incactive-days">
-              <label for="sunday">
-                <input id="sunday" class="checkbox-input" type="checkbox" />
-                S
-              </label>
-              <label for="monday">
-                <input id="monday" class="checkbox-input" type="checkbox" />
-                M
-              </label>
-              <label for="tuesday">
-                <input id="tuesday" class="checkbox-input" type="checkbox" />
-                T
-              </label>
-              <label for="wednesday">
-                <input id="wednesday" class="checkbox-input" type="checkbox" />
-                W
-              </label>
-              <label for="thursday">
-                <input id="thursday" class="checkbox-input" type="checkbox" />
-                T
-              </label>
-              <label for="friday">
-                <input id="friday" class="checkbox-input" type="checkbox" />
-                F
-              </label>
-              <label for="saturday">
-                <input id="saturday" class="checkbox-input" type="checkbox" />
-                S
-              </label>
-            </div>
-          </div>
-          <div class="popup-main-divs">
-            <p>Active Time</p>
-            <div class="active-time">
-              <input id="active-time" class="checkbox-input" type="checkbox" />
-              <div class="set-active-time">
-                <p class="p-button">00:00 - 23:59</p>
-                <div class="select-time">
-                  <div class="start-time">
-                    <p>Start</p>
-                    <select id="start-hour" class="time-select-tag">
-                      <option value="default">00</option>
-                      <option value="00">00</option>
-                      <option value="01">01</option>
-                      <option value="02">02</option>
-                      <option value="03">03</option>
-                      <option value="04">04</option>
-                      <option value="05">05</option>
-                      <option value="06">06</option>
-                      <option value="07">07</option>
-                      <option value="08">08</option>
-                      <option value="09">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                      <option value="19">19</option>
-                      <option value="20">20</option>
-                      <option value="21">21</option>
-                      <option value="22">22</option>
-                      <option value="23">23</option>
-                    </select>
-                    <select id="start-minute" class="time-select-tag">
-                      <option value="default">00</option>
-                      <option value="00">00</option>
-                      <option value="01">01</option>
-                      <option value="02">02</option>
-                      <option value="03">03</option>
-                      <option value="04">04</option>
-                      <option value="05">05</option>
-                      <option value="06">06</option>
-                      <option value="07">07</option>
-                      <option value="08">08</option>
-                      <option value="09">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                      <option value="19">19</option>
-                      <option value="20">20</option>
-                      <option value="21">21</option>
-                      <option value="22">22</option>
-                      <option value="23">23</option>
-                      <option value="24">24</option>
-                      <option value="25">25</option>
-                      <option value="26">26</option>
-                      <option value="27">27</option>
-                      <option value="28">28</option>
-                      <option value="29">29</option>
-                      <option value="30">30</option>
-                      <option value="31">31</option>
-                      <option value="32">32</option>
-                      <option value="33">33</option>
-                      <option value="34">34</option>
-                      <option value="35">35</option>
-                      <option value="36">36</option>
-                      <option value="37">37</option>
-                      <option value="38">38</option>
-                      <option value="39">39</option>
-                      <option value="40">40</option>
-                      <option value="41">41</option>
-                      <option value="42">42</option>
-                      <option value="43">43</option>
-                      <option value="44">44</option>
-                      <option value="45">45</option>
-                      <option value="46">46</option>
-                      <option value="47">47</option>
-                      <option value="48">48</option>
-                      <option value="49">49</option>
-                      <option value="50">50</option>
-                      <option value="51">51</option>
-                      <option value="52">52</option>
-                      <option value="53">53</option>
-                      <option value="54">54</option>
-                      <option value="55">55</option>
-                      <option value="56">56</option>
-                      <option value="57">57</option>
-                      <option value="58">58</option>
-                      <option value="59">59</option>
-                    </select>
-                  </div>
-                  <div class="end-time">
-                    <p>End</p>
-                    <select id="end-hour" class="time-select-tag">
-                      <option value="default">00</option>
-                      <option value="00">00</option>
-                      <option value="01">01</option>
-                      <option value="02">02</option>
-                      <option value="03">03</option>
-                      <option value="04">04</option>
-                      <option value="05">05</option>
-                      <option value="06">06</option>
-                      <option value="07">07</option>
-                      <option value="08">08</option>
-                      <option value="09">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                      <option value="19">19</option>
-                      <option value="20">20</option>
-                      <option value="21">21</option>
-                      <option value="22">22</option>
-                      <option value="23">23</option>
-                    </select>
-                    <select id="end-minute" class="time-select-tag">
-                      <option value="default">00</option>
-                      <option value="00">00</option>
-                      <option value="01">01</option>
-                      <option value="02">02</option>
-                      <option value="03">03</option>
-                      <option value="04">04</option>
-                      <option value="05">05</option>
-                      <option value="06">06</option>
-                      <option value="07">07</option>
-                      <option value="08">08</option>
-                      <option value="09">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                      <option value="19">19</option>
-                      <option value="20">20</option>
-                      <option value="21">21</option>
-                      <option value="22">22</option>
-                      <option value="23">23</option>
-                      <option value="24">24</option>
-                      <option value="25">25</option>
-                      <option value="26">26</option>
-                      <option value="27">27</option>
-                      <option value="28">28</option>
-                      <option value="29">29</option>
-                      <option value="30">30</option>
-                      <option value="31">31</option>
-                      <option value="32">32</option>
-                      <option value="33">33</option>
-                      <option value="34">34</option>
-                      <option value="35">35</option>
-                      <option value="36">36</option>
-                      <option value="37">37</option>
-                      <option value="38">38</option>
-                      <option value="39">39</option>
-                      <option value="40">40</option>
-                      <option value="41">41</option>
-                      <option value="42">42</option>
-                      <option value="43">43</option>
-                      <option value="44">44</option>
-                      <option value="45">45</option>
-                      <option value="46">46</option>
-                      <option value="47">47</option>
-                      <option value="48">48</option>
-                      <option value="49">49</option>
-                      <option value="50">50</option>
-                      <option value="51">51</option>
-                      <option value="52">52</option>
-                      <option value="53">53</option>
-                      <option value="54">54</option>
-                      <option value="55">55</option>
-                      <option value="56">56</option>
-                      <option value="57">57</option>
-                      <option value="58">58</option>
-                      <option value="59">59</option>
-                    </select>
-                  </div>
-                  <div class="set-time-buttons">
-                    <button>Apply</button>
-                    <button>Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="heading">
-            <h4>General Details</h4>
-          </div>
-          <div class="popup-main-divs">
-            <label for="asl-remark">Ask Remark</label>
-            <input id="asl-remark" class="checkbox-input" type="checkbox" />
-          </div>
-          <div class="popup-main-divs bulk-item-selected">
-            <label for="apply-on-selected-category">
-              Apply On Selected Category Only
-            </label>
-            <input
-              id="apply-on-selected-category"
-              class="checkbox-input"
-              type="checkbox"
-            />
-          </div>
-          <div class="popup-main-divs-big">
-            <p>Apply To User</p>
-            <div class="table-wrapper">
-              <table id="user-table" class="table-main">
-                <thead>
-                  <th>
-                    <input
-                      id="select-all-users"
-                      class="checkbox-input"
-                      type="checkbox"
-                    />
-                  </th>
-                  <th><label for="select-all-users">Select All</label></th>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="popup-footer">
-          <button id="discount-submit" class="popup-save-btn">Save</button>
-        </div>
+    <!------------------------- buffer --------------------------------->
+    <div class="buffer">
+      Showing
+      <p id="record-count">x</p>
+      of
+      <p>x</p>
+      Records
+    </div>
+
+    <!------------------------- footer--------------------------------->
+    <footer>
+      <div class="active-property">
+        <span>Property Name :</span>
+        <p>First Source Technology</p>
       </div>
-    </form>
+      <button class="live-support-button">
+        <span class="material-symbols-outlined medium-icon">
+          support_agent
+        </span>
+        <p>Live Support</p>
+      </button>
+    </footer>
+
+    <!------------------------- main-popup --------------------------------->
+    <div id="discount-overlay" class="dark-overlay"></div>
+    <div id="discount-popup" class="popup">
+      <div class="popup-header">
+        <h4>Add Discount</h4>
+        <button id="discount-close" class="close-popup-btn">
+          <span class="material-symbols-outlined medium-icon"> close </span>
+        </button>
+      </div>
+      <form id="discount-form" class="popup-main">
+        <div class="popup-heading">General Details</div>
+        <div class="form-group">
+          <label for="discount-name">
+            Discount Name<span class="mandatory">*</span>
+          </label>
+          <input
+            id="discount-name"
+            class="text-input"
+            type="text"
+            placeholder="Disocunt Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="discount-apply-on">
+            Apply On<span class="mandatory">*</span>
+          </label>
+          <select id="discount-apply-on" class="main-select">
+            <option value="default">--Select--</option>
+            <option value="Order">Order</option>
+            <option value="Item">Item</option>
+            <option value="Bulk Item">Bulk Item</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="discount-type">
+            Discount Type<span class="mandatory">*</span>
+          </label>
+          <select id="discount-type" class="main-select">
+            <option value="default">--Select--</option>
+            <option value="Percentage">Percentage</option>
+            <option value="Amount">Amount</option>
+          </select>
+        </div>
+        <div id="promo-discount-container" class="form-group hide">
+          <label for="promo-discount">Promo Discount</label>
+          <input id="promo-discount" class="checkbox-input" type="checkbox" />
+        </div>
+
+        <div class="popup-heading">Discount value</div>
+        <div class="form-group">
+          <label for="open-discount">Open Discount</label>
+          <input id="open-discount" class="checkbox-input" type="checkbox" />
+        </div>
+        <div
+          id="discount-percentage-container"
+          class="form-group Percentage-option hide"
+        >
+          <label for="discount-percentage">
+            Discount Percentage<span class="mandatory">*</span>
+          </label>
+          <input
+            id="discount-percentage"
+            class="text-input"
+            type="number"
+            placeholder="Discount Percentage"
+          />
+        </div>
+        <div
+          id="discount-amount-container"
+          class="form-group Amount-option hide"
+        >
+          <label for="discount-amount">
+            Discount Amount<span class="mandatory">*</span>
+          </label>
+          <input
+            id="discount-amount"
+            class="text-input"
+            type="number"
+            placeholder="Discount Amount"
+          />
+        </div>
+        <div class="form-group Amount-option hide">
+          <label for="distribute-amount">Distribute Amount (Prorate)</label>
+          <input
+            id="distribute-amount"
+            class="checkbox-input"
+            type="checkbox"
+          />
+        </div>
+        <div id="max-disc-percent-container" class="form-group hide">
+          <label for="max-discount-percentage">
+            Maximum Discount Percentage<span class="mandatory">*</span>
+          </label>
+          <input
+            id="max-discount-percentage"
+            class="text-input"
+            type="number"
+            placeholder="Maximum Discount Percentage"
+          />
+        </div>
+        <div id="max-disc-amt-container" class="form-group hide">
+          <label for="max-discount-amount">
+            Maximum Discount Amount<span class="mandatory">*</span>
+          </label>
+          <input
+            id="max-discount-amount"
+            class="text-input"
+            type="number"
+            placeholder="Maximum Discount Amount"
+          />
+        </div>
+        <div class="form-group">
+          <label for="tax-exempted">Tax Exempted</label>
+          <input id="tax-exempted" class="checkbox-input" type="checkbox" />
+        </div>
+        <div class="form-group order-option hide">
+          <label for="apply-disc-on"> Discount Apply On </label>
+          <select id="apply-disc-on" class="main-select">
+            <option value="Base" selected>Base</option>
+            <option value="Final">Final</option>
+          </select>
+        </div>
+
+        <div class="popup-heading">visibility Settings</div>
+        <div class="form-group">
+          <label for="inactive-order-type"> Inactive For Order Type </label>
+          <div class="wrap-container">
+            <div class="wrap-items">
+              <input id="dine-in" class="checkbox-input" type="checkbox" />
+              <label for="dine-in">Dine In</label>
+            </div>
+            <div class="wrap-items">
+              <input id="take-away" class="checkbox-input" type="checkbox" />
+              <label for="take-away">Take Away</label>
+            </div>
+
+            <div class="wrap-items">
+              <input id="room-service" class="checkbox-input" type="checkbox" />
+              <label for="room-service">Room Service</label>
+            </div>
+            <div class="wrap-items">
+              <input id="delivery" class="checkbox-input" type="checkbox" />
+              <label for="delivery">Delivery</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inactive-days"> Inacitve On Following Days </label>
+          <div class="wrap-container">
+            <div class="wrap-items">
+              <input id="sunday" type="checkbox" />
+              <label for="sunday">S</label>
+            </div>
+            <div class="wrap-items">
+              <input id="monday" type="checkbox" />
+              <label for="monday">M</label>
+            </div>
+            <div class="wrap-items">
+              <input id="tuesday" type="checkbox" />
+              <label for="tuesday">T</label>
+            </div>
+            <div class="wrap-items">
+              <input id="wednesday" type="checkbox" />
+              <label for="wednesday">W</label>
+            </div>
+            <div class="wrap-items">
+              <input id="thursday" type="checkbox" />
+              <label for="thursday">T</label>
+            </div>
+            <div class="wrap-items">
+              <input id="friday" type="checkbox" />
+              <label for="friday">F</label>
+            </div>
+            <div class="wrap-items">
+              <input id="saturday" type="checkbox" />
+              <label for="saturday">S</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="discount-start-time"> Start Time </label>
+          <input
+            id="discount-start-time"
+            class="text-input"
+            type="time"
+            value="00:00"
+          />
+        </div>
+        <div class="form-group">
+          <label for="discount-end-time"> End Time </label>
+          <input
+            id="discount-end-time"
+            class="text-input"
+            type="time"
+            value="23:59"
+          />
+        </div>
+
+        <div class="popup-heading">Other Settings</div>
+        <div class="form-group">
+          <label for="ask-remark">Ask Remark</label>
+          <input id="ask-remark" class="checkbox-input" type="checkbox" />
+        </div>
+        <div class="form-group bulk-item-option hide">
+          <label for="apply-on-select-category">
+            Apply On Selected Category Only
+          </label>
+          <input
+            id="apply-on-select-category"
+            class="checkbox-input"
+            type="checkbox"
+          />
+        </div>
+        <div class="form-group large">
+          <label for="apply-to-users"> Apply To User </label>
+          <div class="table-wrapper">
+            <li class="popup-list">
+              <input
+                id="select-all-users"
+                class="checkbox-input"
+                type="checkbox"
+              />
+              <label for="select-all-users">Select All</label>
+            </li>
+            <ul class="user-list"></ul>
+          </div>
+        </div>
+      </form>
+      <div class="popup-footer">
+        <button id="discount-submit-button" class="popup-save-btn">Save</button>
+      </div>
+    </div>
+
+    <!------------------------- warning popup --------------------------------->
+
+    <div id="warning-overlay" class="dark-overlay"></div>
+    <div class="warning-popup">
+      <div class="warning-popup-head">
+        <span class="material-symbols-outlined extra-large-icon"> error </span>
+      </div>
+      <div class="warning-popup-body">
+        <span>Confirm</span>
+        <p id="warning-message"></p>
+      </div>
+      <div class="warning-popup-foot">
+        <button id="" class="warning-popup-buttons warning-confirm">Yes</button>
+        <button id="" class="warning-popup-buttons warning-denied">No</button>
+      </div>
+    </div>
+
+    <!------------------------- script --------------------------------->
     <script src="discount.js"></script>
   </body>
 </html>

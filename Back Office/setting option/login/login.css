@@ -1,0 +1,293 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, Arial, Helvetica, sans-serif;
+  user-select: none;
+}
+
+body {
+  font-size: var(--font-size); /* Apply the variable */
+}
+
+/*------------remove scroll form number input--------------*/
+
+/* Remove number input arrows for Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.material-symbols-outlined {
+  font-size: medium !important;
+}
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #00aeef;
+}
+
+.small-icon {
+  font-size: medium !important;
+}
+
+.medium-icon {
+  font-size: 1.2em !important;
+}
+
+.large-icon {
+  font-size: 1.8em !important;
+}
+
+.extra-large-icon {
+  font-size: 2.2em !important;
+}
+
+/* ------------------------------------------------------ */
+
+.login-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: auto;
+  min-height: 400px;
+  max-height: 600px;
+  width: auto;
+  min-width: 350px;
+  max-width: 600px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.login-container-head {
+  display: grid;
+  gap: 5px;
+  margin: 10px;
+}
+
+.login-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #00aeef;
+}
+
+.toggle-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  width: auto;
+  padding: 9px 10px;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+  background-color: white;
+  color: gray;
+  transition: 0.5s ease;
+}
+
+.toggle-button:hover {
+  background-color: rgb(238, 238, 238);
+  cursor: pointer;
+}
+
+.active-button {
+  color: #00aeef;
+  background-color: #c5f0ff;
+  border: 1px solid #00aeef;
+}
+
+/*------------------body----------------------*/
+
+.hide {
+  display: none !important;
+}
+
+.login-container-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* #text-login-container {
+  display: none !important;
+} */
+
+.form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.login-inputs {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  outline: none;
+  color: gray;
+}
+
+.form-group label {
+  position: absolute;
+  transition: 300ms ease;
+  width: fit-content;
+  margin-left: 10px;
+  padding: 0px 4px;
+  color: gray;
+  font-size: 0.9em;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.8em;
+  background-color: white;
+  color: #00aeef;
+}
+
+.form-group input:focus {
+  border: 1px solid #00aeef;
+}
+
+.login-button {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background-color: #00aeef;
+  color: white;
+  font-size: 1em;
+  transition: 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #006a91;
+  cursor: pointer;
+}
+
+.login-link {
+  font-size: 0.9em;
+  color: #00aeef;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  color: #60d3fd;
+}
+
+/*----------------keypad login----------------------*/
+#keypad-login-container {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pin-dot-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 10px 0px;
+}
+
+.pin-dot-container span {
+  color: rgb(180, 180, 180);
+}
+
+.keypad-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100%;
+}
+
+.keypad-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  background: none;
+  color: gray;
+  font-size: 1em;
+  transition: 0.3s ease-in-out;
+}
+
+.no-left-border {
+  border-left: none;
+}
+
+.keypad-button:hover {
+  background-color: #c6f0ff;
+  color: #00aeef;
+  cursor: pointer;
+}
+
+/*--------------------------missing-fields-alert----------------------------*/
+
+.missing-fields-alert {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 10px;
+  width: 70%;
+  height: 8%;
+  background-color: #191a1c;
+  color: lightgray;
+  border: none;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  top: 0px;
+}

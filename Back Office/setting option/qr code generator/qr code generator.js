@@ -1,17 +1,83 @@
-//loader
+//----------------------------- header-----------------------------------
+//-----------------------------user option-----------------------------
 
-const loadingScreen = document.querySelector(".loading-screen");
-window.addEventListener("load", () => {
-  const loadingScreen = document.querySelector(".loading-screen");
-  if (loadingScreen) {
-    loadingScreen.remove(); // This removes it from the DOM completely
-  }
+const userbutton = document.querySelector(".username-button");
+const userOptions = document.querySelector(".user-options");
+const userOptionsOverlay = document.querySelector("#user-option-overlay");
+
+userbutton.addEventListener("click", () => {
+  userOptions.style.opacity = 1;
+  userOptions.style.visibility = "visible";
+  userOptionsOverlay.style.visibility = "visible";
 });
 
-/// Select buttons
-const masterButton = document.querySelector(".master-btn");
-const menuButton = document.querySelector(".menu-btn");
-const settingButton = document.querySelector(".settings-btn");
+userOptionsOverlay.addEventListener("click", () => {
+  userOptions.style.opacity = 0;
+  userOptions.style.visibility = "hidden";
+  userOptionsOverlay.style.visibility = "hidden";
+});
+
+//----------------------------- Select warning popup elements-----------------------------
+const warningPopup = document.querySelector(".warning-popup");
+const warningOverlay = document.querySelector("#warning-overlay");
+const warningMessage = document.querySelector("#warning-message");
+const warningFooter = document.querySelector(".warning-popup-foot");
+
+// Function to show the warning popup
+function warningPopupEnable(actionType) {
+  warningPopup.style.opacity = 1;
+  warningPopup.style.visibility = "visible";
+  warningOverlay.style.opacity = 1;
+  warningOverlay.style.visibility = "visible";
+
+  // Set message based on action type
+  if (actionType === "logout") {
+    warningMessage.textContent = "Are you sure you want to logout?";
+    warningFooter.innerHTML = `
+      <button id="logout-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="logout-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  } else if (actionType === "delete") {
+    warningMessage.textContent = "Are you sure you want to delete?";
+    warningFooter.innerHTML = `
+      <button id="delete-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="delete-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  }
+}
+
+// Logout button event listener
+document.querySelector(".main-logout-button").addEventListener("click", () => {
+  warningPopupEnable("logout");
+});
+
+function closeWarning() {
+  warningPopup.style.opacity = 0;
+  warningPopup.style.visibility = "hidden";
+  warningOverlay.style.opacity = 0;
+  warningOverlay.style.visibility = "hidden";
+}
+
+// Use event delegation to close popup when clicking "No"
+document
+  .querySelector(".warning-popup-foot")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("warning-denied")) {
+      closeWarning();
+    }
+  });
+
+// Close popup when clicking outside of it
+warningOverlay.addEventListener("click", () => {
+  closeWarning();
+});
+
+//-----------------------------navbar-----------------------------
+
+//----------------------------- Select buttons-----------------------------
+const masterButton = document.querySelector("#master-button");
+const menuButton = document.querySelector("#menu-button");
+const settingButton = document.querySelector("#setting-button");
 
 // Add event listeners for buttons
 masterButton.addEventListener("click", () => {
@@ -42,133 +108,670 @@ settingButton.addEventListener("click", () => {
 });
 
 //scrollbar from bottom
-const bottomScroll = document.querySelector(".nav-setting-options");
+const bottomScroll = document.querySelector(".nav-container");
 document.addEventListener("DOMContentLoaded", () => {
   bottomScroll.scrollTop = bottomScroll.scrollHeight;
 });
 
-// add  menu confi
+// -----------------------------main-----------------------------
 
-const addMenuOverlay = document.querySelector("#add-menu-config-overlay");
-const addMenuPopup = document.querySelector("#add-menu-config-popup");
-const addMenuClose = document.querySelector("#menu-config-close");
-const addMenuEnablebuttons = document.querySelectorAll(".menu-popup");
+//----------------------------- titlebar-----------------------------
 
-addMenuEnablebuttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    addMenuOverlay.style.display = "flex";
-    addMenuPopup.style.display = "grid";
-  });
-});
+//opening logo popup
 
-addMenuClose.addEventListener("click", (event) => {
-  event.preventDefault();
-  addMenuOverlay.style.display = "none";
-  addMenuPopup.style.display = "none";
-});
+const logoOverlay = document.querySelector("#logo-overlay");
+const logoPopup = document.querySelector("#logo-popup");
+const logoForm = document.querySelector("#logo-form");
+const logoPopupAdd = document.querySelector("#add-logo-button");
+const logoPopupClose = document.querySelector("#logo-close");
 
-//add logo
+function logoPopupEnable() {
+  logoPopup.style.visibility = "visible";
+  logoPopup.style.opacity = 1;
 
-const logoOverlay = document.querySelector("#add-logo-overlay");
-const logoPopup = document.querySelector("#add-logo-popup");
-const logoClose = document.querySelector("#add-logo-close");
-const logoEnable = document.querySelector("#settings-button");
+  logoOverlay.style.visibility = "visible";
+  logoOverlay.style.opacity = 1;
 
-logoEnable.addEventListener("click", () => {
-  logoOverlay.style.display = "flex";
-  logoPopup.style.display = "grid";
-});
-
-logoClose.addEventListener("click", () => {
-  logoOverlay.style.display = "none";
-  logoPopup.style.display = "none";
-});
-
-const popupEnableButton = document.querySelector("#qr-popup-button");
-const popupCloseButton = document.querySelector("#close-qr-popup");
-const popup = document.querySelector("#add-qr-popup");
-const overlay = document.querySelector("#add-qr-overlay");
-const qrForm = document.querySelector("#add-qr-form");
-const scrollableArea = document.querySelector(".popup-main");
-
-function openQRPopup() {
-  popup.style.display = "grid";
-  overlay.style.display = "flex";
+  logoForm.scrollTop = 0;
 }
 
-function closeQRPopup() {
-  popup.style.display = "none";
-  overlay.style.display = "none";
-  qrForm.reset();
-  document.querySelector("#dinein").style.display = "none";
-  document.querySelector("#room-service").style.display = "none";
-  document.querySelector("#menu-link").style.display = "none";
+function logoPopupDisable() {
+  logoPopup.style.visibility = "hidden";
+  logoPopup.style.opacity = 0;
+
+  logoOverlay.style.visibility = "hidden";
+  logoOverlay.style.opacity = 0;
+
+  logoForm.scrollTop = 0;
+
+  //changing the textcontent of file name display
+  fileNameDisplay.innerText = "You Have Not Selected Any File";
+
+  // closing the image preview container
+  imageContainer.style.display = "none";
+  imageDisplay.style.display = "none";
+}
+
+logoPopupAdd.addEventListener("click", () => {
+  logoPopupEnable();
+});
+
+logoPopupClose.addEventListener("click", () => {
+  logoPopupDisable();
+});
+
+// Get the div and the hidden file input
+const customFileDiv = document.getElementById("custom-file-div");
+const fileInput = document.getElementById("file-input");
+const fileNameDisplay = document.querySelector(".file-name");
+
+// Attach click event to the div to trigger the hidden file input
+customFileDiv.addEventListener("click", () => {
+  fileInput.click(); // Programmatically trigger the hidden input
+});
+
+// Handle file selection
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0]; // Get the selected file
+  if (file) {
+    fileNameDisplay.innerText = `${file.name}`; // Display file name in the div
+  }
+});
+
+// Get the input and the image display element
+const imageInput = document.getElementById("file-input");
+const imageDisplay = document.getElementById("imageDisplay");
+const imageContainer = document.querySelector("#image-display-container");
+
+// Add an event listener for when the user selects an image
+imageInput.addEventListener("change", function (event) {
+  const file = event.target.files[0]; // Get the selected file
+  if (file) {
+    const reader = new FileReader(); // Create a FileReader object
+
+    // Event listener for when the file is read
+    reader.onload = function (e) {
+      imageDisplay.src = e.target.result; // Set the src to the file's data URL
+      imageContainer.style.display = "flex";
+      imageDisplay.style.display = "block"; // Display the image
+    };
+
+    reader.readAsDataURL(file); // Read the file as a Data URL
+  }
+});
+
+//removing the image
+const imageClose = document.querySelector("#close-image-btn");
+imageClose.addEventListener("click", () => {
+  imageContainer.style.display = "none";
+  imageDisplay.style.display = "none";
+  fileNameDisplay.innerText = "You Have Not Selected Any File";
+});
+
+//logo submit
+const logoSubmit = document.querySelector("#logo-submit-button");
+logoSubmit.addEventListener("click", () => {
+  //taking inpput
+  const imageInput = document.querySelector("#file-input");
+
+  //validation
+
+  if (imageInput.files.length === 0) {
+    alert("Please Upload an Image");
+    return;
+  }
+
+  logoPopupDisable();
+});
+
+// opening main popup-------------------------------------------
+
+const TCOverlay = document.querySelector("#qr-code-overlay");
+const TCPopup = document.querySelector("#qr-code-popup");
+const TCForm = document.querySelector("#qr-code-form");
+const TCPopupAdd = document.querySelector("#qr-code-open");
+const TCPopupClose = document.querySelector("#qr-code-close");
+
+function mainPopupEnable() {
+  TCPopup.style.visibility = "visible";
+  TCPopup.style.opacity = 1;
+
+  TCOverlay.style.visibility = "visible";
+  TCOverlay.style.opacity = 1;
+
+  TCForm.scrollTop = 0;
+  tableWrapperScrollTop();
+
+  //clearing the table body before opening the popup
   clearTable();
 }
 
-popupEnableButton.addEventListener("click", () => {
-  openQRPopup();
+function mainPopupDisable() {
+  TCPopup.style.visibility = "hidden";
+  TCPopup.style.opacity = 0;
+
+  TCOverlay.style.visibility = "hidden";
+  TCOverlay.style.opacity = 0;
+
+  TCForm.reset();
+
+  //disabling dinein, roomservice, menulink when popup opens
+  dineinContainer.style.display = "none";
+  roomServiceContainer.style.display = "none";
+  menuLinkContainer.style.display = "none";
+
+  //clearing available table container
+  tableContainer.innerHTML = "";
+}
+
+TCPopupAdd.addEventListener("click", () => {
+  mainPopupEnable();
 });
 
-popupCloseButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  closeQRPopup();
+TCPopupClose.addEventListener("click", () => {
+  mainPopupDisable();
 });
 
-// addLogoOverlay.addEventListener("click", () => {
-//   addLogoOverlay.style.display = "none";
-//   addLogoText.style.display = "none";
-// });
+//enabling and disabling dinein,roomservice and menu link container
 
-// select outlet
+const QRSelect = document.querySelector("#qr-code-for");
+const dineinContainer = document.querySelector("#dinein-container");
+const roomServiceContainer = document.querySelector("#room-service-container");
+const menuLinkContainer = document.querySelector("#menu-link-container");
+
+QRSelect.addEventListener("change", () => {
+  const selectedValue = QRSelect.value.trim();
+
+  if (selectedValue === "Dine In") {
+    dineinContainer.style.display = "flex";
+    roomServiceContainer.style.display = "none";
+    menuLinkContainer.style.display = "none";
+  } else if (selectedValue === "Room Service") {
+    dineinContainer.style.display = "none";
+    roomServiceContainer.style.display = "flex";
+    menuLinkContainer.style.display = "none";
+  } else if (selectedValue === "Menu Link") {
+    dineinContainer.style.display = "none";
+    roomServiceContainer.style.display = "none";
+    menuLinkContainer.style.display = "flex";
+  } else {
+    dineinContainer.style.display = "none";
+    roomServiceContainer.style.display = "none";
+    menuLinkContainer.style.display = "none";
+  }
+});
 
 const outlets = [
-  "The Gourmet Kitchen",
-  "Spice Symphony",
-  "Sushi Haven",
-  "The Steakhouse",
-  "Taco Fiesta",
-  "Le Petit Bistro",
-  "Dragon Wok",
-  "Green Earth Cafe",
-  "Mediterraneo",
-  "Smoke & Grill",
+  {
+    outletName: "The Grand Restaurant",
+    menu: "The Grand Restaurant Menu",
+    floors: [
+      { floorName: "Ground Floor", tables: ["Table 1", "Table 2", "Table 3"] },
+      { floorName: "First Floor", tables: ["Table 1", "Table 2"] },
+      { floorName: "Terrace", tables: ["Table 1", "Table 2", "Table 3"] },
+    ],
+  },
+  {
+    outletName: "Sunset Bistro",
+    menu: "Sunset Bistro Menu",
+    floors: [
+      { floorName: "Patio", tables: ["Table 1", "Table 2"] },
+      {
+        floorName: "Indoor Seating",
+        tables: ["Table 1", "Table 2", "Table 3", "Table 4"],
+      },
+    ],
+  },
+  {
+    outletName: "City Diner",
+    menu: "City Diner Menu",
+    floors: [
+      {
+        floorName: "Main Floor",
+        tables: ["Table 1", "Table 2", "Table 3", "Table 4", "Table 5"],
+      },
+    ],
+  },
+  {
+    outletName: "Rooftop Lounge",
+    menu: "Rooftop Lounge Menu",
+    floors: [
+      { floorName: "Rooftop", tables: ["Table 1", "Table 2", "Table 3"] },
+    ],
+  },
 ];
 
-const outletSelect = document.querySelector("#outlet-select");
+const outletSelect = document.querySelectorAll(".outlet-select");
+const menuSelect = document.querySelectorAll(".menu-select");
+const floorSelect = document.querySelector(".floor-select");
+const tableContainer = document.querySelector("#available-tables");
+
+// Populate outlet and menu options initially
 outlets.forEach((outlet) => {
-  const outletOption = document.createElement("option");
-  outletOption.value = outlet.toLowerCase();
-  outletOption.innerText = outlet;
+  outletSelect.forEach((select) => {
+    const option = document.createElement("option");
+    option.value = outlet.outletName.trim();
+    option.textContent = outlet.outletName.trim();
+    select.appendChild(option);
+  });
 
-  outletSelect.appendChild(outletOption);
+  menuSelect.forEach((select) => {
+    const option = document.createElement("option");
+    option.value = outlet.menu.trim();
+    option.textContent = outlet.menu.trim();
+    select.appendChild(option);
+  });
 });
 
-// for import export menu
+// Automatically select the matching menu option when outlet changes
+outletSelect.forEach((select) => {
+  select.addEventListener("change", (event) => {
+    const selectedOutlet = event.target.value.trim();
+    const outletData = outlets.find(
+      (outlet) => outlet.outletName === selectedOutlet
+    );
 
-const importExportMenuButton = document.querySelector(".options-button");
-const importExportMenu = document.querySelector(".import-export-options");
-const importExportMenuOverlay = document.querySelector(
-  ".import-export-overlay "
-);
+    if (!outletData) {
+      floorSelect.innerHTML = ""; // Clear floor options
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "--select--";
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      floorSelect.appendChild(defaultOption);
 
-importExportMenuButton.addEventListener("click", () => {
-  importExportMenu.style.display = "flex";
-  importExportMenuOverlay.style.display = "flex";
+      const tableContainer = document.querySelector("#available-tables");
+      tableContainer.innerHTML = ""; // Clear any existing table checkboxes
+      return; // Exit the function early to prevent further execution
+    }
+
+    if (outletData) {
+      // Set the relevant menu as selected without removing other options
+      menuSelect.forEach((menuDropdown) => {
+        Array.from(menuDropdown.options).forEach((option) => {
+          if (option.value === outletData.menu) {
+            option.selected = true; // Automatically select the correct menu
+          }
+        });
+      });
+    }
+
+    // Clear existing floor options and add default "--select--" option
+    floorSelect.innerHTML = ""; // Clear existing options
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "default";
+    defaultOption.textContent = "--Select--";
+    defaultOption.selected = true; // Set it as the default selected option
+    floorSelect.appendChild(defaultOption);
+
+    // Populate floor options for the selected outlet
+    if (outletData) {
+      outletData.floors.forEach((floor) => {
+        const option = document.createElement("option");
+        option.value = floor.floorName;
+        option.textContent = floor.floorName;
+        floorSelect.appendChild(option);
+      });
+    }
+
+    tableContainer.innerHTML = "";
+    if (outletData) {
+      floorSelect.addEventListener("change", (event) => {
+        const selectedVal = event.target.value.trim();
+
+        // Clear previous table list to avoid duplicates
+        tableContainer.innerHTML = "";
+
+        // Find selected floor and display its tables as checkboxes
+        const selectedFloorData = outletData.floors.find(
+          (floor) => floor.floorName === selectedVal
+        );
+        if (selectedFloorData) {
+          selectedFloorData.tables.forEach((table) => {
+            const id = table.trim();
+            const list = document.createElement("li");
+            list.setAttribute("class", "popup-list");
+            list.innerHTML = `
+              <input id="${id}" class="checkbox-input" type="checkbox"/>
+              <label for="${id}">${table}</label>
+              `;
+            tableContainer.appendChild(list); // Append the table checkboxes to the container
+          });
+        }
+      });
+    }
+  });
 });
 
-importExportMenuOverlay.addEventListener("click", () => {
-  importExportMenu.style.display = "none";
-  importExportMenuOverlay.style.display = "none";
+//----------------------all table wrapper scroll to top----------------------------
+function tableWrapperScrollTop() {
+  document
+    .querySelectorAll(".table-wrapper")
+    .forEach((wrapper) => (wrapper.scrollTop = 0));
+}
+
+tableWrapperScrollTop();
+
+//removing data from table body
+const roomServiceTable = document.querySelector("#room-service-table tbody");
+const menuLinkTable = document.querySelector("#menu-link-table tbody");
+function clearTable() {
+  roomServiceTable.innerHTML = "";
+  menuLinkTable.innerHTML = "";
+}
+
+//---------- opening and closing rate config for room service and menu link-----------------------------
+
+const menuConfigButtons = document.querySelectorAll(".add-menu-config");
+
+const menuConfigOverlay = document.querySelector("#menu-config-overlay");
+const menuConfigPopup = document.querySelector("#menu-config-popup");
+const menuConfigForm = document.querySelector("#menu-config-form");
+const menuConfigCloseBtn = document.querySelector("#menu-config-close");
+const menuConfigSubmit = document.querySelector("#menu-config-submit-button");
+
+let targetTable = "";
+
+function menuConfigOpen() {
+  menuConfigOverlay.style.opacity = 1;
+  menuConfigOverlay.style.visibility = "visible";
+  menuConfigPopup.style.visibility = "visible";
+  menuConfigPopup.style.opacity = 1;
+
+  menuConfigForm.scrollTop = 0;
+  tableWrapperScrollTop();
+}
+
+function menuConfigClose() {
+  menuConfigOverlay.style.opacity = 0;
+  menuConfigOverlay.style.visibility = "hidden";
+  menuConfigPopup.style.visibility = "hidden";
+  menuConfigPopup.style.opacity = 0;
+
+  menuConfigForm.reset();
+}
+
+// Attach event listeners to the buttons
+menuConfigButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    targetTable =
+      button.id === "rs-rate-config" ? "room-service-table" : "menu-link-table";
+
+    // Show popup and overlay with proper styles
+    menuConfigOpen();
+  });
 });
 
-// rotate 180
+// Handle the menu config form submission
+menuConfigSubmit.addEventListener("click", () => {
+  // Taking input
+  const outletName = document.querySelector("#menu-config-outlet").value.trim();
+  const menuName = document.querySelector("#menu-config-menu").value.trim();
 
-const sortDataElements = document.querySelectorAll(".sort-data"); // Select all sort-data elements
+  const paymentMethodCheck = document.querySelectorAll(
+    "#menu-config-payment-method input[type = 'checkbox']:checked"
+  ).length;
+
+  // Validation
+  if (outletName === "" || outletName === "default") {
+    alert("Please Select an Outlet");
+    return;
+  }
+
+  if (menuName === "" || menuName === "default") {
+    alert("Please Select a Menu");
+    return;
+  }
+
+  if (paymentMethodCheck === 0) {
+    alert("Please Select a Payment Method");
+    return;
+  }
+
+  // Find the target table and add the new row dynamically
+  const tableBody = document.getElementById(targetTable).querySelector("tbody");
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+  <td>${outletName}</td>
+  <td>${menuName}</td>
+ 
+  <td class = "popup-action-btns">
+    <button class="edit-btn action-buttons" title="Edit" type = "button">
+      <span class="material-symbols-outlined medium-icon">
+        edit
+      </span>
+    </button>
+  </td>
+  `;
+
+  tableBody.appendChild(row);
+
+  menuConfigClose();
+});
+
+menuConfigCloseBtn.addEventListener("click", () => {
+  menuConfigClose();
+});
+
+//populating rate select
+const rates = [
+  "Happy Hour",
+  "Weekend Brunch Rate",
+  "Lunch Special Rate",
+  "Early Bird Discount",
+  "Event Night Rate",
+];
+
+const rateSelect = document.querySelectorAll(".rate-select");
+
+rates.forEach((rate) => {
+  rateSelect.forEach((select) => {
+    const option = document.createElement("option");
+    option.value = rate.trim();
+    option.textContent = rate.trim();
+
+    select.appendChild(option);
+  });
+});
+
+// Adding payment methods
+const paymentMethods = [
+  "Cash",
+  "Credit Card",
+  "Debit Card",
+  "UPI",
+  "Mobile Wallet",
+  "Net Banking",
+  "Gift Card",
+  "Cheque",
+  "Bank Transfer",
+  "PayPal",
+  "Apple Pay",
+  "Google Pay",
+];
+const paymentOptionList = document.querySelectorAll(".payment-option-list");
+
+paymentMethods.forEach((method) => {
+  paymentOptionList.forEach((option) => {
+    let id = method.trim().replace(/\s+/g, "-");
+
+    const list = document.createElement("li");
+    list.setAttribute("class", "popup-list");
+
+    list.innerHTML = `
+      <input id="${id}" class="checkbox-input" type="checkbox" />
+      <label for="${id}">${method.trim()}</label>
+    `;
+
+    option.appendChild(list);
+  });
+});
+
+// Adding business sources
+const businessSources = [
+  "Swiggy",
+  "Zomato",
+  "Uber Eats",
+  "Dunzo",
+  "Foodpanda",
+  "Amazon Food",
+  "Talabat",
+  "Deliveroo",
+  "Grubhub",
+  "DoorDash",
+  "Postmates",
+  "Takeaway.com",
+  "Direct Walk-In",
+  "Hotel Website",
+  "Google Business",
+  "Instagram Orders",
+  "Facebook Orders",
+];
+
+const sourceOptionList = document.querySelectorAll(".source-option-list");
+
+businessSources.forEach((source) => {
+  sourceOptionList.forEach((option) => {
+    let id = source.trim().replace(/\s+/g, "-"); // Replace spaces with '-' for cleaner IDs
+
+    const list = document.createElement("li");
+    list.setAttribute("class", "popup-list");
+
+    list.innerHTML = `
+      <input id="${id}" class="checkbox-input" type="checkbox" />
+      <label for="${id}">${source.trim()}</label>
+    `;
+
+    option.appendChild(list);
+  });
+});
+
+// Selecting all "select-all" checkboxes
+const selectAllCheckboxes = document.querySelectorAll(".select-all");
+
+selectAllCheckboxes.forEach((selectAllCheckbox) => {
+  selectAllCheckbox.addEventListener("change", (event) => {
+    // Find the closest table wrapper containing the checkboxes
+    const tableWrapper = selectAllCheckbox.closest(".table-wrapper");
+
+    // Select all checkboxes within that table wrapper
+    const itemCheckboxes = tableWrapper.querySelectorAll(
+      "input[type='checkbox']"
+    );
+
+    // Update each checkbox's checked status based on the "select-all" checkbox
+    itemCheckboxes.forEach((itemCheckbox) => {
+      itemCheckbox.checked = selectAllCheckbox.checked;
+    });
+  });
+});
+
+//----------------------------- filterbar-----------------------------
+
+//outlet filter
+const outletFilter = document.querySelector("#select-outlet");
+outletFilter.addEventListener("change", () => {
+  outletSearch();
+});
+
+function outletSearch() {
+  const searchValue = outletFilter.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll("#qr-code-table tbody tr");
+
+  let matchFound = false;
+
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else if (searchValue === "default" || searchValue === "") {
+      row.style.display = "";
+      matchFound = true;
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
+  }
+}
+
+//--------------------------searchbar---------------------------------------
+const mainSearchBar = document.querySelector("#qr-code-search");
+const noRecordsMessage = document.querySelector("#no-records");
+
+mainSearchBar.addEventListener("input", () => {
+  mainSearch();
+});
+
+function mainSearch() {
+  const searchValue = mainSearchBar.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll("#qr-code-table tbody tr");
+
+  let matchFound = false;
+
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
+  }
+}
+//----------------------------- import export menu-----------------------------
+
+const importExportOverlay = document.querySelector("#import-export-overlay");
+const importExportMenu = document.querySelector(".import-export-menu");
+const importExportButton = document.querySelector("#import-export-add");
+
+importExportButton.addEventListener("click", () => {
+  importExportMenu.style.right = "0px";
+  importExportOverlay.style.visibility = "visible";
+});
+
+importExportOverlay.addEventListener("click", () => {
+  importExportMenu.style.right = "-300px";
+  importExportOverlay.style.visibility = "hidden";
+});
+
+//-----------------------------main container-----------------------------
+//----------------------------- rotate icon-----------------------------
+const sortDataElements = document.querySelectorAll(".sort-icon"); // Select all sort-data elements
 
 sortDataElements.forEach((sortData) => {
   sortData.addEventListener("click", () => {
-    // Toggle the rotate-180 class on the icon inside the clicked sortData
     const icon = sortData.querySelector(".rotate-icon");
     if (icon) {
       icon.classList.toggle("rotate-180");
@@ -176,632 +779,351 @@ sortDataElements.forEach((sortData) => {
   });
 });
 
-$(document).ready(function () {
-  // Initialize DataTable with sorting, but no search bar or entries option
-  $("#qr-code-generator-table").DataTable({
-    paging: false, // Disable pagination (entries per page)
-    searching: false, // Disable search bar
-    info: false, // Disable "Showing 1 to X of Y entries" info text
-    ordering: true, // Enable sorting
-    order: [], // Prevent default sorting on page load
+// -----------------------------table sorting-----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.querySelector("#qr-code-table");
+  const headers = table.querySelectorAll("th");
+
+  headers.forEach((header, columnIndex) => {
+    header.addEventListener("click", () => {
+      sortTable(table, columnIndex);
+    });
   });
+
+  function sortTable(table, columnIndex) {
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const isAscending = table.dataset.sortOrder === "asc";
+
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.children[columnIndex].textContent.trim().toLowerCase();
+      const cellB = rowB.children[columnIndex].textContent.trim().toLowerCase();
+
+      return isAscending
+        ? cellA.localeCompare(cellB, undefined, { numeric: true })
+        : cellB.localeCompare(cellA, undefined, { numeric: true });
+    });
+
+    table.dataset.sortOrder = isAscending ? "desc" : "asc"; // Toggle sort order
+
+    tbody.innerHTML = "";
+    rows.forEach((row) => tbody.appendChild(row)); // Append sorted rows back to the table
+  }
 });
 
-// // delete record button
+//-----------------------------delete all checkbox-----------------------------
 
-// const checkbox = document.querySelectorAll("#delete-record-checkbox");
-// const deleteRecordBtn = document.querySelector(".delete-records-button");
+const selectAllCheckbox = document.querySelector("#select-all-checkbox");
 
-// checkbox.forEach((checkbox) => {
-//   checkbox.addEventListener("change", () => {
-//     if (checkbox.checked) {
-//       deleteRecordBtn.style.display = "flex";
-//     } else {
-//       deleteRecordBtn.style.display = "none";
-//     }
-//   });
-// });
-
-// searchbar
-
-const searchBar = document.querySelector("#qr-code-search");
-searchBar.addEventListener("input", () => {
-  const searchValue = searchBar.value.trim().toLowerCase();
-
-  const tableRows = document.querySelectorAll(
-    "#qr-code-generator-table tbody tr"
-  );
+selectAllCheckbox.addEventListener("change", () => {
+  const tableRows = document.querySelectorAll("#qr-code-table tbody tr");
 
   tableRows.forEach((row) => {
-    let isMatch = false;
-    const tableDatas = row.querySelectorAll("td");
-    tableDatas.forEach((data) => {
-      if (data.textContent.trim().toLowerCase().includes(searchValue)) {
-        isMatch = true;
+    const checkbox = row.querySelector("input[type='checkbox']");
+    if (checkbox) {
+      checkbox.checked = selectAllCheckbox.checked;
+    }
+  });
+  deleteAllEnable();
+  noDataDisplay();
+});
+
+//----------------------------- delete all button display-----------------------------
+
+function deleteAllEnable() {
+  const deleteAllButton = document.querySelector(".delete-all-button");
+  const allCheckboxes = document.querySelectorAll(
+    "#qr-code-table tr input[type='checkbox']"
+  );
+
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        deleteAllButton.style.visibility = "visible";
+        deleteAllButton.style.opacity = 1;
+      } else {
+        deleteAllButton.style.visibility = "hidden";
+        deleteAllButton.style.opacity = 0;
       }
     });
-    if (isMatch) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
   });
-});
-
-// dinein option
-
-const QRCodeFor = document.querySelector("#qr-code");
-
-QRCodeFor.addEventListener("change", () => {
-  if (QRCodeFor.value === "dinein") {
-    document.querySelector("#dinein").style.display = "flex";
-    document.querySelector("#room-service").style.display = "none";
-    document.querySelector("#menu-link").style.display = "none";
-  } else if (QRCodeFor.value === "room sevice") {
-    document.querySelector("#dinein").style.display = "none";
-    document.querySelector("#room-service").style.display = "flex";
-    document.querySelector("#menu-link").style.display = "none";
-  } else if (QRCodeFor.value === "menu link") {
-    document.querySelector("#dinein").style.display = "none";
-    document.querySelector("#room-service").style.display = "none";
-    document.querySelector("#menu-link").style.display = "flex";
-  } else {
-    document.querySelector("#dinein").style.display = "none";
-    document.querySelector("#room-service").style.display = "none";
-    document.querySelector("#menu-link").style.display = "none";
-  }
-});
-
-function clearTable() {
-  const availableTableBody = document.querySelector(".available-table tbody");
-
-  availableTableBody.innerHTML =
-    '<tr><td colspan="100%">Selected floor has no tables</td></tr>';
 }
 
-// select outlet
-const hotels = [
-  {
-    name: "Downtown Diner",
-    menu: "Main Menu",
-    floors: [
-      {
-        name: "Ground Floor",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }, { tableNumber: 3 }],
-      },
-      {
-        name: "First Floor",
-        tables: [
-          { tableNumber: 1 },
-          { tableNumber: 2 },
-          { tableNumber: 3 },
-          { tableNumber: 4 },
-        ],
-      },
-      {
-        name: "Rooftop",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }, { tableNumber: 3 }],
-      },
-    ],
-  },
-  {
-    name: "Seaside Café",
-    menu: "Coastal Delights",
-    floors: [
-      {
-        name: "Outdoor Patio",
-        tables: [
-          { tableNumber: 1 },
-          { tableNumber: 2 },
-          { tableNumber: 3 },
-          { tableNumber: 4 },
-        ],
-      },
-      {
-        name: "Indoor Hall",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }, { tableNumber: 3 }],
-      },
-    ],
-  },
-  {
-    name: "Mountain View Restaurant",
-    menu: "Gourmet Specials",
-    floors: [
-      {
-        name: "Lobby Area",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }],
-      },
-      {
-        name: "Terrace",
-        tables: [
-          { tableNumber: 1 },
-          { tableNumber: 2 },
-          { tableNumber: 3 },
-          { tableNumber: 4 },
-          { tableNumber: 5 },
-        ],
-      },
-    ],
-  },
-  {
-    name: "City Lights Bar",
-    menu: "Cocktail & Snacks",
-    floors: [
-      {
-        name: "Main Bar",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }, { tableNumber: 3 }],
-      },
-      {
-        name: "VIP Lounge",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }],
-      },
-    ],
-  },
-  {
-    name: "Garden Bistro",
-    menu: "Organic & Vegan",
-    floors: [
-      {
-        name: "Outdoor Garden",
-        tables: [
-          { tableNumber: 1 },
-          { tableNumber: 2 },
-          { tableNumber: 3 },
-          { tableNumber: 4 },
-        ],
-      },
-      {
-        name: "Greenhouse Dining",
-        tables: [{ tableNumber: 1 }, { tableNumber: 2 }, { tableNumber: 3 }],
-      },
-    ],
-  },
-];
-
-const selectOutlet = document.querySelector("#add-qr-outlet");
-const selectMenu = document.querySelector("#add-qr-menu");
-const selectFloor = document.querySelector("#add-qr-floor");
-const selectTable = document.querySelector("#add-qr-table tbody");
-
-// Populate Outlet Dropdown
-hotels.forEach((hotel) => {
-  const option = document.createElement("option");
-  option.value = hotel.name.trim();
-  option.textContent = hotel.name;
-  selectOutlet.appendChild(option);
+deleteAllEnable();
+//-----------------------------clicking of confirm delete button-----------------------------
+const deleteAllButton = document.querySelector(".delete-all-button");
+deleteAllButton.addEventListener("click", () => {
+  warningPopupEnable("delete");
+  document.querySelector("#delete-confirm").addEventListener("click", () => {
+    deleteRecords();
+    closeWarning();
+  });
 });
 
-// Handle Outlet Selection
-selectOutlet.addEventListener("change", function () {
-  const selectedOutlet = hotels.find(
-    (outlet) => outlet.name.trim() === this.value
+//-----------------------------delete records-----------------------------
+function deleteRecords() {
+  const checkedBoxes = document.querySelectorAll(
+    "#qr-code-table tbody input[type='checkbox']:checked"
   );
 
-  // Clear previous options
-  selectFloor.innerHTML = '<option value="">Select Floor</option>';
-  selectTable.innerHTML = ""; // Clear table selection as well
-  selectMenu.value = "";
+  checkedBoxes.forEach((checkbox) => {
+    const row = checkbox.closest("tr"); // Get the closest <tr>
+    if (row) {
+      row.remove();
+      deleteAllButton.style.visibility = "hidden";
+      deleteAllButton.style.opacity = 0;
 
-  if (selectedOutlet) {
-    selectMenu.value = selectedOutlet.menu; // Set menu value
+      selectAllCheckbox.checked = false;
+    }
+  });
+  noDataDisplay();
+  recordCount();
+}
 
-    selectedOutlet.floors.forEach((floor) => {
-      let option = document.createElement("option");
-      option.value = floor.name.trim();
-      option.textContent = floor.name;
-      selectFloor.appendChild(option);
-    });
+function noDataDisplay() {
+  const rows = document.querySelectorAll("#qr-code-table tbody tr");
 
-    selectFloor.disabled = false; // Enable floor dropdown
+  if (rows.length === 0) {
+    document.querySelector("#no-data").style.display = "flex"; // Show "No Data" message
   } else {
-    selectFloor.disabled = true;
+    document.querySelector("#no-data").style.display = "none"; // Hide "No Data" message
   }
-});
+}
 
-// Handle Floor Selection
-selectFloor.addEventListener("change", function () {
-  const selectedOutlet = hotels.find(
-    (outlet) => outlet.name.trim() === selectOutlet.value
+noDataDisplay();
+
+//----------------------------- adding records to table-----------------------------
+
+const templateCategorySubmit = document.querySelector("#qr-code-submit-button");
+
+templateCategorySubmit.addEventListener("click", () => {
+  // Taking inputs
+  const selectQRFor = document.querySelector("#qr-code-for").value.trim();
+
+  //dinein inputs
+  const dineinLanguage = document.querySelector("#d-language").value.trim();
+  const dineinOutlet = document.querySelector("#d-outlet").value.trim();
+  const dineinMenu = document.querySelector("#d-menu").value.trim();
+  const dineinFloor = document.querySelector("#d-floor").value.trim();
+  const checkedTables = document.querySelectorAll(
+    "#available-tables input[type='checkbox']:checked"
   );
 
-  if (!selectedOutlet) return;
+  // Get the label text for each selected checkbox
+  const selectedTables = Array.from(checkedTables).map((checkbox) => {
+    const label = checkbox.nextElementSibling; // Get the sibling label
+    return label ? label.innerText.trim() : "Unnamed Table";
+  });
 
-  const selectedFloor = selectedOutlet.floors.find(
-    (floor) => floor.name.trim() === this.value
+  //room service inputs
+
+  const roomServiceLanguage = document
+    .querySelector("#rs-language")
+    .value.trim();
+  const roomservicePostingMethod = document
+    .querySelector("#rs-posting-method")
+    .value.trim();
+
+  const roomServiceOutlets = document.querySelectorAll(
+    "#room-service-table tbody tr td:nth-child(2)"
   );
 
-  // Clear previous tables
-  selectTable.innerHTML = "";
+  //menu link inputs
 
-  if (selectedFloor) {
-    selectedFloor.tables.forEach((table) => {
-      let row = document.createElement("tr");
+  const menuLinkLanguage = document.querySelector("#ml-language").value.trim();
 
-      const inputTD = document.createElement("td");
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.id = `table-${table.tableNumber}`;
-      input.value = table.tableNumber;
+  const menuLinkOutlets = document.querySelectorAll(
+    "#menu-link-table tbody tr td:nth-child(2)"
+  );
 
-      inputTD.appendChild(input);
+  // Validation
 
-      const labelTD = document.createElement("td");
-      const label = document.createElement("label");
-      label.setAttribute("for", `table-${table.tableNumber}`);
-      label.textContent = `Table ${table.tableNumber}`;
-
-      labelTD.appendChild(label);
-
-      row.appendChild(inputTD);
-      row.appendChild(labelTD);
-
-      selectTable.appendChild(row);
-    });
-
-    selectTable.style.display = "table"; // Show the table if hidden
+  if (selectQRFor === "" || selectQRFor === "default") {
+    alert("Please Select a QR Option");
+    return;
   }
-});
 
-//populating QR Rate
-const rateNames = [
-  "Standard Rate",
-  "Discounted Rate",
-  "Peak Hour Rate",
-  "Member Rate",
-  "Wholesale Rate",
-  "Seasonal Rate",
-];
-
-const QRrateSelects = document.querySelectorAll(".rate-select");
-
-QRrateSelects.forEach((select) => {
-  rateNames.forEach((rate) => {
-    const option = document.createElement("option");
-    option.value = rate.trim();
-    option.textContent = rate;
-
-    select.appendChild(option);
-  });
-});
-
-// business sources
-// Business sources
-const foodDeliverySources = [
-  "Zomato",
-  "Swiggy",
-  "Uber Eats",
-  "DoorDash",
-  "Grubhub",
-];
-
-// Select the <tbody> once
-const BusinessSourceTables = document.querySelectorAll(
-  ".business-source-select-table tbody"
-);
-BusinessSourceTables.forEach((table) => {
-  foodDeliverySources.forEach((source) => {
-    const businessSourceRow = document.createElement("tr");
-
-    // Checkbox column
-    const busSrcChkTD = document.createElement("td");
-    const busSrcCheckbox = document.createElement("input");
-    busSrcCheckbox.type = "checkbox";
-    busSrcCheckbox.setAttribute(
-      "id",
-      source.toLowerCase().replace(/\s+/g, "-")
-    );
-    busSrcCheckbox.setAttribute("class", "checkbox-input");
-    busSrcChkTD.appendChild(busSrcCheckbox);
-
-    // Label column
-    const busSrcLabelTD = document.createElement("td");
-    const busSrcLabel = document.createElement("label");
-    busSrcLabel.setAttribute("for", source.replace(/\s+/g, "-"));
-    busSrcLabel.textContent = source;
-    busSrcLabelTD.appendChild(busSrcLabel);
-
-    // Append columns to row
-    businessSourceRow.appendChild(busSrcChkTD);
-    businessSourceRow.appendChild(busSrcLabelTD);
-
-    // Append row to tbody
-    table.appendChild(businessSourceRow);
-  });
-});
-
-// Payment methods
-const paymentOptions = [
-  "Credit Card",
-  "Debit Card",
-  "PayPal",
-  "Google Pay",
-  "Apple Pay",
-  "UPI",
-];
-
-// Select the tbody element where rows will be appended
-const paymentMethodTables = document.querySelectorAll(
-  ".payment-select-table tbody"
-);
-
-paymentMethodTables.forEach((table) => {
-  paymentOptions.forEach((option) => {
-    const paymentMethodTR = document.createElement("tr");
-
-    // For checkbox
-    const paymentCheckboxTD = document.createElement("td");
-    const paymentCheckbox = document.createElement("input");
-    paymentCheckbox.type = "checkbox";
-    paymentCheckbox.setAttribute("id", option.replace(/\s+/g, "-"));
-    paymentCheckbox.setAttribute("class", "checkbox-input");
-    paymentCheckboxTD.appendChild(paymentCheckbox);
-
-    // For label
-    const paymentMethodLabelTD = document.createElement("td");
-    const paymentMethodLabel = document.createElement("label");
-    paymentMethodLabel.setAttribute(
-      "for",
-      option.toLowerCase().replace(/\s+/g, "-")
-    );
-    paymentMethodLabel.textContent = option;
-    paymentMethodLabelTD.appendChild(paymentMethodLabel);
-
-    // Append checkbox and label columns to the row
-    paymentMethodTR.appendChild(paymentCheckboxTD);
-    paymentMethodTR.appendChild(paymentMethodLabelTD);
-
-    // Append row to tbody
-    table.appendChild(paymentMethodTR);
-  });
-});
-// Hour options
-const hours = [
-  "00",
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "21",
-  "22",
-  "23",
-];
-
-// Select all select elements with the id "select-hour"
-const selectHours = document.querySelectorAll(".select-hour");
-
-selectHours.forEach((selectHour) => {
-  // Loop through each hour and create an option element
-  hours.forEach((hour) => {
-    const hourOption = document.createElement("option");
-    hourOption.value = hour; // Set the value of the option
-    hourOption.innerText = hour; // Set the visible text of the option
-
-    // Append the option to the select element
-    selectHour.appendChild(hourOption);
-  });
-});
-
-// minute option
-const Minutes = [
-  "00",
-  "01",
-  "02",
-  "03",
-  "04",
-  "05",
-  "06",
-  "07",
-  "08",
-  "09",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-  "15",
-  "16",
-  "17",
-  "18",
-  "19",
-  "20",
-  "21",
-  "22",
-  "23",
-  "24",
-  "25",
-  "26",
-  "27",
-  "28",
-  "29",
-  "30",
-  "31",
-  "32",
-  "33",
-  "34",
-  "35",
-  "36",
-  "37",
-  "38",
-  "39",
-  "40",
-  "41",
-  "42",
-  "43",
-  "44",
-  "45",
-  "46",
-  "47",
-  "48",
-  "49",
-  "50",
-  "51",
-  "52",
-  "53",
-  "54",
-  "55",
-  "56",
-  "57",
-  "58",
-  "59",
-];
-const selectMinutes = document.querySelectorAll(".select-minute");
-
-selectMinutes.forEach((selectMinute) => {
-  Minutes.forEach((minute) => {
-    const minuteOption = document.createElement("option");
-    minuteOption.value = minute;
-    minuteOption.innerText = minute;
-
-    selectMinute.appendChild(minuteOption);
-  });
-});
-
-// const days = [
-//   "monday",
-//   "tuesday",
-//   "wednesday",
-//   "thursday",
-//   "friday",
-//   "saturday",
-//   "sunday",
-// ];
-
-// function setupDayToggle(day) {
-//   const dayCheckbox = document.querySelector(`#${day}`);
-//   const daySelectContainer = document.querySelector(
-//     `#${day} ~ .day-select .day-select-container`
-//   );
-//   const daySelectButton = document.querySelector(
-//     `#${day} ~ .day-select .day-select-buttons`
-//   );
-
-//   // Set initial state
-//   if (!dayCheckbox.checked) {
-//     daySelectButton.classList.add("disabled");
-//     daySelectContainer.style.display = "none";
-//   }
-
-//   // Checkbox change event
-//   dayCheckbox.addEventListener("change", () => {
-//     if (!dayCheckbox.checked) {
-//       daySelectButton.classList.add("disabled");
-//       daySelectContainer.style.display = "none";
-//     } else {
-//       daySelectButton.classList.remove("disabled");
-//     }
-//   });
-
-//   // Button click event
-//   daySelectButton.addEventListener("click", (event) => {
-//     event.preventDefault();
-//     if (dayCheckbox.checked) {
-//       const isExpanded =
-//         daySelectButton.getAttribute("aria-expanded") === "true";
-//       daySelectButton.setAttribute("aria-expanded", !isExpanded);
-//       daySelectContainer.style.display = isExpanded ? "none" : "grid";
-//     }
-//   });
-// }
-
-// Apply to all days
-// days.forEach(setupDayToggle);
-
-// QR Code submit button
-
-document
-  .querySelector("#qr-submit-button")
-  .addEventListener("click", (event) => {
-    event.preventDefault();
-
-    // Get form values
-    const QRCodeFor = document.querySelector("#qr-code").value.trim();
-    const outlet = document.querySelector("#add-qr-outlet").value.trim();
-    const menu = document.querySelector("#add-qr-menu").value.trim();
-    const floor = document.querySelector("#add-qr-floor").value.trim();
-
-    console.log("QRCodeFor:", QRCodeFor);
-    console.log("Outlet:", outlet);
-    console.log("Menu:", menu);
-    console.log("Floor:", floor);
-
-    // Validate mandatory fields
-    if (!QRCodeFor || !outlet || !menu || !floor) {
-      alert("Please fill in all mandatory fields before submitting.");
+  if (selectQRFor === "Dine In") {
+    if (dineinLanguage === "" || dineinLanguage === "default") {
+      alert("Please Select a language");
       return;
     }
 
-    function paymentCheck() {
-      const paymentTable = document.querySelector(
-        "#payment-method-table tbody"
-      );
-      const paymentCheckboxes = paymentTable.querySelector(
-        "input[type='checkbox']:checked"
-      );
-      return Array.from(paymentCheckboxes).some((checkbox) => checkbox.checked);
-    }
-
-    if (!paymentCheck()) {
-      alert("Select Atleast One Payment Method");
+    if (dineinOutlet === "" || dineinOutlet === "default") {
+      alert("Please Select an Outlet");
       return;
     }
 
-    // Get checked tables
+    if (dineinMenu === "" || dineinMenu === "default") {
+      alert("Please Select a Menu");
+      return;
+    }
+
+    if (dineinFloor === "" || dineinFloor === "default") {
+      alert("Please Select a Floor");
+      return;
+    }
+
     const checkedTables = document.querySelectorAll(
-      "#add-qr-table input[type='checkbox']:checked"
+      "#available-tables input[type='checkbox']:checked"
     );
-
-    console.log("Checked Tables:", checkedTables);
 
     if (checkedTables.length === 0) {
-      alert("Please select at least one table.");
+      alert("Please Select At Least One Table");
       return;
     }
 
-    // Get the table where QR details will be displayed
-    const addQRTable = document.querySelector("#qr-code-generator-table tbody");
+    const paymentMethods = document.querySelectorAll(
+      "#d-payment-method input[type = 'checkbox']:checked"
+    ).length;
+    if (paymentMethods === 0) {
+      alert("Please Select Atleast One Payment Method");
+      return;
+    }
 
-    checkedTables.forEach((table) => {
-      const tableName =
-        table.value || table.nextElementSibling.textContent.trim();
+    //for room service
+  } else if (selectQRFor === "Room Service") {
+    if (roomServiceLanguage === "" || roomServiceLanguage === "default") {
+      alert("Please Select One Language");
+      return;
+    }
 
-      // Create a new row for each selected table
+    if (
+      roomservicePostingMethod === "" ||
+      roomservicePostingMethod === "default"
+    ) {
+      alert("Please Select a Posting Method");
+      return;
+    }
+
+    const roomServiceMenuTableRows = document.querySelectorAll(
+      "#room-service-table tbody tr"
+    ).length;
+    if (roomServiceMenuTableRows === 0) {
+      alert("Please Add Atlease One Menu Configuration");
+      return;
+    }
+
+    //for menu link
+  } else if (selectQRFor === "Menu Link") {
+    if (menuLinkLanguage === "" || menuLinkLanguage === "default") {
+      alert("Please Select a Language ASsaS");
+      return;
+    }
+
+    const menuLinkMenuTableRows = document.querySelectorAll(
+      "#menu-link-table tbody tr"
+    ).length;
+    if (menuLinkMenuTableRows === 0) {
+      alert("Please Add Atlease One Menu Configuration");
+      return;
+    }
+  }
+
+  console.log("submitted");
+
+  // Populating the data
+
+  const tableBody = document.querySelector("#qr-code-table tbody");
+
+  if (selectQRFor === "Dine In") {
+    selectedTables.forEach((table) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-      <td>${QRCodeFor} [${floor} - Table ${tableName}]</td>
-      <td>${outlet}</td>
+      <td><input type="checkbox"/></td>
+      <td>${selectQRFor} [${dineinFloor} - ${table}]</td>
+      <td>${dineinOutlet}</td>
+  
       <td>
-        <button class="action-buttons edit-btn" title="Edit">
-          <span class="material-symbols-outlined"> edit </span>
+        <button class="active-button action-buttons" title="Status">
+          <span class="material-symbols-outlined">radio_button_checked</span>
         </button>
-        <button class="action-buttons delete-btn" title="Delete">
-          <span class="material-symbols-outlined"> delete </span>
+        <button class="edit-btn action-buttons" title="Edit">
+          <span class="material-symbols-outlined medium-icon">edit</span>
+        </button>
+        <button class="delete-btn action-buttons" title="Delete">
+          <span class="material-symbols-outlined medium-icon">delete</span>
         </button>
       </td>
     `;
-
-      addQRTable.appendChild(row);
+      tableBody.appendChild(row);
     });
+  } else if (selectQRFor === "Room Service") {
+    roomServiceOutlets.forEach((outlet) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="checkbox"/></td>
+        <td>${selectQRFor}</td>
+        <td>${outlet.textContent.trim()}</td>
+    
+        <td>
+          <button class="active-button action-buttons" title="Status">
+            <span class="material-symbols-outlined">radio_button_checked</span>
+          </button>
+          <button class="edit-btn action-buttons" title="Edit">
+            <span class="material-symbols-outlined medium-icon">edit</span>
+          </button>
+          <button class="delete-btn action-buttons" title="Delete">
+            <span class="material-symbols-outlined medium-icon">delete</span>
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  } else if (selectQRFor === "Menu Link") {
+    menuLinkOutlets.forEach((outlet) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="checkbox"/></td>
+        <td>${selectQRFor}</td>
+        <td>${outlet.textContent.trim()}</td>
+    
+        <td>
+          <button class="active-button action-buttons" title="Status">
+            <span class="material-symbols-outlined">radio_button_checked</span>
+          </button>
+          <button class="edit-btn action-buttons" title="Edit">
+            <span class="material-symbols-outlined medium-icon">edit</span>
+          </button>
+          <button class="delete-btn action-buttons" title="Delete">
+            <span class="material-symbols-outlined medium-icon">delete</span>
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
 
-    // Close the popup after successful submission
-    document.querySelector("#add-qr-overlay").style.display = "none";
-    document.querySelector("#add-qr-popup").style.display = "none";
+  mainPopupDisable();
+  deleteAllEnable();
+  recordCount();
+  noDataDisplay();
+});
 
-    // Reset form fields
-    document.querySelector("#add-qr-form").reset();
+//-----------------------------delete function for all delete buttons-----------------------------
+
+document
+  .querySelector("#qr-code-table tbody")
+  .addEventListener("click", (event) => {
+    if (event.target.closest(".delete-btn")) {
+      const checkedBoxes = document.querySelectorAll(
+        "#qr-code-table tbody input[type='checkbox']:checked"
+      ).length;
+
+      if (checkedBoxes === 0) {
+        alert("Select the record you want to delete");
+      } else {
+        deleteRecords();
+      }
+      mainSearch();
+    }
   });
+
+//-----------------------------buffer-----------------------------
+
+function recordCount() {
+  const rowLength = document.querySelectorAll("#qr-code-table tbody tr").length;
+  document.querySelector("#record-count").textContent = rowLength;
+}
+
+recordCount();

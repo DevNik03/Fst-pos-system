@@ -1,17 +1,83 @@
-//loader
+//----------------------------- header-----------------------------------
+//-----------------------------user option-----------------------------
 
-const loadingScreen = document.querySelector(".loading-screen");
-window.addEventListener("load", () => {
-  const loadingScreen = document.querySelector(".loading-screen");
-  if (loadingScreen) {
-    loadingScreen.remove(); // This removes it from the DOM completely
-  }
+const userbutton = document.querySelector(".username-button");
+const userOptions = document.querySelector(".user-options");
+const userOptionsOverlay = document.querySelector("#user-option-overlay");
+
+userbutton.addEventListener("click", () => {
+  userOptions.style.opacity = 1;
+  userOptions.style.visibility = "visible";
+  userOptionsOverlay.style.visibility = "visible";
 });
 
-// Select buttons
-const masterButton = document.querySelector(".master-btn");
-const menuButton = document.querySelector(".menu-btn");
-const settingButton = document.querySelector(".settings-btn");
+userOptionsOverlay.addEventListener("click", () => {
+  userOptions.style.opacity = 0;
+  userOptions.style.visibility = "hidden";
+  userOptionsOverlay.style.visibility = "hidden";
+});
+
+//----------------------------- Select warning popup elements-----------------------------
+const warningPopup = document.querySelector(".warning-popup");
+const warningOverlay = document.querySelector("#warning-overlay");
+const warningMessage = document.querySelector("#warning-message");
+const warningFooter = document.querySelector(".warning-popup-foot");
+
+// Function to show the warning popup
+function warningPopupEnable(actionType) {
+  warningPopup.style.opacity = 1;
+  warningPopup.style.visibility = "visible";
+  warningOverlay.style.opacity = 1;
+  warningOverlay.style.visibility = "visible";
+
+  // Set message based on action type
+  if (actionType === "logout") {
+    warningMessage.textContent = "Are you sure you want to logout?";
+    warningFooter.innerHTML = `
+      <button id="logout-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="logout-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  } else if (actionType === "delete") {
+    warningMessage.textContent = "Are you sure you want to delete?";
+    warningFooter.innerHTML = `
+      <button id="delete-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="delete-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  }
+}
+
+// Logout button event listener
+document.querySelector(".main-logout-button").addEventListener("click", () => {
+  warningPopupEnable("logout");
+});
+
+function closeWarning() {
+  warningPopup.style.opacity = 0;
+  warningPopup.style.visibility = "hidden";
+  warningOverlay.style.opacity = 0;
+  warningOverlay.style.visibility = "hidden";
+}
+
+// Use event delegation to close popup when clicking "No"
+document
+  .querySelector(".warning-popup-foot")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("warning-denied")) {
+      closeWarning();
+    }
+  });
+
+// Close popup when clicking outside of it
+warningOverlay.addEventListener("click", () => {
+  closeWarning();
+});
+
+//-----------------------------navbar-----------------------------
+
+//----------------------------- Select buttons-----------------------------
+const masterButton = document.querySelector("#master-button");
+const menuButton = document.querySelector("#menu-button");
+const settingButton = document.querySelector("#setting-button");
 
 // Add event listeners for buttons
 masterButton.addEventListener("click", () => {
@@ -41,30 +107,171 @@ settingButton.addEventListener("click", () => {
   menuButton.classList.remove("navbar-active-option");
 });
 
-// for import export menu
-
-const importExportMenuButton = document.querySelector(".options-button");
-const importExportMenu = document.querySelector(".import-export-options");
-const importExportMenuOverlay = document.querySelector(
-  ".import-export-overlay"
-);
-
-importExportMenuButton.addEventListener("click", () => {
-  importExportMenu.style.display = "flex";
-  importExportMenuOverlay.style.display = "flex";
+//scrollbar from bottom
+const bottomScroll = document.querySelector(".nav-container");
+document.addEventListener("DOMContentLoaded", () => {
+  bottomScroll.scrollTop = bottomScroll.scrollHeight;
 });
 
-importExportMenuOverlay.addEventListener("click", () => {
-  importExportMenu.style.display = "none";
-  importExportMenuOverlay.style.display = "none";
-});
-// rotate 180
+// -----------------------------main-----------------------------
 
-const sortDataElements = document.querySelectorAll(".sort-data"); // Select all sort-data elements
+//----------------------------- filterbar-----------------------------
+
+//------------------------------changing heading of the table dynamically-------------------------------------------------------
+
+const headingSelect = document.querySelector("#menu-or-on-off"); // Fixed invalid ID selector
+const tableHeading = document.querySelector(".table-header");
+
+const outletOnOffHeadings = [
+  "Source",
+  "On/Off",
+  "Response Time",
+  "Username",
+  "Response Status",
+  "Reason",
+];
+
+const menuHeadings = [
+  "Menu",
+  "Source",
+  "Last Synced at",
+  "Response Time",
+  "Response Status",
+];
+
+function tableHeadingChange() {
+  const selectedValue = headingSelect.value.trim();
+
+  // 🔥 Clear previous table headers
+  tableHeading.innerHTML = "";
+
+  const tr = document.createElement("tr");
+  const headings =
+    selectedValue === "Outlet On/Off" ? outletOnOffHeadings : menuHeadings;
+
+  headings.forEach((heading) => {
+    const th = document.createElement("th");
+    th.textContent = heading;
+    tr.appendChild(th);
+  });
+
+  tableHeading.appendChild(tr);
+}
+
+// Initialize table headers on page load
+tableHeadingChange();
+
+// Update headers when dropdown selection changes
+headingSelect.addEventListener("change", tableHeadingChange);
+
+//populating outlets select--------------------------------------------
+const outlets = [
+  "The Gourmet Spot",
+  "Savory Bites",
+  "Golden Spoon",
+  "Urban Tandoor",
+  "Flavors of Italy",
+  "Spice Symphony",
+  "The Seafood Shack",
+  "Grill House",
+  "Fusion Feast",
+  "The Cozy Café",
+  "Taco Haven",
+  "Sushi Delight",
+  "The Vegan Table",
+  "Firewood Steakhouse",
+  "Pasta Palace",
+];
+
+const outletSelect = document.querySelector("#select-outlet");
+
+outlets.forEach((outlet) => {
+  const option = document.createElement("option");
+  option.value = outlet.trim();
+  option.textContent = outlet.trim();
+
+  outletSelect.appendChild(option);
+});
+
+//populating sources select--------------------------------------------
+const sources = [
+  "Zomato",
+  "Swiggy",
+  "Uber Eats",
+  "DoorDash",
+  "Grubhub",
+  "Postmates",
+  "Deliveroo",
+  "Foodpanda",
+  "Talabat",
+  "Dunzo",
+  "Glovo",
+  "Instacart",
+  "Seamless",
+  "GoPuff",
+  "EatSure",
+  "Box8",
+];
+
+const sourceSelect = document.querySelector("#select-source");
+
+sources.forEach((outlet) => {
+  const option = document.createElement("option");
+  option.value = outlet.trim();
+  option.textContent = outlet.trim();
+
+  sourceSelect.appendChild(option);
+});
+
+//----------------------------searchbar-----------------------------------------------------
+
+const mainSearchBar = document.querySelector("#online-ordering-search");
+const noRecordsMessage = document.querySelector("#no-records");
+
+mainSearchBar.addEventListener("input", () => {
+  mainSearch();
+});
+
+function mainSearch() {
+  const searchValue = mainSearchBar.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll(
+    "#online-ordering-table tbody tr"
+  );
+
+  let matchFound = false;
+
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
+  }
+}
+
+//-----------------------------main container-----------------------------
+//----------------------------- rotate icon-----------------------------
+const sortDataElements = document.querySelectorAll(".sort-icon"); // Select all sort-data elements
 
 sortDataElements.forEach((sortData) => {
   sortData.addEventListener("click", () => {
-    // Toggle the rotate-180 class on the icon inside the clicked sortData
     const icon = sortData.querySelector(".rotate-icon");
     if (icon) {
       icon.classList.toggle("rotate-180");
@@ -72,135 +279,59 @@ sortDataElements.forEach((sortData) => {
   });
 });
 
-$(document).ready(function () {
-  $("#on-and-off-table").DataTable({
-    paging: false, // Disable pagination (entries per page)
-    searching: false, // Disable search bar
-    info: false, // Disable "Showing 1 to X of Y entries" info text
-    ordering: true, // Enable sorting
-    order: [], // Prevent default sorting on page load
-    language: {
-      emptyTable: "", // Hide 'No data available in table'
-      zeroRecords: "", // Hide 'No matching records found'
-      infoEmpty: "", // Hide 'Showing 0 to 0 of 0 entries'
-      infoFiltered: "", // Hide 'filtered from X total entries'
-    },
+// -----------------------------table sorting-----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.querySelector("#online-ordering-table");
+  const headers = table.querySelectorAll("th");
+
+  headers.forEach((header, columnIndex) => {
+    header.addEventListener("click", () => {
+      sortTable(table, columnIndex);
+    });
   });
-});
 
-const searchBar = document.querySelector("#online-ordering-search");
-searchBar.addEventListener("input", () => {
-  const searchValue = searchBar.value.trim().toLowerCase();
-  const tableRows = document.querySelectorAll("#on-and-off-table tbody tr");
-  let hasVisibleRows = false;
+  function sortTable(table, columnIndex) {
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const isAscending = table.dataset.sortOrder === "asc";
 
-  tableRows.forEach((row) => {
-    let isMatch = false;
-    row.querySelectorAll("td").forEach((data) => {
-      if (data.textContent.trim().toLowerCase().includes(searchValue)) {
-        isMatch = true;
-      }
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.children[columnIndex].textContent.trim().toLowerCase();
+      const cellB = rowB.children[columnIndex].textContent.trim().toLowerCase();
+
+      return isAscending
+        ? cellA.localeCompare(cellB, undefined, { numeric: true })
+        : cellB.localeCompare(cellA, undefined, { numeric: true });
     });
 
-    if (isMatch) {
-      row.style.display = "";
-      hasVisibleRows = true;
-    } else {
-      row.style.display = "none";
-    }
-  });
+    table.dataset.sortOrder = isAscending ? "desc" : "asc"; // Toggle sort order
 
-  // Handle "No data" message correctly
-  const noDataMessage = document.querySelector("#no-records");
-  noDataMessage.style.display = hasVisibleRows ? "none" : "flex";
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const tableRows = document.querySelectorAll("#on-and-off-table tbody tr");
-  const noDataMessage = document.querySelector("#no-data");
-
-  if (tableRows.length === 0) {
-    noDataMessage.style.display = "block"; // Show message if no rows
-  } else {
-    noDataMessage.style.display = "none"; // Hide message if rows are present
+    tbody.innerHTML = "";
+    rows.forEach((row) => tbody.appendChild(row)); // Append sorted rows back to the table
   }
 });
 
-// select business sources
+//no data display
 
-const businessSources = [
-  "Swiggy",
-  "Zomato",
-  "EatSure",
-  "Uber Eats",
-  "Domino's",
-  "McDonald's",
-  "Pizza Hut",
-  "KFC",
-  "Burger King",
-  "Faasos",
-  "Subway",
-  "Dunzo",
-  "Blinkit",
-  "Zepto",
-  "BigBasket",
-  "FreshMenu",
-  "Box8",
-  "MojoPizza",
-  "Behrouz Biryani",
-  "Oven Story",
-];
+function noDataDisplay() {
+  const rows = document.querySelectorAll("#online-ordering-table tbody tr");
 
-const selectSource = document.querySelector("#select-source");
+  if (rows.length === 0) {
+    document.querySelector("#no-data").style.display = "flex"; // Show "No Data" message
+  } else {
+    document.querySelector("#no-data").style.display = "none"; // Hide "No Data" message
+  }
+}
 
-businessSources.forEach((source) => {
-  const option = document.createElement("option");
-  option.value = source.toLowerCase().trim();
-  option.textContent = source;
+noDataDisplay();
 
-  selectSource.appendChild(option);
-});
+//-----------------------------buffer-----------------------------
 
-// select outlet
+function recordCount() {
+  const rowLength = document.querySelectorAll(
+    "#online-ordering-table tbody tr"
+  ).length;
+  document.querySelector("#record-count").textContent = rowLength;
+}
 
-const restaurants = [
-  "Barbeque Nation",
-  "The Cheesecake Factory",
-  "Olive Garden",
-  "Buffalo Wild Wings",
-  "TGI Fridays",
-  "The Capital Grille",
-  "Morton's The Steakhouse",
-  "Texas Roadhouse",
-  "Outback Steakhouse",
-  "P.F. Chang's",
-  "Benihana",
-  "Shake Shack",
-  "Five Guys",
-  "In-N-Out Burger",
-  "Hard Rock Cafe",
-  "IHOP",
-  "Denny's",
-  "Cracker Barrel",
-  "The Table",
-  "Yauatcha",
-  "Bukhara",
-  "Indian Accent",
-  "Gajalee",
-  "Karavalli",
-  "The Bombay Canteen",
-  "Farzi Cafe",
-  "Social",
-  "Smoke House Deli",
-  "Mamagoto",
-  "Jamavar",
-];
-
-const selectOutlet = document.querySelector("#select-outlet");
-restaurants.forEach((restaurant) => {
-  const option = document.createElement("option");
-  option.value = restaurant.toLowerCase().trim();
-  option.textContent = restaurant;
-
-  selectOutlet.appendChild(option);
-});
+recordCount();

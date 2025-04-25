@@ -1,17 +1,83 @@
-//loader
+//----------------------------- header-----------------------------------
+//-----------------------------user option-----------------------------
 
-const loadingScreen = document.querySelector(".loading-screen");
-window.addEventListener("load", () => {
-  const loadingScreen = document.querySelector(".loading-screen");
-  if (loadingScreen) {
-    loadingScreen.remove(); // This removes it from the DOM completely
-  }
+const userbutton = document.querySelector(".username-button");
+const userOptions = document.querySelector(".user-options");
+const userOptionsOverlay = document.querySelector("#user-option-overlay");
+
+userbutton.addEventListener("click", () => {
+  userOptions.style.opacity = 1;
+  userOptions.style.visibility = "visible";
+  userOptionsOverlay.style.visibility = "visible";
 });
 
-// Select buttons
-const masterButton = document.querySelector(".master-btn");
-const menuButton = document.querySelector(".menu-btn");
-const settingButton = document.querySelector(".settings-btn");
+userOptionsOverlay.addEventListener("click", () => {
+  userOptions.style.opacity = 0;
+  userOptions.style.visibility = "hidden";
+  userOptionsOverlay.style.visibility = "hidden";
+});
+
+//----------------------------- Select warning popup elements-----------------------------
+const warningPopup = document.querySelector(".warning-popup");
+const warningOverlay = document.querySelector("#warning-overlay");
+const warningMessage = document.querySelector("#warning-message");
+const warningFooter = document.querySelector(".warning-popup-foot");
+
+// Function to show the warning popup
+function warningPopupEnable(actionType) {
+  warningPopup.style.opacity = 1;
+  warningPopup.style.visibility = "visible";
+  warningOverlay.style.opacity = 1;
+  warningOverlay.style.visibility = "visible";
+
+  // Set message based on action type
+  if (actionType === "logout") {
+    warningMessage.textContent = "Are you sure you want to logout?";
+    warningFooter.innerHTML = `
+      <button id="logout-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="logout-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  } else if (actionType === "delete") {
+    warningMessage.textContent = "Are you sure you want to delete?";
+    warningFooter.innerHTML = `
+      <button id="delete-confirm" class="warning-popup-buttons warning-confirm">Yes</button>
+      <button id="delete-denied" class="warning-popup-buttons warning-denied">No</button>
+    `;
+  }
+}
+
+// Logout button event listener
+document.querySelector(".main-logout-button").addEventListener("click", () => {
+  warningPopupEnable("logout");
+});
+
+function closeWarning() {
+  warningPopup.style.opacity = 0;
+  warningPopup.style.visibility = "hidden";
+  warningOverlay.style.opacity = 0;
+  warningOverlay.style.visibility = "hidden";
+}
+
+// Use event delegation to close popup when clicking "No"
+document
+  .querySelector(".warning-popup-foot")
+  .addEventListener("click", (event) => {
+    if (event.target.classList.contains("warning-denied")) {
+      closeWarning();
+    }
+  });
+
+// Close popup when clicking outside of it
+warningOverlay.addEventListener("click", () => {
+  closeWarning();
+});
+
+//-----------------------------navbar-----------------------------
+
+//----------------------------- Select buttons-----------------------------
+const masterButton = document.querySelector("#master-button");
+const menuButton = document.querySelector("#menu-button");
+const settingButton = document.querySelector("#setting-button");
 
 // Add event listeners for buttons
 masterButton.addEventListener("click", () => {
@@ -41,73 +107,132 @@ settingButton.addEventListener("click", () => {
   menuButton.classList.remove("navbar-active-option");
 });
 
-// add payment popup close button
+// -----------------------------main-----------------------------
 
-const popupEnableButton = document.querySelector(".popup-enable-button");
-const popupCloseButton = document.querySelector(".close-popup-btn");
-const popup = document.querySelector(".tax-option-popup");
-const overlay = document.querySelector(".popup-overlay");
-const Form = document.querySelector("#tax-form");
-const scrollableArea = document.querySelector(".popup-main");
+//----------------------------- titlebar-----------------------------
+// opening main popup
 
-function openPopup() {
-  popup.style.display = "grid";
-  overlay.style.display = "flex";
-  scrollableArea.scrollTop = 0;
+const taxOverlay = document.querySelector("#tax-overlay");
+const taxPopup = document.querySelector("#tax-popup");
+const taxForm = document.querySelector("#tax-form");
+const taxPopupAdd = document.querySelector("#tax-open");
+const taxPopupClose = document.querySelector("#tax-close");
+
+function mainPopupEnable() {
+  taxPopup.style.visibility = "visible";
+  taxPopup.style.opacity = 1;
+
+  taxOverlay.style.visibility = "visible";
+  taxOverlay.style.opacity = 1;
+
+  taxForm.scrollTop = 0;
 }
 
-function closePopup() {
-  popup.style.display = "none";
-  overlay.style.display = "none";
-  Form.reset();
+function mainPopupDisable() {
+  taxPopup.style.visibility = "hidden";
+  taxPopup.style.opacity = 0;
+
+  taxOverlay.style.visibility = "hidden";
+  taxOverlay.style.opacity = 0;
+
+  taxForm.reset();
 }
 
-popupEnableButton.addEventListener("click", () => {
-  openPopup();
+taxPopupAdd.addEventListener("click", () => {
+  mainPopupEnable();
 });
 
-popupCloseButton.addEventListener("click", () => {
-  closePopup();
+taxPopupClose.addEventListener("click", () => {
+  mainPopupDisable();
 });
 
-// for import export menu
-
-const importExportMenuButton = document.querySelector(".options-button");
-const importExportMenu = document.querySelector(".import-export-options");
-const importExportMenuOverlay = document.querySelector(
-  ".import-export-overlay"
-);
-
-importExportMenuButton.addEventListener("click", () => {
-  importExportMenu.style.display = "flex";
-  importExportMenuOverlay.style.display = "flex";
+taxOverlay.addEventListener("click", () => {
+  mainPopupDisable();
 });
 
-importExportMenuOverlay.addEventListener("click", () => {
-  importExportMenu.style.display = "none";
-  importExportMenuOverlay.style.display = "none";
+// //image preview container
+// const imageInput = document.getElementById("item-group-image");
+// const imagePreview = document.getElementById("imagePreview");
+
+// imageInput.addEventListener("change", function (event) {
+//   const file = event.target.files[0]; // Get the selected file
+
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = function (e) {
+//       imagePreview.src = e.target.result; // Set image source
+//       imagePreview.style.display = "block"; // Show the image
+//     };
+//     reader.readAsDataURL(file);
+//   } else {
+//     // If no file is selected, hide the preview
+//     imagePreview.src = "";
+//     imagePreview.style.display = "none";
+//   }
+// });
+
+//----------------------------- filterbar-----------------------------
+
+const mainSearchBar = document.querySelector("#tax-search");
+const noRecordsMessage = document.querySelector("#no-records");
+
+mainSearchBar.addEventListener("input", () => {
+  mainSearch();
 });
 
-// delete record button
+function mainSearch() {
+  const searchValue = mainSearchBar.value.toLowerCase().trim();
+  const tableRows = document.querySelectorAll("#tax-table tbody tr");
 
-const checkbox = document.querySelector("#delete-record-checkbox");
-const deleteRecordBtn = document.querySelector(".delete-records-button");
+  let matchFound = false;
 
-checkbox.addEventListener("change", () => {
-  if (checkbox.checked) {
-    deleteRecordBtn.style.display = "flex";
-  } else {
-    deleteRecordBtn.style.display = "none";
+  tableRows.forEach((row) => {
+    let isMatch = false;
+    const tableDatas = row.querySelectorAll("td");
+
+    tableDatas.forEach((data) => {
+      if (data.textContent.toLowerCase().trim().includes(searchValue)) {
+        isMatch = true;
+      }
+    });
+
+    if (isMatch) {
+      row.style.display = "";
+      matchFound = true; // Set matchFound to true if any row is visible
+    } else {
+      row.style.display = "none";
+    }
+  });
+
+  // Show "No Records Found" message only if no matches were found
+  noRecordsMessage.style.display = matchFound ? "none" : "flex";
+
+  if (searchValue === "") {
+    noRecordsMessage.style.display = "none";
   }
+}
+//----------------------------- import export menu-----------------------------
+
+const importExportOverlay = document.querySelector("#import-export-overlay");
+const importExportMenu = document.querySelector(".import-export-menu");
+const importExportButton = document.querySelector("#import-export-add");
+
+importExportButton.addEventListener("click", () => {
+  importExportMenu.style.right = "0px";
+  importExportOverlay.style.visibility = "visible";
 });
 
-// rotate 180
+importExportOverlay.addEventListener("click", () => {
+  importExportMenu.style.right = "-300px";
+  importExportOverlay.style.visibility = "hidden";
+});
 
-const sortDataElements = document.querySelectorAll(".sort-data"); // Select all sort-data elements
+//-----------------------------main container-----------------------------
+//----------------------------- rotate icon-----------------------------
+const sortDataElements = document.querySelectorAll(".sort-icon"); // Select all sort-data elements
 
 sortDataElements.forEach((sortData) => {
   sortData.addEventListener("click", () => {
-    // Toggle the rotate-180 class on the icon inside the clicked sortData
     const icon = sortData.querySelector(".rotate-icon");
     if (icon) {
       icon.classList.toggle("rotate-180");
@@ -115,149 +240,197 @@ sortDataElements.forEach((sortData) => {
   });
 });
 
-$(document).ready(function () {
-  $("#tax-table").DataTable({
-    paging: false, // Disable pagination (entries per page)
-    searching: false, // Disable search bar
-    info: false, // Disable "Showing 1 to X of Y entries" info text
-    ordering: true, // Enable sorting
-    order: [], // Prevent default sorting on page load
-    language: {
-      emptyTable: "", // Hide 'No data available in table'
-      zeroRecords: "", // Hide 'No matching records found'
-      infoEmpty: "", // Hide 'Showing 0 to 0 of 0 entries'
-      infoFiltered: "", // Hide 'filtered from X total entries'
-    },
+// -----------------------------table sorting-----------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  const table = document.querySelector("#tax-table");
+  const headers = table.querySelectorAll("th");
+
+  headers.forEach((header, columnIndex) => {
+    header.addEventListener("click", () => {
+      sortTable(table, columnIndex);
+    });
   });
-});
 
-// searchbar
-const searchBar = document.querySelector("#tax-search");
-searchBar.addEventListener("input", () => {
-  const searchValue = searchBar.value.trim().toLowerCase();
-  const tableRows = document.querySelectorAll("#tax-table tbody tr");
-  let hasVisibleRows = false;
+  function sortTable(table, columnIndex) {
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const isAscending = table.dataset.sortOrder === "asc";
 
-  tableRows.forEach((row) => {
-    let isMatch = false;
-    row.querySelectorAll("td").forEach((data) => {
-      if (data.textContent.trim().toLowerCase().includes(searchValue)) {
-        isMatch = true;
-      }
+    rows.sort((rowA, rowB) => {
+      const cellA = rowA.children[columnIndex].textContent.trim().toLowerCase();
+      const cellB = rowB.children[columnIndex].textContent.trim().toLowerCase();
+
+      return isAscending
+        ? cellA.localeCompare(cellB, undefined, { numeric: true })
+        : cellB.localeCompare(cellA, undefined, { numeric: true });
     });
 
-    if (isMatch) {
-      row.style.display = "";
-      hasVisibleRows = true;
-    } else {
-      row.style.display = "none";
+    table.dataset.sortOrder = isAscending ? "desc" : "asc"; // Toggle sort order
+
+    tbody.innerHTML = "";
+    rows.forEach((row) => tbody.appendChild(row)); // Append sorted rows back to the table
+  }
+});
+
+//-----------------------------delete all checkbox-----------------------------
+
+const selectAllCheckbox = document.querySelector("#select-all-checkbox");
+
+selectAllCheckbox.addEventListener("change", () => {
+  const tableRows = document.querySelectorAll("#tax-table tbody tr");
+
+  tableRows.forEach((row) => {
+    const checkbox = row.querySelector("input[type='checkbox']");
+    if (checkbox) {
+      checkbox.checked = selectAllCheckbox.checked;
     }
   });
-
-  // Handle "No data" message correctly
-  const noDataMessage = document.querySelector("#no-records");
-  noDataMessage.style.display = hasVisibleRows ? "none" : "flex";
+  deleteAllEnable();
+  noDataDisplay();
 });
 
-function checkEmptyTable() {
-  const tableRows = document.querySelectorAll("#tax-table tbody tr");
-  const noDataMessage = document.querySelector("#no-data");
+//----------------------------- delete all button display-----------------------------
 
-  if (tableRows.length === 0) {
-    noDataMessage.style.display = "block"; // Show message if no rows
+function deleteAllEnable() {
+  const deleteAllButton = document.querySelector(".delete-all-button");
+  const allCheckboxes = document.querySelectorAll(
+    "#tax-table tr input[type='checkbox']"
+  );
+
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        deleteAllButton.style.visibility = "visible";
+        deleteAllButton.style.opacity = 1;
+      } else {
+        deleteAllButton.style.visibility = "hidden";
+        deleteAllButton.style.opacity = 0;
+      }
+    });
+  });
+}
+
+deleteAllEnable();
+//-----------------------------clicking of confirm delete button-----------------------------
+const deleteAllButton = document.querySelector(".delete-all-button");
+deleteAllButton.addEventListener("click", () => {
+  warningPopupEnable("delete");
+  document.querySelector("#delete-confirm").addEventListener("click", () => {
+    deleteRecords();
+    closeWarning();
+  });
+});
+
+//-----------------------------delete records-----------------------------
+function deleteRecords() {
+  const checkedBoxes = document.querySelectorAll(
+    "#tax-table tbody input[type='checkbox']:checked"
+  );
+
+  checkedBoxes.forEach((checkbox) => {
+    const row = checkbox.closest("tr"); // Get the closest <tr>
+    if (row) {
+      row.remove();
+      deleteAllButton.style.visibility = "hidden";
+      deleteAllButton.style.opacity = 0;
+
+      selectAllCheckbox.checked = false;
+    }
+  });
+  noDataDisplay();
+  recordCount();
+}
+
+function noDataDisplay() {
+  const rows = document.querySelectorAll("#tax-table tbody tr");
+
+  if (rows.length === 0) {
+    document.querySelector("#no-data").style.display = "flex"; // Show "No Data" message
   } else {
-    noDataMessage.style.display = "none"; // Hide message if rows are present
+    document.querySelector("#no-data").style.display = "none"; // Hide "No Data" message
   }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  checkEmptyTable();
-});
 
-// Function to submit form and add data to table
-function submitForm() {
-  let taxNameInput = document.querySelector("#tax-name");
-  let taxName = taxNameInput.value.trim();
-  const tableBody = document.querySelector("#tax-table tbody");
+noDataDisplay();
 
-  // Validation: Check if tax name is empty
+//----------------------------- adding records to table-----------------------------
+
+const taxSubmit = document.querySelector("#tax-submit-button");
+
+taxSubmit.addEventListener("click", () => {
+  // Taking inputs
+  const taxName = document.querySelector("#tax-name").value.trim();
+
+  // Validation for session name
   if (taxName === "") {
-    taxNameInput.style.border = "1px solid red";
-    return;
-  } else {
-    taxNameInput.style.border = ""; // Reset border if valid input
-  }
-
-  // Prevent duplicate entries
-  if (
-    document.querySelector(
-      `#tax-table tbody label[for="${taxName.toLowerCase()}"]`
-    )
-  ) {
-    alert("This tax name already exists!");
+    alert("Please Enter Tax");
     return;
   }
 
-  // Create a new row and append it to the table
-  let row = document.createElement("tr");
+  // Check for duplicates
+  const existingValues = document.querySelectorAll(
+    "#tax-table tbody tr td:nth-child(2)"
+  );
+
+  let isDuplicate = Array.from(existingValues).some(
+    (cell) => cell.textContent.trim().toLowerCase() === taxName.toLowerCase()
+  );
+
+  if (isDuplicate) {
+    alert("Tax already exists!");
+    return;
+  }
+
+  // Populating the data
+  const tableBody = document.querySelector("#tax-table tbody");
+  const row = document.createElement("tr");
   row.innerHTML = `
-    <td><input id="${taxName.toLowerCase()}" type="checkbox"/></td>
-    <td><label for="${taxName.toLowerCase()}">${taxName}</label></td>
-    <td> 
-       <button class="action-buttons edit-btn" title="Edit">
-        <span class="material-symbols-outlined"> edit </span>
+    <td><input type="checkbox"/></td>
+    <td>${taxName}</td>
+    <td>
+      <button class="active-button action-buttons" title="Status">
+        <span class="material-symbols-outlined">radio_button_checked</span>
       </button>
-      <button class="action-buttons delete-btn" title="Delete">
-        <span class="material-symbols-outlined"> delete </span>
+      <button class="edit-btn action-buttons" title="Edit">
+        <span class="material-symbols-outlined medium-icon">edit</span>
+      </button>
+      <button class="delete-btn action-buttons" title="Delete">
+        <span class="material-symbols-outlined medium-icon">delete</span>
       </button>
     </td>
   `;
   tableBody.appendChild(row);
 
-  // Clear input field after adding the row
-  taxNameInput.value = "";
-
-  // Close the popup
-  closePopup();
-}
-
-// Event listener for submit button
-document.querySelector(".popup-save-btn").addEventListener("click", (event) => {
-  event.preventDefault();
-  submitForm();
+  mainPopupDisable();
+  deleteAllEnable();
+  recordCount();
+  noDataDisplay();
 });
 
-// Event listener for "Edit" and "Delete" buttons (Event Delegation)
+//-----------------------------delete function for all delete buttons-----------------------------
+
 document
   .querySelector("#tax-table tbody")
-  .addEventListener("click", function (event) {
-    let target = event.target.closest("button");
-    if (!target) return; // Ignore clicks outside buttons
+  .addEventListener("click", (event) => {
+    if (event.target.closest(".delete-btn")) {
+      const checkedBoxes = document.querySelectorAll(
+        "#tax-table tbody input[type='checkbox']:checked"
+      ).length;
 
-    let row = target.closest("tr");
-
-    if (target.classList.contains("delete-btn")) {
-      // Delete Row
-      row.remove();
+      if (checkedBoxes === 0) {
+        alert("Select the record you want to delete");
+      } else {
+        deleteRecords();
+      }
+      mainSearch();
     }
   });
 
-// Select the "Delete All" checkbox
-const deleteAllCheckbox = document.querySelector("#delete-record-checkbox");
+//-----------------------------buffer-----------------------------
 
-// Add event listener to toggle all checkboxes
-deleteAllCheckbox.addEventListener("change", function () {
-  const allCheckboxes = document.querySelectorAll(
-    "#tax-table tbody input[type='checkbox']"
-  );
+function recordCount() {
+  const rowLength = document.querySelectorAll("#tax-table tbody tr").length;
+  document.querySelector("#record-count").textContent = rowLength;
+}
 
-  allCheckboxes.forEach((checkbox) => {
-    checkbox.checked = deleteAllCheckbox.checked;
-  });
-});
-
-const deletebutton = document.querySelector(".delete-records-button");
-deletebutton.addEventListener("click", () => {
-  tbody = document.querySelector("#tax-table tbody");
-  tbody.innerHTML = "";
-  checkEmptyTable();
-});
+recordCount();

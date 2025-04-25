@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sliding Sidebar</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 60px;
+        background-color: #2f3542;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+      }
+
+      .sidebar button {
+        width: 40px;
+        height: 40px;
+        margin: 10px 0;
+        background-color: #57606f;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .sidebar button:hover {
+        background-color: #747d8c;
+      }
+
+      /* Flyout Panel */
+      .panel {
+        width: 200px;
+        background-color: #dfe4ea;
+        padding: 15px;
+        display: none;
+        flex-direction: column;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .panel.active {
+        display: flex;
+      }
+
+      .panel h3 {
+        margin-top: 0;
+        font-size: 18px;
+        color: #2f3542;
+      }
+
+      .panel a {
+        margin: 8px 0;
+        text-decoration: none;
+        color: #2f3542;
+        padding: 8px;
+        border-radius: 5px;
+        transition: background 0.2s;
+      }
+
+      .panel a:hover {
+        background-color: #ced6e0;
+      }
+
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Icon Sidebar -->
+    <div class="sidebar">
+      <button onclick="openPanel('master')">M</button>
+      <button onclick="openPanel('menu')">N</button>
+      <button onclick="openPanel('settings')">S</button>
+    </div>
+
+    <!-- Panels -->
+    <div class="panel" id="master-panel">
+      <h3>Master</h3>
+      <a href="#">Users</a>
+      <a href="#">Roles</a>
+      <a href="#">Outlets</a>
+    </div>
+
+    <div class="panel" id="menu-panel">
+      <h3>Menu</h3>
+      <a href="#">Items</a>
+      <a href="#">Categories</a>
+      <a href="#">Modifiers</a>
+    </div>
+
+    <div class="panel" id="settings-panel">
+      <h3>Settings</h3>
+      <a href="#">Preferences</a>
+      <a href="#">Security</a>
+      <a href="#">Payments</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <h1>Dashboard</h1>
+      <p>Click the icons in the sidebar to see options.</p>
+    </div>
+
+    <script>
+      function openPanel(panelName) {
+        // Hide all panels first
+        document.querySelectorAll(".panel").forEach((panel) => {
+          panel.classList.remove("active");
+        });
+
+        // Show the selected one
+        document.getElementById(`${panelName}-panel`).classList.add("active");
+      }
+    </script>
+  </body>
+</html>

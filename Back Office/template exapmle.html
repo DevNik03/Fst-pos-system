@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Template Builder</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .tag {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      .tag:hover {
+        background-color: #007bff;
+        color: white;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Create Your Dynamic SMS Template</h2>
+
+      <!-- Input where the dynamic template will be built -->
+      <input
+        type="text"
+        id="templateInput"
+        placeholder="Create your message here..."
+      />
+
+      <!-- Container with dynamic tags -->
+      <div class="tags-container">
+        <div class="tag" data-tag="{date}">{date}</div>
+        <div class="tag" data-tag="{time}">{time}</div>
+        <div class="tag" data-tag="{guestname}">{guestname}</div>
+        <div class="tag" data-tag="{waitername}">{waitername}</div>
+        <div class="tag" data-tag="{table}">{table}</div>
+        <div class="tag" data-tag="{order_total}">{order_total}</div>
+        <div class="tag" data-tag="{restaurant_name}">{restaurant_name}</div>
+      </div>
+    </div>
+
+    <script>
+      const templateInput = document.getElementById("templateInput");
+      const tags = document.querySelectorAll(".tag");
+
+      tags.forEach((tag) => {
+        tag.addEventListener("click", () => {
+          const tagText = tag.getAttribute("data-tag");
+          insertAtCursor(templateInput, tagText); // Insert tag at cursor position
+        });
+      });
+
+      // Function to insert text at the cursor position in the input field
+      function insertAtCursor(input, textToInsert) {
+        const start = input.selectionStart;
+        const end = input.selectionEnd;
+
+        // Insert the tag at the cursor position and retain any existing text
+        const currentText = input.value;
+        input.value =
+          currentText.slice(0, start) + textToInsert + currentText.slice(end);
+
+        // Move the cursor to the right after inserting the text
+        input.setSelectionRange(
+          start + textToInsert.length,
+          start + textToInsert.length
+        );
+
+        // Focus back on the input field
+        input.focus();
+      }
+    </script>
+  </body>
+</html>

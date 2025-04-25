@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Management</title>
+    <style>
+      .container {
+        margin: 20px;
+      }
+
+      .row {
+        padding: 10px;
+        margin: 5px 0;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      #breadcrumb {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      .breadcrumb-item {
+        color: blue;
+        cursor: pointer;
+      }
+
+      .breadcrumb-item:not(:last-child)::after {
+        content: " > ";
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="breadcrumb">
+      <span class="breadcrumb-item" id="breadcrumb-outlet">Select Outlet</span>
+    </div>
+
+    <div id="outlet" class="container">
+      <h3>Select Outlet</h3>
+      <div class="row" data-outlet="Outlet 1">Outlet 1</div>
+      <div class="row" data-outlet="Outlet 2">Outlet 2</div>
+      <div class="row" data-outlet="Outlet 3">Outlet 3</div>
+    </div>
+
+    <div id="floor" class="container hidden">
+      <h3>Select Floor</h3>
+      <div class="row" data-floor="Floor A">Floor A</div>
+      <div class="row" data-floor="Floor B">Floor B</div>
+    </div>
+
+    <div id="table" class="container hidden">
+      <h3>Select Table</h3>
+      <div class="row">Table 1</div>
+      <div class="row">Table 2</div>
+    </div>
+
+    <script>
+      const outletContainer = document.querySelector("#outlet");
+      const floorContainer = document.querySelector("#floor");
+      const tableContainer = document.querySelector("#table");
+      const breadcrumb = document.querySelector("#breadcrumb");
+
+      const outletBreadcrumb = document.createElement("span");
+      const floorBreadcrumb = document.createElement("span");
+
+      // Event: Selecting Outlet
+      document.querySelectorAll("#outlet .row").forEach((outletRow) => {
+        outletRow.addEventListener("click", () => {
+          const outletName = outletRow.innerText;
+
+          // Update breadcrumb
+          outletBreadcrumb.innerText = `${outletName} -> Select Floor`;
+          outletBreadcrumb.classList.add("breadcrumb-item");
+          breadcrumb.appendChild(outletBreadcrumb);
+
+          // Toggle containers
+          outletContainer.classList.add("hidden");
+          floorContainer.classList.remove("hidden");
+        });
+      });
+
+      // Event: Clicking on Outlet Name in Breadcrumb (Go Back)
+      outletBreadcrumb.addEventListener("click", () => {
+        floorContainer.classList.add("hidden");
+        outletContainer.classList.remove("hidden");
+        breadcrumb.removeChild(outletBreadcrumb); // Remove breadcrumb step
+      });
+
+      // Event: Selecting Floor
+      document.querySelectorAll("#floor .row").forEach((floorRow) => {
+        floorRow.addEventListener("click", () => {
+          const floorName = floorRow.innerText;
+
+          // Update breadcrumb
+          floorBreadcrumb.innerText = `-> ${floorName} -> Select Table`;
+          floorBreadcrumb.classList.add("breadcrumb-item");
+          breadcrumb.appendChild(floorBreadcrumb);
+
+          // Toggle containers
+          floorContainer.classList.add("hidden");
+          tableContainer.classList.remove("hidden");
+        });
+      });
+
+      // Event: Clicking on Floor Name in Breadcrumb (Go Back)
+      floorBreadcrumb.addEventListener("click", () => {
+        tableContainer.classList.add("hidden");
+        floorContainer.classList.remove("hidden");
+        breadcrumb.removeChild(floorBreadcrumb); // Remove breadcrumb step
+      });
+    </script>
+  </body>
+</html>
