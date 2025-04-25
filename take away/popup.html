@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Takeaway</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="business-source-overlay"></div>
+    <div class="namaste"><button id="popup-enable-btn">clickme</button></div>
+    <!-- popup-start -->
+    <div class="pop-up">
+      <!-- popup-head -->
+      <div class="popup-header">
+        <h1>Order Information</h1>
+        <button id="pop-up-close-btn">
+          <img src="close.png" alt="" />
+        </button>
+      </div>
+      <!-- popup-main -->
+      <div class="popup-main-content">
+        <h4>Guest Details</h4>
+        <!-- popup-head search bar-->
+        <div class="popup-searchbar">
+          <div class="search-input">
+            <input type="text" id="guest-search" placeholder=" " />
+            <label for="guest-search"
+              >Enter Guest Name, Mobile, Phone, or Email</label
+            >
+          </div>
+          <button><span>Search</span></button>
+        </div>
+        <!-- popup-head guest info-->
+        <div class="popup-guest-data">
+          <div class="guest-name">
+            <input type="text" id="guest-name" placeholder=" " />
+            <label for="guest-name">Guest Name</label>
+          </div>
+          <div class="mobile-no">
+            <input type="text" id="mobile-num" placeholder=" " />
+            <label for="mobile-num">Mobile Number</label>
+          </div>
+          <div id="business-source-popup-generator" class="business-source">
+            <input
+              type="text"
+              id="guest-name"
+              placeholder="Select Business Source"
+            /><button class="business-source-button">
+              <img src="business source.png" alt="" />
+            </button>
+            <label for="guest-name">Business Source</label>
+          </div>
+          <div class="guest-reference">
+            <input type="text" id="reference#" placeholder=" " />
+            <label for="reference#">Reference#</label>
+          </div>
+        </div>
+      </div>
+      <!-- popup-footer -->
+      <div class="popup-footer">
+        <button><span>Save</span></button>
+      </div>
+    </div>
+    <!-- business-source-popup -->
+    <div class="business-source-popup">
+      <!-- business-source-popup head-->
+      <div class="business-source-popup-header">
+        <h4>Select Business Source</h4>
+        <button id="business-source-close-btn"><img src="close.png" /></button>
+      </div>
+      <!-- business-source-popup searchbar-->
+      <div class="business-source-popup-searchbar">
+        <div class="business-source-popup-searchbar-container">
+          <img src="search.png" />
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div class="business-source-selection">
+        <div class="business-source-selection-container">
+          <div class="select-source">
+            <button class="business-source-btn">
+              <input type="radio" id="sel-source" value="name" />
+              <label for="sel-source">Select Business Source</label>
+            </button>
+          </div>
+          <div class="business-sources">
+            <button class="business-source-btn">
+              <input type="radio" id="business-src" value="-businessname" />
+              <label for="business-src">Kumar</label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

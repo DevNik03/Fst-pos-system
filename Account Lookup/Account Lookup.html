@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account Lookup</title>
-    <link rel="stylesheet" href="Account Lookup.css" />
+    <link rel="stylesheet" href="account lookup.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
@@ -66,7 +66,7 @@
             <span class="material-symbols-outlined"> lock_open_right </span>
             <p>Change Password</p>
           </button>
-          <button class="popover-buttons">
+          <button id="switch-to-back-btn" class="popover-buttons">
             <span class="material-symbols-outlined"> undo </span>
             <p>Switch To Back</p>
           </button>
@@ -101,25 +101,25 @@
             <p>Ordering</p>
           </div>
           <div class="navbar-container">
-            <button class="navbar-buttons">
+            <button id="dine-in-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> restaurant </span>
               <p>Dine In</p>
             </button>
-            <button id="take-away-button" class="navbar-buttons">
+            <button id="take-away-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> takeout_dining </span>
               <p>Take Away</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="delivery-manager-btn" class="navbar-buttons">
               <span class="material-symbols-outlined">
                 delivery_truck_speed
               </span>
               <p>Delivery Manager</p>
             </button>
-            <button id="no-charge-button" class="navbar-buttons">
+            <button id="no-charge-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> money_off </span>
               <p>No Charge</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="order-summary-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> receipt_long </span>
               <p>Order Summary</p>
             </button>
@@ -131,43 +131,43 @@
             <p>Manager</p>
           </div>
           <div class="navbar-container">
-            <button class="navbar-buttons">
+            <button id="dashboard-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> dashboard </span>
               <p>Dashboard</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="reports-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> query_stats </span>
               <p>Reports</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="account-lookup-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> assignment_ind </span>
               <p>Account Lookup</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="transaction-lock-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> receipt_long_off </span>
               <p>Transaction Lock</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="blocked-device-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> app_blocking </span>
               <p>Blocked Devices</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="shift-manager-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> manage_accounts </span>
               <p>Shift Manager</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="day-close-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> calendar_month </span>
               <p>Day Close</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="no-sale-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> point_of_sale </span>
               <p>No Sale</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="expense-voucher-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> arrow_circle_up </span>
               <p>Expense Voucher</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="income-voucher-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> arrow_circle_down </span>
               <p>Income Voucher</p>
             </button>
@@ -179,11 +179,11 @@
             <p>Other</p>
           </div>
           <div class="navbar-container">
-            <button class="navbar-buttons">
+            <button id="item-lookup-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> manage_search </span>
               <p>Item Lookup</p>
             </button>
-            <button class="navbar-buttons">
+            <button id="guest-database-btn" class="navbar-buttons">
               <span class="material-symbols-outlined"> groups </span>
               <p>Guest Database</p>
             </button>
@@ -348,6 +348,6 @@
       <div id="order-info-footer" class="popup-footer"></div>
     </div> 
 
-    <script src="Account Lookup.js"></script>
+    <script src="account lookup.js"></script>
   </body>
 </html>

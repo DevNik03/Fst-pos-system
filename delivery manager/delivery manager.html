@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Manager</title>
+    <link rel="stylesheet" href="delivery manager.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"
+    />
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <button id="navbar-enable-button" class="header-buttons">
+          <span class="material-symbols-outlined"> widgets </span>
+        </button>
+        <div class="page-heading">
+          <p>Delivery Manager</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button
+          id="guest-info-enable"
+          class="header-buttons"
+          title="Add Delivery"
+        >
+          <span class="material-symbols-outlined"> person_add </span>
+        </button>
+        <button class="header-buttons" title="Online Ordering Status">
+          <span class="material-symbols-outlined"> phone_android </span>
+        </button>
+        <button class="header-buttons" title="Latest Updates">
+          <span class="material-symbols-outlined"> campaign </span>
+        </button>
+        <button class="header-buttons" onclick="openSelectionPopup('outlet')">
+          <span class="material-symbols-outlined"> store </span>
+          <p>Outlet Name</p>
+        </button>
+        <button id="popover-enable" class="header-buttons">
+          <span class="material-symbols-outlined"> person </span>
+          <p>username</p>
+        </button>
+
+        <!-- popover -->
+        <div id="popover-overlay" class="navbar-overlay"></div>
+        <div class="popover">
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> lock_open_right </span>
+            <p>Change Password</p>
+          </button>
+          <button id="switch-to-back-btn" class="popover-buttons">
+            <span class="material-symbols-outlined"> undo </span>
+            <p>Switch To Back</p>
+          </button>
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> business_center </span>
+            <p>Know Your Plan</p>
+          </button>
+          <button class="popover-buttons">
+            <span class="material-symbols-outlined"> power_settings_new </span>
+            <p>Logout</p>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="navbar-overlay" class="navbar-overlay"></div>
+    <nav>
+      <div class="nav-searchbar">
+        <button class="search-button">
+          <span class="material-icons-outlined"> search </span>
+        </button>
+        <input
+          id="navbar-search"
+          class="search-input"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+      <div class="navbar-main">
+        <div id="navbar-ordering" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Ordering</p>
+          </div>
+          <div class="navbar-container">
+            <button id="dine-in-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> restaurant </span>
+              <p>Dine In</p>
+            </button>
+            <button id="take-away-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> takeout_dining </span>
+              <p>Take Away</p>
+            </button>
+            <button id="delivery-manager-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined">
+                delivery_truck_speed
+              </span>
+              <p>Delivery Manager</p>
+            </button>
+            <button id="no-charge-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> money_off </span>
+              <p>No Charge</p>
+            </button>
+            <button id="order-summary-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> receipt_long </span>
+              <p>Order Summary</p>
+            </button>
+          </div>
+        </div>
+
+        <div id="navbar-manager" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Manager</p>
+          </div>
+          <div class="navbar-container">
+            <button id="dashboard-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> dashboard </span>
+              <p>Dashboard</p>
+            </button>
+            <button id="reports-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> query_stats </span>
+              <p>Reports</p>
+            </button>
+            <button id="account-lookup-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> assignment_ind </span>
+              <p>Account Lookup</p>
+            </button>
+            <button id="transaction-lock-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> receipt_long_off </span>
+              <p>Transaction Lock</p>
+            </button>
+            <button id="blocked-device-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> app_blocking </span>
+              <p>Blocked Devices</p>
+            </button>
+            <button id="shift-manager-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> manage_accounts </span>
+              <p>Shift Manager</p>
+            </button>
+            <button id="day-close-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> calendar_month </span>
+              <p>Day Close</p>
+            </button>
+            <button id="no-sale-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> point_of_sale </span>
+              <p>No Sale</p>
+            </button>
+            <button id="expense-voucher-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> arrow_circle_up </span>
+              <p>Expense Voucher</p>
+            </button>
+            <button id="income-voucher-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> arrow_circle_down </span>
+              <p>Income Voucher</p>
+            </button>
+          </div>
+        </div>
+
+        <div id="navbar-other" class="navbar-options">
+          <div class="navbar-heading">
+            <p>Other</p>
+          </div>
+          <div class="navbar-container">
+            <button id="item-lookup-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> manage_search </span>
+              <p>Item Lookup</p>
+            </button>
+            <button id="guest-database-btn" class="navbar-buttons">
+              <span class="material-symbols-outlined"> groups </span>
+              <p>Guest Database</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-----------main---------------------->
+    <!----------------- delivery-info-main container --------------------->
+    <main id="delivery-info-main">
+      <div class="main-filterbar">
+        <div class="main-action-buttons">
+          <button class="status-button" title="All Orders">
+            All
+            <span id="all-orders-badge" class="badge">
+              <p>0</p>
+            </span>
+          </button>
+          <button
+            class="status-button active-status-button"
+            title="Preparing Orders"
+          >
+            Preparing
+            <span id="preparing-orders-badge" class="badge">
+              <p>0</p>
+            </span>
+          </button>
+          <button class="status-button" title="Dispatched Orders">
+            Dispatched
+            <span id="dispatched-orders-badge" class="badge">
+              <p>0</p>
+            </span>
+          </button>
+          <button class="status-button" title="Completed Orders">
+            Completed
+            <span id="completed-orders-badge" class="badge">
+              <p>0</p>
+            </span>
+          </button>
+        </div>
+        <div class="main-searchbar">
+          <button class="search-button">
+            <span class="material-icons-outlined"> search </span>
+          </button>
+          <input
+            id="delivery-info-search"
+            class="search-input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+      </div>
+
+      <div class="main-container">
+        <div id="no-data" class="table-warning">
+          <h2>No Data Available!</h2>
+        </div>
+        <div id="no-records" class="table-warning">
+          <h2>No Records Available!</h2>
+        </div>
+        <table id="delivery-manager-table" class="main-table">
+          <thead>
+            <tr>
+              <th id="order-number">
+                <p class="sort-icon">
+                  Order No
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-time">
+                <p class="sort-icon">
+                  Date
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-reciept-no">
+                <p class="sort-icon">
+                  Time
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="rt-No">
+                <p class="sort-icon">
+                  Location
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-type">
+                <p class="sort-icon">
+                  Amount
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-guest-name">
+                <p class="sort-icon">
+                  Payment Status
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-user">
+                <p class="sort-icon">
+                  Order Status
+                  <span class="material-symbols-outlined rotate-icon">
+                    arrow_drop_down
+                  </span>
+                </p>
+              </th>
+              <th id="order-status">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#12345</td>
+              <td>2025-02-19</td>
+              <td>14:30</td>
+              <td>New York</td>
+              <td>$120.00</td>
+              <td>Paid</td>
+              <td>Processing</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12346</td>
+              <td>2025-02-18</td>
+              <td>12:15</td>
+              <td>Los Angeles</td>
+              <td>$85.50</td>
+              <td>Unpaid</td>
+              <td>Pending</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12347</td>
+              <td>2025-02-17</td>
+              <td>09:45</td>
+              <td>Chicago</td>
+              <td>$150.00</td>
+              <td>Paid</td>
+              <td>Completed</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12348</td>
+              <td>2025-02-16</td>
+              <td>16:30</td>
+              <td>Houston</td>
+              <td>$200.25</td>
+              <td>Paid</td>
+              <td>Shipped</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12349</td>
+              <td>2025-02-15</td>
+              <td>18:00</td>
+              <td>Miami</td>
+              <td>$95.75</td>
+              <td>Unpaid</td>
+              <td>Processing</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12350</td>
+              <td>2025-02-14</td>
+              <td>20:10</td>
+              <td>San Francisco</td>
+              <td>$175.00</td>
+              <td>Paid</td>
+              <td>Delivered</td>
+              <td>View</td>
+            </tr>
+            <tr>
+              <td>#12351</td>
+              <td>2025-02-13</td>
+              <td>08:20</td>
+              <td>Seattle</td>
+              <td>$210.00</td>
+              <td>Paid</td>
+              <td>Completed</td>
+              <td>View</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!----------------- delivery- guest info-main container --------------------->
+    <main id="delivery-guest-info" class="disable-main">
+      <div class="delivery-guest-filterbar">
+        <div class="guest-searchbar">
+          <button class="search-button">
+            <span class="material-icons-outlined"> search </span>
+          </button>
+          <input
+            id="navbar-search"
+            class="search-input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <!-- <button class="add-guest-button">
+          <span class="material-symbols-outlined"> person_add </span>
+          <p>Add New Guest</p>
+        </button> -->
+      </div>
+      <div class="delivery-guest-info-main">
+        <form class="guest-info-form">
+          <div class="form-container">
+            <div class="heading">
+              <p>Guest Details</p>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-name"
+                  placeholder=" "
+                />
+                <label for="guest-name">Guest Name</label>
+              </div>
+
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="email"
+                  id="email"
+                  placeholder=" "
+                />
+                <label for="email">Email</label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-phone"
+                  placeholder=" "
+                />
+                <label for="guest-phone">Phone No.</label>
+              </div>
+
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-mobile"
+                  placeholder=" "
+                />
+                <label for="guest-mobile">Mobile No.</label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-pincode"
+                  placeholder=" "
+                />
+                <label for="guest-pincode">Pincode</label>
+              </div>
+
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-city"
+                  placeholder=" "
+                />
+                <label for="guest-city">City</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                class="text-input"
+                type="text"
+                id="guest-address"
+                placeholder=" "
+              />
+              <label for="guest-address">Address</label>
+            </div>
+
+            <div class="form-group">
+              <input
+                class="text-input"
+                type="text"
+                id="guest-remark"
+                placeholder=" "
+              />
+              <label for="guest-remark">Remark</label>
+            </div>
+
+            <div class="form-group">
+              <input
+                class="text-input"
+                type="text"
+                id="expected-time"
+                placeholder=" "
+                value="30"
+              />
+              <label for="expected-time">Expected Time</label>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-phone"
+                  placeholder=" "
+                />
+                <label for="guest-phone">Phone No.</label>
+              </div>
+
+              <div class="form-group">
+                <input
+                  class="text-input"
+                  type="text"
+                  id="guest-reference#"
+                  placeholder=" "
+                />
+                <label for="guest-reference#">Reference#</label>
+              </div>
+            </div>
+          </div>
+          <div class="guest-form-buttons">
+            <button
+              id="back-to-delivery-page"
+              class="guest-button"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button id="clear-guest-form" class="guest-button" type="button">
+              Clear Form
+            </button>
+            <button id="place-order-button" class="guest-button" type="button">
+              Place Order
+            </button>
+          </div>
+        </form>
+        <div class="past-orders-info">
+          <div class="heading">
+            <p>Past Orders</p>
+          </div>
+          <div id="past-order-container" class="main-container">
+            <table id="past-orders-table" class="main-table">
+              <thead>
+                <tr>
+                  <th>#Order</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Outlet</th>
+                  <th>Source</th>
+                  <th>Driver/Waiter</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1001</td>
+                  <td>2025-02-19</td>
+                  <td>$50.00</td>
+                  <td>Outlet A</td>
+                  <td>Online</td>
+                  <td>John Doe</td>
+                </tr>
+                <tr>
+                  <td>1002</td>
+                  <td>2025-02-19</td>
+                  <td>$75.00</td>
+                  <td>Outlet B</td>
+                  <td>Walk-in</td>
+                  <td>Jane Smith</td>
+                </tr>
+                <tr>
+                  <td>1003</td>
+                  <td>2025-02-19</td>
+                  <td>$120.00</td>
+                  <td>Outlet C</td>
+                  <td>Phone Order</td>
+                  <td>Michael Lee</td>
+                </tr>
+                <tr>
+                  <td>1004</td>
+                  <td>2025-02-19</td>
+                  <td>$30.00</td>
+                  <td>Outlet D</td>
+                  <td>Online</td>
+                  <td>Sarah Connor</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-left">
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> calendar_month </span>
+          <p>18-02-2025</p>
+        </button>
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> person_pin_circle </span>
+          <p>username</p>
+        </button>
+        <button class="footer-buttons">
+          <span class="material-symbols-outlined"> desktop_windows </span>
+          <p>Terminal Name</p>
+        </button>
+      </div>
+      <div class="footer-right">
+        <button class="footer-buttons" title="Market Place">
+          <span class="material-symbols-outlined"> settings </span>
+          <p>Market Place</p>
+        </button>
+        <button class="footer-buttons" title="Help Center">
+          <span class="material-symbols-outlined"> help </span>
+          <p>Help Center</p>
+        </button>
+      </div>
+    </footer>
+
+    <!------------------- POPUPS -------------------------->
+    <div id="selection-popup-overlay" class="overlay"></div>
+
+    <div id="selection-popup" class="popup">
+      <div class="popup-header">
+        <h4 class="selection-popup-heading"></h4>
+        <button id="selection-popup-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+
+      <form
+        id="selection-popup-form"
+        class="popup-main-container selection-popup-scroll"
+      >
+        <div class="popup-search">
+          <button class="search-button">
+            <span class="material-icons-outlined"> search </span>
+          </button>
+          <input
+            id="selection-popup-search"
+            class="search-input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div class="popup-container">
+          <ul class="main-ul"></ul>
+        </div>
+      </form>
+    </div>
+
+    <!-----------------logout popup---------------------------------->
+    <div id="warning-popup-overlay" class="overlay"></div>
+    <div id="warning-popup" class="popup">
+      <div id="warning-header" class="popup-header">
+        <div class="warning">
+          <span id="warning-icon" class="material-symbols-outlined">
+            warning
+          </span>
+          <p id="warning-heading"></p>
+        </div>
+        <button id="warning-popup-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <div id="warning-main" class="popup-main">
+        <p id="warning-message"></p>
+      </div>
+      <div id="warning-footer" class="popup-footer"></div>
+    </div>
+    <!---------------------------- important popups --------------------->
+    <!---------------------------- take away popup --------------------->
+    <div id="order-information-overlay" class="overlay"></div>
+    <div id="order-information-popup" class="popup">
+      <div class="popup-header">
+        <h4 class="selection-popup-heading">Order Information</h4>
+        <button id="order-information-close" class="close-popup-btn">
+          <span class="material-icons-outlined"> close </span>
+        </button>
+      </div>
+      <form id="order-information-form" class="popup-main"></form>
+      <div id="order-info-footer" class="popup-footer">
+        <button id="order-info-submit" class="footer-buttons save-button">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <script src="delivery manager.js"></script>
+  </body>
+</html>

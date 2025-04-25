@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="expense voucher.css" />
+    <title>Expense Voucher</title>
+  </head>
+  <body>
+    <nav>
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <div class="user-dropdown">
+            <div class="user-dropdown-button">
+              <button id="user-btn-activate" class="toolbar-btns">
+                <img src="/images/menu.png" />
+              </button>
+            </div>
+            <div
+              id="userDropdown-container"
+              class="user-dropdown-container userDropdown-container-hide"
+            >
+              <div class="user-dropdown-container-top-btns">
+                <div class="user-dropdown-container-heading">
+                  <h1>menu</h1>
+                </div>
+                <button class="user-btns">
+                  <img src="/images/password.png" /><span>Change password</span>
+                </button>
+                <button class="user-btns">
+                  <img src="/images/download-2.png" /><span>Download App</span>
+                </button>
+                <button class="user-btns">
+                  <img src="/images/settings.png" /><span>Switch To Back</span>
+                </button>
+              </div>
+              <div class="user-dropdown-container-bottom-btns">
+                <button class="user-btns">
+                  <img src="/images/logout.png" /><span>Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar-left-logo">
+            <button><img src="/images/fst no-bg.png" /></button>
+          </div>
+          <div class="page-title"><h1>EXPENSE VOUCHER</h1></div>
+          <div class="toolbar-left-buttons">
+            <button class="toolbar-btns">
+              <img src="/images/online order.png" />
+            </button>
+            <button class="toolbar-btns">
+              <img src="/images/megaphone.png" />
+            </button>
+          </div>
+        </div>
+        <div class="toolbar-right">
+          <div class="toolbar-right-buttons">
+            <div class="expense-voucher-add">
+              <button class="toolbar-right-add-btn">
+                <img src="/images/add table.png" />
+              </button>
+            </div>
+            <div class="toolbar-right-outlet-btn">
+              <button class="toolbar-btns">
+                <img src="/images/outlet.png" alt="" /><span>Outlet</span>
+              </button>
+            </div>
+            <div class="toolbar-right-user-name-btn">
+              <button class="toolbar-btns">
+                <img src="/images/user.png" alt="" /><span>User Name</span>
+              </button>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-menu-button">
+                <button id="menu-btn-activate" class="toolbar-btns">
+                  <img src="/images/grid.png" />
+                </button>
+              </div>
+              <div
+                id="menu-container"
+                class="dropdown-menu-container dropdown-menu-hide"
+              >
+                <div class="menu-searchbar">
+                  <div class="menu-searchbar-container">
+                    <img src="/images/search.png" />
+                    <input type="text" placeholder="Search" />
+                  </div>
+                </div>
+                <div class="menu-ordering">
+                  <h4>Ordering</h4>
+
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                </div>
+                <div class="menu-manager">
+                  <h4>Ordering</h4>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                </div>
+                <div class="menu-others">
+                  <h4>Ordering</h4>
+
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                  <button class="menu-options">
+                    <a href=""
+                      ><img src="/images/dine.png" /><span>dinein</span></a
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="filter-bar">
+        <div class="filter-bar-date">
+          <div class="filter-bar-date-container">
+            <span>Date</span>
+            <img src="/images/calendar.png" />
+          </div>
+        </div>
+        <div class="filter-bar-search">
+          <div class="fb-search-container">
+            <img src="/images/search.png" />
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
+        <div class="filter-bar-select-account">
+          <p>Select Account</p>
+          <button class="select-acc-btn">
+            <img src="/images/business source.png" />
+          </button>
+        </div>
+      </div>
+      <div class="expense-voucher-left">
+        <div class="expense-voucher-left-overlay-text">
+          <span>No Records Found!</span>
+        </div>
+        <div class="expense-voucher-left-heading">
+          <button class="expense-voucher-left-heading">
+            <img src="/images/reports.png" /><span>All</span>
+          </button>
+        </div>
+        <div class="expense-voucher-left-main"></div>
+      </div>
+      <div class="expense-voucher-invoice">
+        <div class="expense-voucher-invoice-overlay-text">
+          <span>No Records Found!</span>
+        </div>
+      </div>
+
+      <div class="expense-voucher-overlay">
+        <div class="expense-voucher-overlay-top">
+          <div class="expense-voucher-overlay-left">
+            <div class="invoice-header">
+              <h1>New</h1>
+              <div class="invoice-header-top">
+                <div class="invoice-date">
+                  <div class="date"></div>
+                  <button class="invoice-date-btn">
+                    <img src="/images/calendar.png" />
+                  </button>
+                </div>
+                <div class="expense-account">
+                  <span>Expense Account</span>
+                  <p>Select Account</p>
+                  <img src="/images/business source.png" />
+                </div>
+                <div class="reference">
+                  <input type="text" id="ev-reference" placeholder=" " />
+                  <label id="ev-reference">Reference No</label>
+                </div>
+              </div>
+              <div class="invoice-header-bottom">
+                <div class="remark">
+                  <input type="text" id="ev-remark" placeholder=" " />
+                  <label id="ev-remark">Remark</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="expense-voucher-invoice-bottom">
+              <div class="extra-charge-section">
+                <h1>Extra Charge</h1>
+                <div class="extra-charge-table-head">
+                  <table class="extra-charge-table">
+                    <thead>
+                      <td id="extra-charge-head">Extra Charge</td>
+                      <td id="price-head">Price</td>
+                      <td id="discount-head">Discount</td>
+                      <td id="tax-head">Tax</td>
+                      <td id="adjustments-head">Adjustment</td>
+                      <td id="total-head">Total</td>
+                      <td id="remark-head">Remark</td>
+                      <td id="delete-head">
+                        <div><button></button></div>
+                      </td>
+                    </thead>
+                    <tbody>
+                      <tr class="tr-kitchen-materials">
+                        <td id="extra-charge">
+                          <div class="extra-charge-categories">
+                            <span> kitchen materials </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="price">
+                          <div class="extra-charge-price">
+                            <input
+                              class="etra-charge-price-input"
+                              autocomplete="off"
+                              value="10.00"
+                            />
+                          </div>
+                        </td>
+                        <td id="discount">
+                          <div class="extra-charge-discount">
+                            <button class="ec-disc-btn">
+                              <img src="/images/account lookup.png" /></button
+                            ><input value="0" />
+                          </div>
+                        </td>
+                        <td id="tax">
+                          <div class="extra-charge-tax">
+                            <span> Select Tax </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="adjustments">
+                          <div class="extra-charge-adjustments">
+                            <button onclick="changeImage()" class="ec-adj-btn">
+                              <img
+                                id="adj"
+                                src="/images/account lookup.png"
+                              /></button
+                            ><input value="20.00" />
+                          </div>
+                        </td>
+                        <td id="total">
+                          <div class="extra-charge-total">100</div>
+                        </td>
+                        <td id="remark">
+                          <div class="extra-charge-remark">
+                            <input type="text" />
+                          </div>
+                        </td>
+                        <td id="delete">
+                          <div class="extra-charge-delete">
+                            <button
+                              id="kitcherMaterials-delete-btn"
+                              class="expense-voucher-delete-btn"
+                            >
+                              <img src="/images/expense voucher delete.png" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tr-Misc-Expenses">
+                        <td id="extra-charge">
+                          <div class="extra-charge-categories">
+                            <span> Misc-Expenses </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="price">
+                          <div class="extra-charge-price">
+                            <input
+                              class="etra-charge-price-input"
+                              autocomplete="off"
+                              value="10.00"
+                            />
+                          </div>
+                        </td>
+                        <td id="discount">
+                          <div class="extra-charge-discount">
+                            <button class="ec-disc-btn">
+                              <img src="/images/account lookup.png" /></button
+                            ><input value="0" />
+                          </div>
+                        </td>
+                        <td id="tax">
+                          <div class="extra-charge-tax">
+                            <span> Select Tax </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="adjustments">
+                          <div class="extra-charge-adjustments">
+                            <button class="ec-adj-btn">
+                              <img src="/images/account lookup.png" /></button
+                            ><input value="20.00" />
+                          </div>
+                        </td>
+                        <td id="total">
+                          <div class="extra-charge-total">100</div>
+                        </td>
+                        <td id="remark">
+                          <div class="extra-charge-remark">
+                            <input type="text" />
+                          </div>
+                        </td>
+                        <td id="delete">
+                          <div class="extra-charge-delete">
+                            <button class="expense-voucher-delete-btn">
+                              <img src="/images/expense voucher delete.png" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tr-office-expenses">
+                        <td id="extra-charge">
+                          <div class="extra-charge-categories">
+                            <span> OfficeExpenses </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="price">
+                          <div class="extra-charge-price">
+                            <input
+                              class="etra-charge-price-input"
+                              autocomplete="off"
+                              value="10.00"
+                            />
+                          </div>
+                        </td>
+                        <td id="discount">
+                          <div class="extra-charge-discount">
+                            <button class="ec-disc-btn">
+                              <img src="/images/account lookup.png" /></button
+                            ><input value="0" />
+                          </div>
+                        </td>
+                        <td id="tax">
+                          <div class="extra-charge-tax">
+                            <span> Select Tax </span>
+                            <img src="/images/business source.png" />
+                          </div>
+                        </td>
+                        <td id="adjustments">
+                          <div class="extra-charge-adjustments">
+                            <button class="ec-adj-btn">
+                              <img src="/images/account lookup.png" /></button
+                            ><input value="20.00" />
+                          </div>
+                        </td>
+                        <td id="total">
+                          <div class="extra-charge-total">100</div>
+                        </td>
+                        <td id="remark">
+                          <div class="extra-charge-remark">
+                            <input type="text" />
+                          </div>
+                        </td>
+                        <td id="delete">
+                          <div class="extra-charge-delete">
+                            <button class="expense-voucher-delete-btn">
+                              <img src="/images/expense voucher delete.png" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- <div class="extra-charge-table-data">
+                  <table>
+                    <tr>
+                      <td id="extra-charge">
+                        <div class="extra-charge-categories">
+                          <span> kitchen materials </span>
+                          <img src="/images/business source.png" />
+                        </div>
+                      </td>
+                      <td id="price">
+                        <div class="extra-charge-price">
+                          <input
+                            class="etra-charge-price-input"
+                            autocomplete="off"
+                            value="10.00"
+                          />
+                        </div>
+                      </td>
+                      <td id="discount">
+                        <div class="extra-charge-discount">
+                          <button class="ec-disc-btn">
+                            <img src="/images/account lookup.png" /></button
+                          ><input value="0" />
+                        </div>
+                      </td>
+                      <td id="tax">
+                        <div class="extra-charge-tax">
+                          <span> Select Tax </span>
+                          <img src="/images/business source.png" />
+                        </div>
+                      </td>
+                      <td id="adjustments">
+                        <div class="extra-charge-adjustments">
+                          <button class="ec-adj-btn">
+                            <img src="/images/account lookup.png" /></button
+                          ><input value="20.00" />
+                        </div>
+                      </td>
+                      <td id="total">
+                        <div class="extra-charge-total">100</div>
+                      </td>
+                      <td id="remark">
+                        <div class="extra-charge-remark">
+                          <input type="text" />
+                        </div>
+                      </td>
+                      <td id="delete">
+                        <div class="extra-charge-delete">
+                          <button class="expense-voucher-delete-btn">
+                            <img src="/images/expense voucher delete.png" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div> -->
+              </div>
+              <div class="expense-voucher-invoice-bottom-buttons">
+                <button class="add-ex-charge">
+                  <img src="/images/add table.png" /><span
+                    >Add Extra Charge</span
+                  >
+                </button>
+
+                <button class="add-ex-payment">
+                  <img src="/images/add table.png" /><span>Add Payment</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="expense-voucher-overlay-right">
+            <div class="expense-voucher-right-invoice-breakup">
+              <div class="expense-voucher-right-invoice-breakup-divs">
+                <div>
+                  <span>Extra Charge</span>
+                  <span>0.00</span>
+                </div>
+                <div>
+                  <span>Discount</span>
+                  <span>0.00</span>
+                </div>
+                <div>
+                  <span>Tax</span>
+                  <span>0.00</span>
+                </div>
+                <div>
+                  <span>Adjustment</span>
+                  <span>0.00</span>
+                </div>
+                <div>
+                  <span>Discount</span>
+                  <div class="expense-voucher-right-input">
+                    <img src="/images/add table.png" /><input />
+                  </div>
+                </div>
+                <div>
+                  <span>Adjustment</span>
+                  <div class="expense-voucher-right-input">
+                    <img
+                      src="/images/expense voucher adjustments.png"
+                    /><input />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="expense-voucher-overlay-bottom">
+          <button class="expense-voucher-overlay-btns">
+            <img src="/images/expense voucher cancel.png" /><span
+              id="ev-cancel-btn"
+              >Cancel</span
+            >
+          </button>
+          <button class="expense-voucher-overlay-btns">
+            <img src="/images/expense  voucher save.png" /><span
+              id="ev-save-btn"
+              >Save</span
+            >
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <button class="footer-left-btns">
+            <img src="/images/calendar.png" /><span>Date</span>
+          </button>
+          <button class="footer-left-btns">
+            <img src="/images/user.png" /><span>User Name</span>
+          </button>
+          <button class="footer-left-btns">
+            <img src="/images/terminal.png" /><span>Terminal</span>
+          </button>
+        </div>
+        <div class="footer-right">
+          <button id="about-us-activate" class="footer-right-btns">
+            <img src="/images/help center.png" /><span>About us</span>
+          </button>
+          <button class="footer-right-btns">
+            <img src="/images/settings.png" /><span>Market Place</span>
+          </button>
+          <button class="footer-right-btns">
+            <img src="/images/help center.png" /><span>Help</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+    <div class="about-us">
+      <div class="about-us-container">
+        <div class="about-us-close-button">
+          <button id="aboutus-close-btn" class="au-close-btn">
+            <img src="/images/close.png" />
+          </button>
+        </div>
+        <div class="about-fst">
+          <img src="/images/fst white no bg.png" />
+          <p>
+            We will help you in managing your restaurant billing<br />
+            system by using POS solutions. We also provide<br />
+            Digital Agency Services, GIS Imagery & Cloud <br />Based POS
+            Software.
+          </p>
+        </div>
+        <div class="fst-services">
+          <h2>Services we Provide</h2>
+          <li>POS Software</li>
+          <li>GPS Satellite Imagery</li>
+          <li>Digital Services</li>
+          <li>IT Instructions</li>
+          <li>Free SEO Course</li>
+          <li>Network Monitoring</li>
+        </div>
+        <div class="fst-address">
+          <h2>Contact Us</h2>
+          <div class="fst-address-container">
+            <div class="fst-qatar">
+              <h2>Qatar</h2>
+              <span class="fst-address-spans"
+                ><img src="/images/loaction.png" />Aziziya Commercial
+                Complex,<br />
+                Office No # 9, Zone # 55, Street # 185,<br />
+                Building # 97, AL Aziziya - Qatar</span
+              >
+              <span class="fst-address-spans"
+                ><img src="/images/call.png" alt="" />+974 66266581</span
+              >
+              <span class="fst-address-spans"
+                ><img src="/images/mail.png" alt="" />info@fsqatar.com</span
+              >
+            </div>
+            <div class="fst-nepal">
+              <h2>Nepal</h2>
+              <span class="fst-address-spans"
+                ><img src="/images/loaction.png" />Basundhara, Kathamndu, Nepal
+                - 44600
+              </span>
+              <span class="fst-address-spans"
+                ><img src="/images/call.png" alt="" />+977 9704534484</span
+              >
+              <span class="fst-address-spans"
+                ><img
+                  src="/images/mail.png"
+                  alt=""
+                />info@firstsource-tech.com</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="fst-copyright">
+          <span
+            >Copyright 2020 First Source Technology. Designed by Tenacious
+            Techies. All Rights Reserved.</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="select-extra-charge-popup-overlay"></div>
+    <div class="select-extra-charge-popup">
+      <div class="select-extra-charge-popup-header">
+        <h4>Select Extra Charge</h4>
+        <button class="select-extra-charge-popup-close-btn">
+          <img src="/images/close.png" />
+        </button>
+      </div>
+      <div class="select-extra-charge-popup-search">
+        <div class="select-extra-charge-popup-search-container">
+          <img src="/images/search.png" />
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div class="select-extra-charge-popup-options">
+        <button id="kitcherMaterials" class="select-extra-charge-popup-btns">
+          <input class="extra-charhe-popup-checkbox" type="checkbox" id="x" />
+          <label class="lbl" for="x">kitchen materials</label>
+        </button>
+        <button id="miscExpenses" class="select-extra-charge-popup-btns">
+          <input class="extra-charhe-popup-checkbox" type="checkbox" id="y" />
+          <label class="lbl" for="y">Misc-Expenses</label>
+        </button>
+        <button id="officeExpenses" class="select-extra-charge-popup-btns">
+          <input class="extra-charhe-popup-checkbox" type="checkbox" id="z" />
+          <label class="lbl" for="z">Office Expenses</label>
+        </button>
+      </div>
+      <div class="select-extra-charge-popup-footer">
+        <button>Save</button>
+      </div>
+    </div>
+    <div class="add-payment-overlay"></div>
+    <div class="add-payment-popup">
+      <div class="add-payment-popup-head">
+        <h4>Add Payment</h4>
+        <button class="add-payment-close-button">
+          <img src="/images/close.png" />
+        </button>
+      </div>
+      <div class="add-payment-popup-calendar">
+        <div class="add-payment-popup-calendar-container">
+          <div class=""></div>
+          <button class=""><img src="/images/calendar.png" /></button>
+        </div>
+      </div>
+      <div class="payment-type-selection">
+        <div class="payment-type-selection-container">
+          <button>
+            <p>Payment Type</p>
+            <span>--Select--</span>
+            <img src="/images/business source.png" />
+          </button>
+        </div>
+      </div>
+      <div class="payment-method">
+        <div class="payment-method-container">
+          <button>
+            <p>Payment Method</p>
+            <span>--Select--</span>
+            <img src="/images/business source.png" />
+          </button>
+        </div>
+      </div>
+      <div class="add-payment-money">
+        <div class="currency">
+          <div class="currency-container">
+            <button>
+              <p>Currency</p>
+              <span>QR</span>
+              <img src="/images/business source.png" />
+            </button>
+          </div>
+        </div>
+        <div class="amount">
+          <div class="amount-container">
+            <input value="10.00" />
+            <p>Amount</p>
+          </div>
+        </div>
+      </div>
+      <div class="add-payment-remark">
+        <div class="add-payment-remark-container">
+          <input type="text" />
+          <p>Remark</p>
+        </div>
+      </div>
+    </div>
+    <script src="expense voucher.js"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="no charge.css" />
+  </head>
+  <body>
+    <div class="select-account-popup-overlay"></div>
+    <div class="select-waiter-popup-overlay"></div>
+    <div class="no-charge-popup">
+      <div class="no-charge-popup-header">
+        <h1>Order Information</h1>
+        <button id="no-charge-popup-close-btn">
+          <img src="close.png" alt="" />
+        </button>
+      </div>
+      <div class="no-charge-popup-main-content">
+        <div class="main-content-container">
+          <h4>No Charge Account</h4>
+          <div id="nc-account-popup-activate" class="no-charge-account">
+            <input type="text" id="nocharge-account" placeholder="Account" />
+            <button class="nocharge-account-button">
+              <img src="business source.png" alt="" />
+            </button>
+            <label for="nocharge-account">Account</label>
+          </div>
+          <h4>Waiter Details</h4>
+          <div class="no-charge-waiter-details">
+            <div id="nc-waiter-popup-activate" class="select-waiter">
+              <input type="text" id="waiter-name" placeholder="Select Waiter" />
+              <button class="select-waiter-button">
+                <img src="business source.png" alt="" />
+              </button>
+              <label for="waiter-name">select Waiter</label>
+            </div>
+            <div class="waiter-code">
+              <input type="text" id="wait-code" placeholder=" " />
+              <label for="wait-code">Waiter Code</label>
+            </div>
+          </div>
+          <h4>Guest Details</h4>
+
+          <div class="no-charge-search-bar">
+            <div class="no-charge-search-input">
+              <input type="text" id="guest-search" placeholder=" " />
+              <label for="guest-search"
+                >Enter Guest Name, Mobile, Phone, or Email</label
+              >
+            </div>
+            <button><span>Search</span></button>
+          </div>
+          <div class="no-charge-guest-info">
+            <div class="no-charge-guest-name">
+              <input type="text" id="nc-guest-name" placeholder=" " />
+              <label for="nc-guest-name">Guest Name</label>
+            </div>
+            <div class="no-charge-email">
+              <input type="text" id="nc-email" placeholder=" " />
+              <label for="nc-email">Email</label>
+            </div>
+            <div class="no-charge-phone">
+              <input type="text" id="nc-phone" placeholder=" " />
+              <label for="nc-phone">Phone</label>
+            </div>
+            <div class="no-charge-mobile">
+              <input type="text" id="nc-mobile" placeholder=" " />
+              <label for="nc-mobile">Mobile No</label>
+            </div>
+            <div class="no-charge-address">
+              <input type="text" id="nc-address" placeholder=" " />
+              <label for="nc-address">Address</label>
+            </div>
+            <div class="no-charge-remark">
+              <input type="text" id="nc-remark" placeholder=" " />
+              <label for="nc-remark">Remark</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-charge-popup-footer">
+        <button><span>Save</span></button>
+      </div>
+    </div>
+    <!-- no-charge-account-select-popup -->
+    <div class="no-charge-account-select-popup">
+      <!-- nc-account-selection-popup head-->
+      <div class="nc-account-selection-popup-header">
+        <h4>Select Account</h4>
+        <button id="nc-account-popup-close-btn"><img src="close.png" /></button>
+      </div>
+      <!-- select-account-popup searchbar-->
+      <div class="nc-account-popup-searchbar">
+        <div class="nc-account-popup-searchbar-container">
+          <img src="search.png" />
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div class="nc-account-selection">
+        <div class="nc-account-selection-container">
+          <div class="select-account">
+            <button class="bnc-account-select-btn">
+              <input type="radio" id="sel-acc" value="name" />
+              <label for="sel-acc">Select Account Name</label>
+            </button>
+          </div>
+          <div class="nc-account-names">
+            <button class="bnc-account-select-btn">
+              <input type="radio" id="select-account" value="-businessname" />
+              <label for="select-account">Kumar</label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- no-charge--select-waiter-popup -->
+    <div class="no-charge-waiter-select-popup">
+      <!-- nc-waiter-selection-popup head-->
+      <div class="nc-waiter-selection-popup-header">
+        <h4>Select Waiter</h4>
+        <button id="nc-waiter-popup-close-btn"><img src="close.png" /></button>
+      </div>
+      <!-- select-waiter-popup searchbar-->
+      <div class="nc-waiter-popup-searchbar">
+        <div class="nc-waiter-popup-searchbar-container">
+          <img src="search.png" />
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div class="nc-waiter-selection">
+        <div class="nc-waiter-selection-container">
+          <div class="selecting-waiters">
+            <button class="nc-waiter-select-btn">
+              <input type="radio" id="sel-waiter" value="name" />
+              <label for="sel-waiter">Select Waiter Name</label>
+            </button>
+          </div>
+          <div class="nc-waiter-names">
+            <button class="nc-waiter-select-btn">
+              <input type="radio" id="select-waiters" value="-businessname" />
+              <label for="select-waiters">Kumar</label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="no charge.js"></script>
+  </body>
+</html>

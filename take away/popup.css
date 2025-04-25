@@ -1,0 +1,483 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif, Arial, Helvetica, sans-serif;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  display: none;
+}
+
+.business-source-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 4;
+  display: none;
+}
+
+/*------------ popup------------*/
+.pop-up {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  height: 400px;
+  width: 600px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  z-index: 2;
+}
+/*------------ popup-header------------*/
+.popup-header {
+  height: 48px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.popup-header h1 {
+  width: 538px;
+  margin-left: 36px;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.popup-header button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.popup-header img {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+/*------------ popup-main content-----------*/
+.popup-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-bottom: 60px;
+}
+
+.popup-main-content h4 {
+  height: 20px;
+  width: 100%;
+}
+/*------------ popup-searchbar-----------*/
+
+.popup-searchbar {
+  height: 40px;
+  margin-top: 15px;
+  display: flex;
+  width: 100%;
+}
+.search-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/*------------ popup-searchbar transition-----------*/
+
+.search-input input {
+  width: 480px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border: 1px solid lightgray;
+  outline: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+  background: transparent;
+}
+
+.search-input label {
+  position: absolute;
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 5px;
+  transition: 300ms ease;
+  margin-left: 10px;
+}
+
+label {
+  color: gray;
+}
+
+.search-input input:focus + label,
+.search-input input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.9em;
+  background-color: rgb(255, 255, 255);
+}
+
+.search-input input:focus {
+  border: 1px solid #00aeef;
+}
+
+.popup-searchbar button {
+  height: 40px;
+  width: 120px;
+  margin-right: 10px;
+  background-color: #00aeef;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+.popup-searchbar span {
+  color: white;
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+/*------------ popup-guest data-----------*/
+
+.popup-guest-data {
+  display: grid;
+  grid-template-areas:
+    "guestname mobileNo"
+    "business-source reference";
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.guest-name input {
+  width: 282px;
+  height: 40px;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 5px;
+}
+
+.guest-name label {
+  position: absolute;
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 5px;
+  transition: 300ms ease;
+  margin-left: 10px;
+}
+
+.guest-name input:focus + label,
+.guest-name input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.9em;
+  background-color: rgb(255, 255, 255);
+  padding-right: 5px;
+}
+
+.guest-name input:focus {
+  border: 1px solid #00aeef;
+}
+
+/*------------ popup-guest name-----------*/
+.guest-name {
+  grid-area: guestname;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/*------------ popup-mobile number-----------*/
+.mobile-no {
+  grid-area: mobileNo;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mobile-no input {
+  width: 282px;
+  height: 40px;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 5px;
+}
+
+.mobile-no label {
+  position: absolute;
+  height: 70%;
+
+  display: flex;
+  align-items: flex-end;
+  padding-left: 5px;
+  transition: 300ms ease;
+  background: transparent;
+  margin-left: 10px;
+}
+
+.mobile-no input:focus + label,
+.mobile-no input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.9em;
+  background-color: rgb(255, 255, 255);
+  padding-right: 5px;
+}
+
+.mobile-no input:focus {
+  border: 1px solid #00aeef;
+}
+
+/*------------ popup-business source-----------*/
+.business-source {
+  grid-area: business-source;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+}
+
+.business-source input {
+  width: 282px;
+  height: 40px;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.business-source label {
+  position: absolute;
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 5px;
+  transition: 300ms ease;
+  margin-left: 10px;
+  top: -20px;
+  background-color: white;
+  font-size: 0.8em;
+  padding-right: 5px;
+}
+
+::placeholder {
+  padding-left: 5px;
+}
+
+.business-source-button {
+  position: absolute;
+  height: 20px;
+  width: 25px;
+  right: 10px;
+  top: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.business-source-button img {
+  height: 12px;
+  width: 16px;
+}
+
+/*------------ popup-business popup-----------*/
+.business-source-popup {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  height: 400px;
+  width: 400px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: none;
+  flex-direction: column;
+  z-index: 5;
+}
+
+/*------------ popup-business popup-header-----------*/
+.business-source-popup-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.business-source-popup-header h4 {
+  font-size: 1.2em;
+}
+
+.business-source-popup-header button {
+  position: absolute;
+  right: 5px;
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.business-source-popup-header img {
+  height: 36px;
+  width: 36px;
+}
+/*------------ popup-business source popup search-----------*/
+.business-source-popup-searchbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+  width: 100%;
+}
+
+.business-source-popup-searchbar-container {
+  width: 384px;
+  height: 36px;
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.business-source-popup-searchbar-container input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 1em;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.business-source-popup-searchbar img {
+  height: 30px;
+  width: 30px;
+}
+
+.business-source-selection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  width: 100%;
+}
+
+.business-source-selection-container {
+  width: 388px;
+  height: 290px;
+}
+
+.business-source-selection-container button {
+  width: 100%;
+  height: 34px;
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.business-source-btn {
+  display: flex;
+  align-items: center;
+}
+
+.business-source-selection-container input {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.business-source-selection-container label {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+/*------------ popup-guest reference-----------*/
+.guest-reference {
+  grid-area: reference;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+}
+
+.guest-reference input {
+  width: 282px;
+  height: 40px;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 5px;
+}
+
+.guest-reference label {
+  position: absolute;
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 5px;
+  transition: 300ms ease;
+  margin-left: 10px;
+}
+
+.guest-reference input:focus + label,
+.guest-reference input:not(:placeholder-shown) + label {
+  transform: translateY(-20px);
+  font-size: 0.9em;
+  background-color: rgb(255, 255, 255);
+  padding-right: 5px;
+}
+
+.guest-reference input:focus {
+  border: 1px solid #00aeef;
+}
+
+/*------------ popup-footer-----------*/
+.popup-footer {
+  height: 52.8px;
+  width: 600px;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid lightgray;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.popup-footer button {
+  height: 36px;
+  width: 120px;
+  margin-right: 10px;
+  background-color: #00aeef;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.popup-footer span {
+  color: white;
+  font-size: 1.2em;
+  font-weight: 300;
+}
